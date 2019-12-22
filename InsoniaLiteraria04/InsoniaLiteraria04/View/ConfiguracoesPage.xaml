@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BackgroundImage="logointro.png"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="InsoniaLiteraria04.View.ConfiguracoesPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout BackgroundColor="WhiteSmoke" Padding="10">
+                <StackLayout Orientation="Horizontal">
+
+                    <Button Text="Fechar" BackgroundColor="Transparent" Clicked="clkFechar" 
+                            HorizontalOptions="StartAndExpand"></Button>
+                    <Label Text="Ajustes"
+                   FontSize="Title"
+                   FontAttributes="Bold"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand" />
+                    <!--<Button Text="Salvar" BackgroundColor="Transparent"
+                            HorizontalOptions="EndAndExpand"></Button>-->
+                </StackLayout>
+
+                <StackLayout
+                Margin="10"
+                HeightRequest="2"
+                WidthRequest="2"
+                BackgroundColor="Black"
+                >
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="CenterAndExpand">
+                    <controls:CircleImage
+                              x:Name="image_profile"
+                              BorderColor="White"
+                              BorderThickness="5"
+                              WidthRequest="100"
+                              HeightRequest="100"
+                              Aspect="AspectFill"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Start"/>
+                    <Label Text="ALTERE SUA FOTO DE PERFIL" FontSize="Small" TextColor="Gray" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ClkPegueFotoGaleria"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Nome" FontAttributes="Bold" FontSize="Small" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
+
+                    <Label x:Name="lblNomeUsuario" FontAttributes="Bold" FontSize="Medium" TextColor="#FF4500" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            <StackLayout Orientation="Horizontal">
+
+                    <Label Text="Username" FontAttributes="Bold" FontSize="Small" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
+
+                    <Label x:Name="lblUsername" FontAttributes="Bold" FontSize="Medium" TextColor="#FF4500" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+
+                    <Label Text="Email" FontAttributes="Bold" FontSize="Small" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
+
+                    <Label x:Name="lblEmail" FontAttributes="Bold" FontSize="Medium" TextColor="#FF4500" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Black" >
+                    <Button Text="SAIR" BackgroundColor="Transparent" HorizontalOptions="Center"
+                             TextColor="#FF4500" Clicked="clkSair"></Button>
+                </StackLayout>
+
+                <!--<StackLayout Orientation="Horizontal" VerticalOptions="End">
+                    <Button Text="Excluir Conta" BackgroundColor="Transparent"
+                            HorizontalOptions="StartAndExpand" TextColor="#FF4500"></Button>
+                </StackLayout>-->
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

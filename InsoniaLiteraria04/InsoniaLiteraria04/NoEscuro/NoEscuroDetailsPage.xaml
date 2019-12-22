@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.NoEscuro.NoEscuroDetailsPage"
+             Title="No Escuro"
+             BackgroundImage="capaescuro.jpg">
+    <ContentPage.Content>
+        <StackLayout Padding="0">
+            <StackLayout Padding="40, 10, 40, 0">
+                <Frame BackgroundColor="Black" CornerRadius="50" Rotation="5">
+                    <StackLayout>
+                        <Image Source="capaescuro.jpg" WidthRequest="120"/>
+                        <Label Text="No Escuro" TextColor="White" FontAttributes="Bold" HorizontalOptions="EndAndExpand" FontSize="Medium" />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            <ScrollView>
+                <StackLayout Margin="0" VerticalOptions="Start" Padding="10" BackgroundColor="#C0C0C0">
+
+                    <StackLayout>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="1">
+                            <StackLayout>
+                                <ListView VerticalOptions="Start" x:Name="_list"  SeparatorVisibility="Default"
+                                               HasUnevenRows="True"  SeparatorColor="Black" ItemTapped="IrParaCapitulo" ItemsSource="{Binding .}" HeightRequest="81">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ImageCell ImageSource="menuescuro.JPG" x:Name="txcCapitulo" Text="{Binding nomeCapitulo}" Detail="{Binding capituloLido}" TextColor="Black" Height="80" ></ImageCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <Label Text="Darkey sempre foi conhecida como uma cidade pequena calma e segura, até que um desaparecimento abalou os habitantes, e junto dele, notícias de assassinatos em série. 
+Dez anos depois, todos parecem ter seguido em frente da melhor maneira possível, mas as feridas deixam cicatrizes.
+Joseph retorna à cidade para uma festa familiar, mas logo percebe que as coisas podem não ter mudado tanto assim.
+Um clima festivo dá entrada para uma luta por sobrevivência quando outros assassinatos estranhos começam a amedrontar a cidade.
+Até onde uma pessoa vai para se salvar? Quem está matando as pessoas? Haverá algum sobrevivente? E se houver, ele irá conseguir lidar com mais esse trauma?" VerticalOptions="Fill" HorizontalOptions="Fill" FontSize="Small"/>
+                    <Label Text="--*--" FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
+                    <Label Text="Gênero: Suspense, Serial Killer..." FontSize="Small" FontAttributes="Bold" />
+                    <Label Text="Escrito por: Reinaldo Souza" FontSize="Small" FontAttributes="Bold"/>
+                    <Label Text="Ano de Publicação: 2019" FontSize="Small" FontAttributes="Bold"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

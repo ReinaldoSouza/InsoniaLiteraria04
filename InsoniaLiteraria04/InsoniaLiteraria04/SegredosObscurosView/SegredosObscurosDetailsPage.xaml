@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.SegredosObscurosView.SegredosObscurosDetailsPage"
+             BackgroundImage="capaobscuros.JPG">
+    <ContentPage.Content>
+        <StackLayout Padding="0">
+            <StackLayout Padding="40, 10, 40, 0">
+                <Frame BackgroundColor="DarkSlateBlue" CornerRadius="50" Rotation="5">
+                    <StackLayout>
+                        <Image Source="capaobscuros.JPG" WidthRequest="120"/>
+                        <Label Text="Segredos Obscuros" TextColor="White" FontAttributes="Bold" HorizontalOptions="EndAndExpand" FontSize="Medium" />
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+            <ScrollView>
+                <StackLayout Margin="0" VerticalOptions="Start" Padding="10" BackgroundColor="#ADD8E6">
+
+                    <StackLayout>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="1">
+                            <StackLayout>
+                                <ListView VerticalOptions="Start" x:Name="_list"  SeparatorVisibility="Default"
+                                               HasUnevenRows="True"  SeparatorColor="Black" ItemTapped="IrParaCapitulo" ItemsSource="{Binding .}" HeightRequest="81">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ImageCell ImageSource="menuobscuro.JPG" x:Name="txcCapitulo" Text="{Binding nomeCapitulo}" Detail="{Binding capituloLido}" TextColor="MidnightBlue" Height="80" ></ImageCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <Label Text="Você tem um segredo? Aquele do tipo que ninguém, nem a pessoa mais próxima pode saber?
+A verdade é que todo mundo tem. Todo mundo esconde algo, ninguém é totalmente sincero com as pessoas.
+O que você faria se esse tão guardado segredo vazasse?
+E se todo mundo soubesse da coisa mais horrível que você acha que já fez? Te tratariam diferente?
+Você conseguiria encarar todos sabendo que eles poderiam te julgar a qualquer momento?
+O fato é que todo mundo esconde algo e, mais cedo ou mais tarde, alguém vai descobrir,
+e essa pessoa vai te ter nas mãos e vai poder escolher entre te ajudar a manter o segredo ou espalhar,
+isso já vai sair do seu controle, mas as consequências ainda vão ser culpa sua, já que a verdade é sempre o melhor caminho,
+mesmo sendo doloroso." VerticalOptions="Fill" HorizontalOptions="Fill" FontSize="Small"/>
+                    <Label Text="--*--" FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
+                    <Label Text="Gênero: Romance, Ficção Adolescente, Amizade, Comédia..." FontSize="Small" FontAttributes="Bold"/>
+                    <Label Text="Escrito por: Reinaldo Souza" FontSize="Small" FontAttributes="Bold"/>
+                    <Label Text="Ano de Publicação: 2015" FontSize="Small" FontAttributes="Bold"/>
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

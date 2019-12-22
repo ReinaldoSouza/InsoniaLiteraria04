@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.AnjoMorteView.AnjoMorteDetaisPage"
+             BackgroundImage="capaanjomorte.JPG">
+    <ContentPage.Content>
+        <StackLayout Padding="0">
+            <StackLayout Padding="40, 10, 40, 0">
+                <Frame BackgroundColor="OrangeRed" CornerRadius="50" Rotation="5">
+                    <StackLayout>
+                        <Image Source="capaanjomorte.JPG" WidthRequest="120"/>
+                        <Label Text="Anjo da Morte" TextColor="White" FontAttributes="Bold" HorizontalOptions="EndAndExpand" FontSize="Medium" />
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+            <ScrollView>
+                <StackLayout Margin="0" VerticalOptions="Start" Padding="10" BackgroundColor="Orange">
+
+                    <StackLayout >
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="1">
+                            <StackLayout>
+                                <ListView VerticalOptions="Start" x:Name="_list"  SeparatorVisibility="Default"
+                                               HasUnevenRows="True"  SeparatorColor="Black" ItemTapped="IrParaCapitulo" ItemsSource="{Binding .}" HeightRequest="81">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ImageCell ImageSource="menuanjomorte.JPG" x:Name="txcCapitulo" Text="{Binding nomeCapitulo}" Detail="{Binding capituloLido}" TextColor="MidnightBlue" Height="80" ></ImageCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+
+                        </Frame>
+                    </StackLayout>
+
+                    <Label TextColor="Black" Text="Eu ouvi a personagem de uma série de TV, Peyton Sawyer, dizer que pessoas sempre partem e eu costumava me sentir mal por isso.
+ Não apenas pela personagem, mas também sentia muito por mim e por todos, que como ela, viveram situações de perda semelhantes.
+ No entanto, eu percebi que às vezes você precisa deixar as pessoas livres para partir ao invés de continuar temendo o momento em que elas terão de tomar essa decisão por você." 
+                           VerticalOptions="Fill" FontSize="Small"/>
+                    <Label Text="--*--" FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
+                    <Label Text="Gênero: Drama, Ficção Adolescente, Romance..." FontSize="Small" FontAttributes="Bold" />
+                    <Label Text="Escrito por: Carolina Anf" FontSize="Small" FontAttributes="Bold"/>
+                    <Label Text="Ano de Publicação: 2016" FontSize="Small" FontAttributes="Bold"/>
+
+                    <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" BackgroundColor="Transparent">
+                        <Image x:Name="imgPlaylist" Source="spotify_icon.png" WidthRequest="40">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="imgPlaylist_Tapped" ></TapGestureRecognizer>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label x:Name="lblPlaylist" VerticalOptions="Center" Text="Escutar Playlist Anjo da Morte" FontAttributes="Bold" FontSize="Small" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="imgPlaylist_Tapped"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

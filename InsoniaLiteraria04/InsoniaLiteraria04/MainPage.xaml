@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.MainPage"
+             BackgroundImage="intro.png">
+    <StackLayout Padding="20"
+       VerticalOptions="End"
+       HorizontalOptions="CenterAndExpand"
+        >
+        <Frame BackgroundColor="#2F4F4F" BorderColor="White" Padding="10" CornerRadius="20" >
+            <StackLayout Orientation="Horizontal">
+                <Label Text="CLIQUE AQUI PARA COMEÇAR" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="Medium"/>
+                <Image Source="iconemain.png" HeightRequest="50" />
+            </StackLayout>
+
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="clkGoLogin"/>
+            </Frame.GestureRecognizers>
+        </Frame>
+
+    </StackLayout>
+
+</ContentPage>

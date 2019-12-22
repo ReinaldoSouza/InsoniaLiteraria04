@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.MenusView.MenuSegredosObscurosPage">
+    <ContentPage.Content>
+        <StackLayout Margin="20,20,20,20">
+
+            <ListView VerticalOptions="FillAndExpand" x:Name="listMenu" ItemsSource="{Binding ListaMenu}" SeparatorVisibility="Default"
+                      HasUnevenRows="True" SelectedItem="{Binding MenuSelecionado}"  SeparatorColor="Black" ItemTapped="IrParaCapitulo">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding Imagem}" x:Name="txcCapitulo" TextColor="DarkSlateBlue" Text="{Binding Titulo}" Detail="{Binding Descricao}"></ImageCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label Margin="10" Text="COMPLETO" TextColor="White" BackgroundColor="Red" HorizontalOptions="EndAndExpand" FontSize="Micro"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

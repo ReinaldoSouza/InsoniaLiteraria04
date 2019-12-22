@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.View.CadastroPage"
+             BackgroundImage="logointro.png">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10,20,10,20">
+                <Frame CornerRadius="20" BackgroundColor="Transparent" BorderColor="White" VerticalOptions="Center">
+                    <StackLayout>
+                        <StackLayout>
+                            <Image Source="logocadastro.png" WidthRequest="150" HorizontalOptions="Center" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Image Source="nomecadastro.png" WidthRequest="40"/>
+                            <Entry x:Name="txtNomeCadastro" Placeholder="Digite seu nome..."
+                   BackgroundColor="White"
+                           PlaceholderColor="Gray"
+                                   HorizontalOptions="FillAndExpand"
+                           TextColor="Black"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Image Source="usuariologin.png" WidthRequest="40"/>
+                            <Entry x:Name="txtUsernameCadastro" Placeholder="Digite seu username..."
+                   BackgroundColor="White"
+                                   HorizontalOptions="FillAndExpand"
+                           PlaceholderColor="Gray" 
+                           TextColor="Black"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Image Source="emailcadastro.png" WidthRequest="40"/>
+                            <Entry x:Name="txtEmailCadastro" Placeholder="Digite seu email..."
+                   BackgroundColor="White"
+                           PlaceholderColor="Gray"
+                                   HorizontalOptions="FillAndExpand"
+                           Keyboard="Email"
+                           TextColor="Black"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Image Source="senhalogin.png" WidthRequest="40"/>
+                            <Entry x:Name="txtSenhaCadastro" Placeholder="Digite sua senha..."       
+                   BackgroundColor="White"
+                           PlaceholderColor="Gray"
+                                   HorizontalOptions="FillAndExpand"
+                           IsPassword="True"
+                           TextColor="Black"/>
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+
+                <Button Text="CRIE SUA CONTA" 
+                                BackgroundColor="#2F4F4F" 
+                                BorderRadius="20" 
+                                TextColor="White"
+                                HorizontalOptions="Fill"
+                                Margin="10,0,10,0"
+                                Padding="10"
+                                Clicked="clkCriarConta"/>
+
+                <StackLayout
+                Margin="10"
+                HeightRequest="2"
+                WidthRequest="2"
+                BackgroundColor="Black"
+                >
+                </StackLayout>
+
+                <Button Text="JÁ TEM UMA CONTA" 
+                                BackgroundColor="#2F4F4F" 
+                                BorderRadius="20" 
+                                Margin="10,0,10,0"
+                                TextColor="White"
+                                HorizontalOptions="Fill"
+                                Padding="10"
+                                Clicked="clkGoLogin"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

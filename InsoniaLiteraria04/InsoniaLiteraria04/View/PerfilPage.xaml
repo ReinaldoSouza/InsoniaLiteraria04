@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.View.PerfilPage"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             BackgroundImage="intro2.png">
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout>
+
+                <RelativeLayout>
+                    <Image x:Name="imgCard" HorizontalOptions="Fill" Aspect="AspectFill" Source="logo2.jpg" InputTransparent="True"/>
+
+                    <controls:CircleImage
+                              x:Name="image_profile"
+                              BorderColor="White"
+                              Source="capaprofile.jpg"
+                              BorderThickness="5"
+                              WidthRequest="160"
+                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=imgCard, Property=Height, Factor=.5,Constant=40}"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=imgCard, Property=Width, Factor=.5,Constant=-80}"
+                              HeightRequest="160"
+                              Aspect="AspectFill"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Start"/>
+
+                </RelativeLayout>
+
+                <StackLayout>
+
+                    <Label HorizontalOptions="Center" TextColor="Black" x:Name="lblNome" FontAttributes="Bold" FontSize="Large"  BackgroundColor="WhiteSmoke"/>
+                    <Label HorizontalOptions="Center" x:Name="lblUsername" FontSize="Small" BackgroundColor="WhiteSmoke" />
+
+                    <!--Histórias ainda sendo lidas-->
+                    
+                    <StackLayout BackgroundColor="ForestGreen" Padding="10">
+                        <Label HorizontalOptions="End" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Text="LENDO"/>
+
+                        <ScrollView HorizontalOptions="Fill" Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke" Padding="2">
+
+                                <Image x:Name="imgSemLendo" Source="SemLeituras.PNG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgLendo_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                
+                                <Image x:Name="imgEstranha" Source="capaestranha.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgEstranha_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgAnjoMorte" Source="capaanjomorte.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgAnjoMorte_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgApenasDance" Source="capadancecomigo.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgApenasDance_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgMundo" Source="capaessemundo.JPG"  WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgMundo_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgEscuro" Source="capaescuro.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgEscuro_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgObscuros" Source="capaobscuros.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgObscuros_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgDistantes" Source="capadistantes.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgDistantes_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                            </StackLayout>
+                            
+                        </ScrollView>
+
+                    </StackLayout>
+
+                    <!--Histórias aguardando capítulos novos-->
+
+                    <StackLayout BackgroundColor="Gold" Padding="10">
+                        <Label HorizontalOptions="End" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Text="AGUARDANDO MAIS"/>
+
+                        <ScrollView HorizontalOptions="Fill" Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke" Padding="2">
+
+                                <Image x:Name="imgAguardando" Source="SemAguardando.jpg" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgLendo_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgEstranhaF" Source="capaestranha.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgEstranha_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgAnjoMorteF" Source="capaanjomorte.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgAnjoMorte_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgApenasDanceF" Source="capadancecomigo.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgApenasDance_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgEscuroF" Source="capaescuro.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgEscuro_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgDistantesF" Source="capadistantes.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgDistantes_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                
+                            </StackLayout>
+
+                        </ScrollView>
+
+                    </StackLayout>
+
+                    <!--Histórias finalizadas-->
+
+                    <StackLayout BackgroundColor="Maroon" Padding="10">
+                        <Label HorizontalOptions="End" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Text="FINALIZADAS"/>
+
+                        <ScrollView HorizontalOptions="Fill" Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke" Padding="2">
+
+                                <Image x:Name="imgSemFinalizadas" Source="SemFinalizadas.jpg" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgLendo_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgMundoF" Source="capaessemundo.JPG"  WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgMundo_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image x:Name="imgObscurosF" Source="capaobscuros.JPG" WidthRequest="140">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="imgObscuros_Tapped" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                            </StackLayout>
+
+                        </ScrollView>
+
+                    </StackLayout>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal"  Padding="0, 10, 0, 0">
+
+                    <Frame BackgroundColor="#2F4F4F" BorderColor="White" HorizontalOptions="CenterAndExpand" Padding="15" CornerRadius="20" >
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="CONTA" TextColor="White" FontAttributes="Bold" VerticalOptions="CenterAndExpand" FontSize="Small"/>
+                            <Image Source="iconeAjustes.png" HeightRequest="30" />
+                        </StackLayout>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="clkGoAjuste"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <!--<Button BackgroundColor="Black" WidthRequest="150" BorderColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="End" Text="ALTERAR FOTO" Clicked="ClkPegueFotoGaleria" TextColor="White"/>
+                    <Button BackgroundColor="Red" WidthRequest="150" BorderColor="Black" HorizontalOptions="EndAndExpand" VerticalOptions="End" TextColor="White" Text="SAIR" Clicked="clkSair"/>-->
+                </StackLayout>
+
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

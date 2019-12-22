@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.View.LoginPage"
+             BackgroundImage="logointro.png"
+             >
+    <StackLayout Padding="10,80,10,20">
+        <Frame CornerRadius="20" BackgroundColor="Transparent" BorderColor="White" VerticalOptions="Center">
+            <StackLayout>
+        <StackLayout>
+            <Image Source="logologin.png" WidthRequest="500" HorizontalOptions="Center" />
+        </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Image Source="usuariologin.png" WidthRequest="40"/>
+                   
+                    <Entry x:Name="txtUsernameLogin" 
+                   TextColor="Black"
+                   BackgroundColor="White"
+                Placeholder="Digite seu username..."
+                           HorizontalOptions="FillAndExpand"
+               PlaceholderColor="Gray"
+                   />
+        </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Image Source="senhalogin.png" WidthRequest="40" />
+            <Entry x:Name="txtSenhaLogin" 
+                   IsPassword="True"
+                   BackgroundColor="White"
+                   Placeholder="Digite sua senha..."
+                   HorizontalOptions="FillAndExpand"
+                   PlaceholderColor="Gray"
+                    />
+
+
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+        <Button Text="ACESSE SUA CONTA"
+                    Padding="10"
+                    Margin="10,20,10,0"
+                    BackgroundColor="#2F4F4F" 
+                    BorderRadius="20" 
+                    TextColor="White"
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="clkGoPrincipal"
+                    />
+
+        <StackLayout
+                Margin="10"
+                HeightRequest="2"
+                WidthRequest="2"
+                BackgroundColor="Black"
+                >
+        </StackLayout>
+
+        <Button Text="AINDA NÃO TEM UMA CONTA?"
+                    Padding="10"
+                    Margin="10,0,10,0"
+                    BackgroundColor="#2F4F4F"
+                    BorderRadius="20" 
+                    TextColor="White"
+                    HorizontalOptions="Fill"
+                    Clicked="clkGoCadastro"/>
+
+
+        <!--<StackLayout>
+            <Button Text="ESQUECI MINHA SENHA"
+                    BackgroundColor="Transparent"
+                    TextColor="OrangeRed"
+                    HorizontalOptions="EndAndExpand"
+                    Clicked="clkMudarSenha"/>
+        </StackLayout>-->
+
+    </StackLayout>
+    
+    
+
+</ContentPage>

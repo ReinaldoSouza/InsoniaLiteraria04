@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "824913217977",
+    "firebase_url": "https://insonialiteraria-d64ae.firebaseio.com",
+    "project_id": "insonialiteraria-d64ae",
+    "storage_bucket": "insonialiteraria-d64ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824913217977:android:7ddd5c532ded8200",
+        "android_client_info": {
+          "package_name": "com.reinaldo.insonialiteraria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824913217977-rjnocitk70lu3ujr5ntopo5scmm9g0tr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB59z1Nrf1xZg0-EElawi90Lw3sk5SqF-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824913217977-rjnocitk70lu3ujr5ntopo5scmm9g0tr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

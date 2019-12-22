@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.SegredosDistantesView.SegredosDistantesDetailsPage"
+             BackgroundImage="capadistantes.JPG">
+    <ContentPage.Content>
+        <StackLayout Padding="0">
+            <StackLayout Padding="40, 10, 40, 0">
+                <Frame BackgroundColor="DarkSlateBlue" CornerRadius="50" Rotation="5">
+                    <StackLayout>
+                        <Image Source="capadistantes.JPG" WidthRequest="120"/>
+                        <Label Text="Segredos Distantes" TextColor="White" FontAttributes="Bold" HorizontalOptions="EndAndExpand" FontSize="Medium" />
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+            <ScrollView>
+                <StackLayout Margin="0" VerticalOptions="Start" Padding="10" BackgroundColor="#ADD8E6">
+
+                    <StackLayout>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="1">
+                            <StackLayout>
+                                <ListView VerticalOptions="Start" x:Name="_list"  SeparatorVisibility="Default"
+                                               HasUnevenRows="True"  SeparatorColor="Black" ItemTapped="IrParaCapitulo" ItemsSource="{Binding .}" HeightRequest="81">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ImageCell ImageSource="menudistantes.JPG" x:Name="txcCapitulo" Text="{Binding nomeCapitulo}" Detail="{Binding capituloLido}" TextColor="MidnightBlue" Height="80" ></ImageCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <Label Text="Anos depois dos acontecimentos de Segredos Obscuros, parece que cada um seguiu a sua vida. 
+Jason continua tentando encontrar o seu lugar no mundo, enquanto fantasmas do seu passado ainda o assombram. 
+Emily está em Nova York sozinha e com uma nova vida, pelo menos por enquanto. Temperance escolhe ir para longe para se afastar das lembranças boas e ruins, ela nem sabe mais diferenciar cada uma delas.
+Mas mesmo longe, algo ainda conecta essas três pessoas, amizade, amor e até mesmo segredos." VerticalOptions="Fill" HorizontalOptions="Fill" FontSize="Small"/>
+                    <Label Text="--*--" FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
+                    <Label Text="Gênero: Romance, Ficção Adolescente, Amizade, Comédia..." FontSize="Small" FontAttributes="Bold"/>
+                    <Label Text="Escrito por: Reinaldo Souza" FontSize="Small" FontAttributes="Bold"/>
+                    <Label Text="Ano de Publicação: 2017" FontSize="Small" FontAttributes="Bold"/>
+                    
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

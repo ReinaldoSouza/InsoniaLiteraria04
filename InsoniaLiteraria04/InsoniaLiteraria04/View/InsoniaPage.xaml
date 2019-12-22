@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.View.InsoniaPage"
+             xmlns:controls="clr-namespace:InsoniaLiteraria04.CardView"
+             BackgroundImage="intro.png"
+             >
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    
+                    <Frame Margin="15" BackgroundColor="WhiteSmoke">
+                        <StackLayout BackgroundColor="WhiteSmoke">
+                            <controls:AnjoMorteCardView/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Margin="15" BackgroundColor="WhiteSmoke">
+                        <StackLayout BackgroundColor="WhiteSmoke">
+                            <controls:EsseMundoCardView/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Margin="15" BackgroundColor="WhiteSmoke">
+                        <StackLayout BackgroundColor="WhiteSmoke">
+                            <controls:NoEscuroCardView/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Margin="15" BackgroundColor="WhiteSmoke">
+                        <StackLayout BackgroundColor="WhiteSmoke">
+                            <controls:SegredosObscurosCardView/>
+                            <controls:SegredosDistantesCardView/>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+            </ScrollView>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

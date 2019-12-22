@@ -1,0 +1,344 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Firebase.Xamarin.NetStandard20" Version="1.1.0" />
+    <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
+    <PackageReference Include="Microsoft.AppCenter" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AppCenter.Push" Version="2.1.1" />
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
+    <PackageReference Include="System.Security.Cryptography.Cng" Version="4.5.0" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="AnjoMorteView\AnjoMorteDetaisPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AnjoMorteView\Capitulo1Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AnjoMorteView\Capitulo2Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ApenasDanceView\CapituloApenasPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CardView\AnjoMorteCardView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CardView\ApenasDanceCardView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CardView\EsseMundoCardView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CardView\EstranhaCardView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CardView\NoEscuroCardView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CardView\SegredosDistantesCardView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CardView\SegredosObscurosCardView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EsseMundoView\Capitulo1Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EsseMundoView\Capitulo2Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EsseMundoView\Capitulo3Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EsseMundoView\Capitulo4Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EsseMundoView\Capitulo5Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EsseMundoView\Capitulo6Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EsseMundoView\Capitulo7Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EsseMundoView\Capitulo8Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EsseMundoView\EsseMundoDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EsseMundoView\IntroducaoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EsseMundoView\MyPopupPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EstranhaView\EstranhaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MenusView\MenuAnjoMortePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MenusView\MenuApenasDancePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MenusView\MenuEsseMundoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MenusView\MenuEstranhaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MenusView\MenuNoEscuroPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MenusView\MenuSegredosDistantesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MenusView\MenuSegredosObscurosPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="NoEscuro\Capitulo1Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="NoEscuro\NoEscuroDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="NoEscuro\PrologoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SegredosDistantesView\Capitulo1Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SegredosDistantesView\PrologoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SegredosDistantesView\SegredosDistantesDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SegredosObscurosView\Capitulo1Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SegredosObscurosView\Capitulo2Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SegredosObscurosView\Capitulo3Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SegredosObscurosView\Capitulo4Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SegredosObscurosView\Capitulo5Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SegredosObscurosView\Capitulo6Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SegredosObscurosView\SegredosObscurosDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\CadastroPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\ConfiguracoesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\ContosPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\InsoniaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\LoadingPopupPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PerfilPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PrincipalPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AnjoMorteView\AnjoMorteDetaisPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="AnjoMorteView\Capitulo1Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="ApenasDanceView\CapituloApenasPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="CardView\AnjoMorteCardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="CardView\ApenasDanceCardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="CardView\EsseMundoCardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="CardView\EstranhaCardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="CardView\NoEscuroCardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="CardView\SegredosObscurosCardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\Capitulo10Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\Capitulo1Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\Capitulo2Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\Capitulo3Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\Capitulo4Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\Capitulo5Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\Capitulo6Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\Capitulo7Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\Capitulo8Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\Capitulo9Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\EsseMundoDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\IntroducaoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EsseMundoView\MyPopupPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EstranhaView\EstranhaPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MenusView\MenuAnjoMortePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MenusView\MenuApenasDancePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MenusView\MenuEsseMundoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MenusView\MenuEstranhaPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MenusView\MenuNoEscuroPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MenusView\MenuSegredosObscurosPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="NoEscuro\Capitulo1Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="NoEscuro\Capitulo2Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="NoEscuro\Capitulo3Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="NoEscuro\Capitulo4Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="NoEscuro\NoEscuroDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="NoEscuro\PrologoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SegredosObscurosView\Capitulo1Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SegredosObscurosView\Capitulo2Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SegredosObscurosView\Capitulo3Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SegredosObscurosView\Capitulo4Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SegredosObscurosView\Capitulo5Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SegredosObscurosView\Capitulo6Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SegredosObscurosView\SegredosObscurosDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="View\CadastroPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="View\ContosPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="View\InsoniaPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="View\LoadingPopupPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="View\MyPopupPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="View\PerfilPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="View\PrincipalPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+</Project>
