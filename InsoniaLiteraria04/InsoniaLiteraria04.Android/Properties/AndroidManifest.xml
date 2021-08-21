@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="18" android:versionName="2.3.3" package="com.reinaldosouza.InsoniaLiteraria04" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="25" android:targetSdkVersion="28" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="54" android:versionName="3.2" package="com.reinaldosouza.InsoniaLiteraria04" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="25" android:targetSdkVersion="30" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="Insônia Literária">
 		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" />
@@ -13,5 +14,7 @@
 				<category android:name="${applicationId}" />
 			</intent-filter>
 		</receiver>
+		<!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-9129739278119852~4059994623" />
 	</application>
 </manifest>

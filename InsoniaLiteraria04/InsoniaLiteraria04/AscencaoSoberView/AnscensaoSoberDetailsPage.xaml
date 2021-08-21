@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundImage="detailssober.png"
+             x:Class="InsoniaLiteraria04.AscencaoSoberView.AnscensaoSoberDetailsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <StackLayout Orientation="Vertical" Padding="5">
+
+                    <ImageButton Source="iconeFechar" WidthRequest="30" HorizontalOptions="EndAndExpand" Clicked="clkFechar"/>
+
+                    <Frame BackgroundColor="Black" Padding="5" HorizontalOptions="CenterAndExpand">
+                        <Image Source="capasober.jpg" WidthRequest="140"/>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+
+            <ScrollView Padding="0">
+                <StackLayout VerticalOptions="Start" BackgroundColor="Transparent">
+
+                    <StackLayout Padding="5" BackgroundColor="Transparent">
+                        <Frame BorderColor="Transparent" CornerRadius="5" Padding="3">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout VerticalOptions="Start">
+                                    <Image Source="iconemain.png" WidthRequest="50"/>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Label x:Name="lbltitulo" TextColor="Black" FontSize="Medium" />
+                                    <Label x:Name="lbldescricao" TextColor="Black" FontSize="Small" />
+                                    <Label x:Name="lblPorcentagem" TextColor="Gray" FontAttributes="Bold" FontSize="Small" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="IrParaCapitulo"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Padding="10" BackgroundColor="Cornsilk">
+                        <Label TextColor="Black" Text="A Ascensão de Sober" HorizontalTextAlignment="Center" TextDecorations="Underline" FontSize="18" FontAttributes="Bold" />
+                        <Label TextColor="Black" Text="Escrito por: Carolina Anf" HorizontalTextAlignment="Center" FontSize="Small" FontAttributes="Bold"/>
+                        <Label TextColor="Black" Text="Ano de Publicação: 2015" HorizontalTextAlignment="Center" FontSize="Small" FontAttributes="Bold"/>
+                        <Label TextColor="Black" Text="Os Santoro são parte restante da antiga burguesia italiana, eles viviam como nômades em geral desde que foram derrubados do poder na velha Itália e em raras ocasiões se estabeleciam em algum lugar durante anos." FontSize="15"/>
+                        <Label TextColor="Black" Text="Quando os pais de Sam eram vivos, eles eram parte dessa exceção, assim como hoje são Sam, seus irmãos e Lily, a irmã mais nova do pai deles e também o único parente vivo que eles conhecem. Mesmo com os esforços de Lily para mantê-los seguros..." FontSize="15"/>
+
+                        <StackLayout BackgroundColor="Transparent" Padding="10">
+                            <Button Text="RESETAR HISTÓRIA" TextColor="White" HorizontalOptions="Center" BackgroundColor="Red" 
+                                    BorderColor="Transparent" CornerRadius="5" Clicked="clkResetar"></Button>
+                        </StackLayout>
+                        
+                    </StackLayout>
+
+                </StackLayout>
+
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

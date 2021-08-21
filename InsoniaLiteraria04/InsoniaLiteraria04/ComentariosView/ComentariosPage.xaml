@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.ComentariosView.ComentariosPage"
+             BackgroundImage="backInsonia"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin">
+    <StackLayout BackgroundColor="White" Padding="5" Margin ="5" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+
+        <StackLayout Padding="3">
+            <ImageButton Source="iconeFechar"  WidthRequest="30" HorizontalOptions="EndAndExpand" Clicked="clkFechar"/>
+        </StackLayout>
+        
+        <StackLayout>
+            <Label x:Name="lblMensagem" Text="Seja o primeiro a comentar!" HorizontalOptions="CenterAndExpand"></Label>
+        </StackLayout>
+
+        <ActivityIndicator x:Name="ldlCarregar"
+        Color="Black"
+        VerticalOptions="Center"
+        HorizontalOptions="Center"
+        HeightRequest="30"
+        WidthRequest="30"/>
+
+        <ListView Margin="10" IsPullToRefreshEnabled="True" Refreshing="atualizarComentarios" HasUnevenRows="True" ItemsSource="{Binding .}" SeparatorVisibility="None" x:Name="_list" VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Frame Padding="2">
+                                <Grid Padding="0">
+                                    <StackLayout Orientation="Horizontal" Padding="0">
+                                        <StackLayout>
+                                            <controls:CircleImage
+                                                  x:Name="image_profile"
+                                                  BorderColor="White"
+                                                  Source="{Binding Imagem}"
+                                                  BorderThickness="1"
+                                                  WidthRequest="40"
+                                                  HeightRequest="40"
+                                                  Aspect="AspectFill"
+                                                  HorizontalOptions="Start"
+                                                  />
+                                        </StackLayout>
+                                        <StackLayout HorizontalOptions="FillAndExpand" Padding="3">
+                                            <StackLayout Orientation="Vertical" Padding="1" Margin="0">
+                                                <Frame CornerRadius="5" Margin="1" Padding="2" BackgroundColor="Gainsboro"  HorizontalOptions="FillAndExpand">
+                                                    <Label x:Name="eee" Text="{Binding Mensagem}" FontSize="13" FontAttributes="Bold"
+                                                   TextColor= "Black" VerticalOptions="Center"/>
+                                                </Frame>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding Usuario}" FontSize="10" HorizontalOptions="StartAndExpand" />
+                                                    <Label Text="{Binding Data}" FontSize="10" HorizontalOptions="EndAndExpand"/>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0">
+                                                <Button x:Name="btnExcluir" Text="EXCLUIR" IsVisible="{Binding Excluir}" FontSize="10" TextColor="Black" FontAttributes="Bold" Clicked="clkExcluirComentario" CommandParameter="{Binding Id}" HorizontalOptions="StartAndExpand" BackgroundColor="Transparent"></Button>
+                                                <Button x:Name="btnRespostas" Text="{Binding Respostas}" FontSize="10" Clicked="clkRespostas" TextColor="Black" FontAttributes="Bold" CommandParameter="{Binding Id}" HorizontalOptions="EndAndExpand" BackgroundColor="Transparent"></Button>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackLayout Orientation="Horizontal" Spacing="1" Padding="1" BackgroundColor="LightYellow">
+            <Editor x:Name="txtComentar" BackgroundColor="Transparent" AutoSize="TextChanges" Placeholder="Comente aqui..." 
+                            WidthRequest="230" FontSize="Small" HorizontalOptions="StartAndExpand" >
+                <Editor.Keyboard>
+                    <Keyboard x:FactoryMethod="Create">
+                        <x:Arguments>
+                            <KeyboardFlags>Suggestions,CapitalizeSentence</KeyboardFlags>
+                        </x:Arguments>
+                    </Keyboard>
+                </Editor.Keyboard>
+            </Editor>
+            <ImageButton Source="img_send" WidthRequest="50"  Clicked="clkComentar" VerticalOptions="End" HorizontalOptions="End" />
+        </StackLayout>
+
+    </StackLayout>
+
+</ContentPage>

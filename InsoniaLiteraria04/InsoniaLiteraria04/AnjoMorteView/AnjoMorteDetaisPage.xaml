@@ -2,59 +2,70 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.AnjoMorteView.AnjoMorteDetaisPage"
-             BackgroundImage="capaanjomorte.JPG">
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             BackgroundImage="detailsanjomorte.JPG">
     <ContentPage.Content>
-        <StackLayout Padding="0">
-            <StackLayout Padding="40, 10, 40, 0">
-                <Frame BackgroundColor="OrangeRed" CornerRadius="50" Rotation="5">
-                    <StackLayout>
-                        <Image Source="capaanjomorte.JPG" WidthRequest="120"/>
-                        <Label Text="Anjo da Morte" TextColor="White" FontAttributes="Bold" HorizontalOptions="EndAndExpand" FontSize="Medium" />
-                    </StackLayout>
-                </Frame>
+        <StackLayout>
 
+            <StackLayout>
+                <StackLayout Orientation="Vertical" Padding="5">
+
+                    <ImageButton Source="iconeFechar" WidthRequest="30" HorizontalOptions="EndAndExpand" Clicked="clkFechar"/>
+
+                    <Frame BackgroundColor="Black" Padding="5" HorizontalOptions="CenterAndExpand">
+                        <Image Source="capaanjomorte.JPG" WidthRequest="140"/>
+                    </Frame>
+                </StackLayout>
             </StackLayout>
-            <ScrollView>
-                <StackLayout Margin="0" VerticalOptions="Start" Padding="10" BackgroundColor="Orange">
 
-                    <StackLayout >
-                        <Frame BorderColor="Black" CornerRadius="5" Padding="1">
-                            <StackLayout>
-                                <ListView VerticalOptions="Start" x:Name="_list"  SeparatorVisibility="Default"
-                                               HasUnevenRows="True"  SeparatorColor="Black" ItemTapped="IrParaCapitulo" ItemsSource="{Binding .}" HeightRequest="81">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <ImageCell ImageSource="menuanjomorte.JPG" x:Name="txcCapitulo" Text="{Binding nomeCapitulo}" Detail="{Binding capituloLido}" TextColor="MidnightBlue" Height="80" ></ImageCell>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
+            <ScrollView Padding="0">
+                <StackLayout VerticalOptions="Start" BackgroundColor="Transparent">
+
+                    <StackLayout Padding="5" BackgroundColor="Transparent">
+                        <Frame BorderColor="Transparent" CornerRadius="5" Padding="3">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout VerticalOptions="Start">
+                                    <Image Source="iconemain.png" WidthRequest="50"/>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Label x:Name="lbltitulo" TextColor="Black" FontSize="Medium" />
+                                    <Label x:Name="lbldescricao" TextColor="Black" FontSize="Small" />
+                                    <Label x:Name="lblPorcentagem" TextColor="Gray" FontAttributes="Bold" FontSize="Small" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="IrParaCapitulo"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
                             </StackLayout>
-
                         </Frame>
                     </StackLayout>
 
-                    <Label TextColor="Black" Text="Eu ouvi a personagem de uma série de TV, Peyton Sawyer, dizer que pessoas sempre partem e eu costumava me sentir mal por isso.
- Não apenas pela personagem, mas também sentia muito por mim e por todos, que como ela, viveram situações de perda semelhantes.
- No entanto, eu percebi que às vezes você precisa deixar as pessoas livres para partir ao invés de continuar temendo o momento em que elas terão de tomar essa decisão por você." 
-                           VerticalOptions="Fill" FontSize="Small"/>
-                    <Label Text="--*--" FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
-                    <Label Text="Gênero: Drama, Ficção Adolescente, Romance..." FontSize="Small" FontAttributes="Bold" />
-                    <Label Text="Escrito por: Carolina Anf" FontSize="Small" FontAttributes="Bold"/>
-                    <Label Text="Ano de Publicação: 2016" FontSize="Small" FontAttributes="Bold"/>
+                    <StackLayout Padding="10" BackgroundColor="Cornsilk">
+                        <Label TextColor="Black" Text="Anjo da Morte" HorizontalTextAlignment="Center" TextDecorations="Underline" FontSize="18" FontAttributes="Bold" />
+                        <Label TextColor="Black" Text="Escrito por: Carolina Anf" HorizontalTextAlignment="Center" FontSize="Small" FontAttributes="Bold"/>
+                        <Label TextColor="Black" Text="Ano de Publicação: 2016" HorizontalTextAlignment="Center" FontSize="Small" FontAttributes="Bold"/>
+                        <Label TextColor="Black" Text="Eu ouvi a personagem de uma série de TV, Peyton Sawyer, dizer que pessoas sempre partem e eu costumava me sentir mal por isso." FontSize="15"/>
+                        <Label TextColor="Black" Text="Não apenas pela personagem, mas também sentia muito por mim e por todos, que como ela, viveram situações de perda semelhantes." FontSize="15"/>
+                        <Label TextColor="Black" Text="No entanto, eu percebi que às vezes você precisa deixar as pessoas livres para partir ao invés de continuar temendo o momento em que elas terão de tomar essa decisão por você." FontSize="15"/>
 
-                    <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" BackgroundColor="Transparent">
-                        <Image x:Name="imgPlaylist" Source="spotify_icon.png" WidthRequest="40">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="imgPlaylist_Tapped" ></TapGestureRecognizer>
-                            </Image.GestureRecognizers>
-                        </Image>
-                        <Label x:Name="lblPlaylist" VerticalOptions="Center" Text="Escutar Playlist Anjo da Morte" FontAttributes="Bold" FontSize="Small" >
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="imgPlaylist_Tapped"></TapGestureRecognizer>
-                            </Label.GestureRecognizers>
-                        </Label>
+                        <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" BackgroundColor="Transparent">
+                            <Image x:Name="imgPlaylist" Source="spotify_icon.png" WidthRequest="40">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="imgPlaylist_Tapped" ></TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label x:Name="lblPlaylist" VerticalOptions="Center" HorizontalTextAlignment="Center" Text="Clique aqui para escutar a playlist de Anjo da Morte" FontAttributes="Bold" FontSize="Small" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="imgPlaylist_Tapped"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout BackgroundColor="Transparent" Padding="10">
+                            <Button Text="RESETAR HISTÓRIA" TextColor="White" HorizontalOptions="Center" BackgroundColor="Red" 
+                                    BorderColor="Transparent" CornerRadius="5" Clicked="clkResetar"></Button>
+                        </StackLayout>
+
                     </StackLayout>
-
                 </StackLayout>
             </ScrollView>
         </StackLayout>

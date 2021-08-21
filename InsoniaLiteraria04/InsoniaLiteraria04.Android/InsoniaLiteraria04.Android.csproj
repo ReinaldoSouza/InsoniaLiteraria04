@@ -16,7 +16,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -65,23 +65,20 @@
     <PackageReference Include="FirebaseStorage.net">
       <Version>1.0.3</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.AppCenter">
-      <Version>2.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.AppCenter.Push">
-      <Version>2.1.1</Version>
-    </PackageReference>
     <PackageReference Include="Plugin.Permissions">
-      <Version>3.0.0.12</Version>
+      <Version>6.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="RatingConception">
+      <Version>5.0.0.2012</Version>
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
-      <Version>1.1.5.188</Version>
+      <Version>2.0.0.12</Version>
     </PackageReference>
     <PackageReference Include="System.Security.Cryptography.Cng">
-      <Version>4.5.0</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
-      <Version>4.0.1.5</Version>
+      <Version>5.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
       <Version>3.0.0.5</Version>
@@ -89,18 +86,29 @@
     <PackageReference Include="Xamarin.Android.Tooltips">
       <Version>1.0.7</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Essentials">
-      <Version>1.3.1</Version>
+    <PackageReference Include="Xamarin.AndroidX.Palette">
+      <Version>1.0.0.7</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>1.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Ads">
+      <Version>119.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.3.1" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.3.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.7" />
+    <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.2.4" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseUrl_droid.cs" />
+    <Compile Include="InterstitialAdsImplementation.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Message_Droid.cs" />
@@ -148,9 +156,6 @@
     <AndroidResource Include="Resources\drawable\capaessemundo.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\intro.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\logo.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\capaescuro.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\capaestranha.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\backcontos.jpg" />
@@ -178,7 +180,7 @@
     <AndroidResource Include="Resources\drawable\backessemundo.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_launcher1.png" />
+    <AndroidResource Include="Resources\drawable\ic_launcher2.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_launcher.png" />
@@ -199,16 +201,10 @@
     <AndroidResource Include="Resources\drawable\ic_perfil.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\essemundoseta.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\backapenasdance.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\capadancecomigo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\capaobscuros.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\backobscuros.jpg" />
@@ -217,34 +213,10 @@
     <AndroidResource Include="Resources\drawable\menuapenasdance.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\apenasdanceseta.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\estranhaseta.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\noescuroseta.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\obscuroseta.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\menuobscuro.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\cap2.html" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\spotify_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\backanjomorte.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\capaanjomorte.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\anjomorteseta.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\menuanjomorte.jpg" />
@@ -271,9 +243,6 @@
     <AndroidResource Include="Resources\drawable\nomecadastro.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\logointro.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\iconemain.png" />
   </ItemGroup>
   <ItemGroup>
@@ -292,16 +261,7 @@
     <AndroidResource Include="Resources\drawable\backdistantes.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\capadistantes.JPG" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\distantesseta.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\menudistantes.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\comentarios.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\leituras.png" />
@@ -310,8 +270,83 @@
     <AndroidResource Include="Resources\drawable\logo2.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="intro2.png" />
-    <AndroidResource Include="Resources\drawable\intro2.png" />
+    <AndroidResource Include="Resources\drawable\backsober.jpg" />
+    <AndroidResource Include="Resources\drawable\menuascensao.png" />
+    <AndroidResource Include="Resources\drawable\menu_voltar.png" />
+    <AndroidResource Include="Resources\drawable\backinternos.jpg" />
+    <AndroidResource Include="Resources\drawable\backsuamusica.jpg" />
+    <AndroidResource Include="Resources\drawable\capasuamusica.JPG" />
+    <AndroidResource Include="Resources\drawable\menuinternos.jpg" />
+    <AndroidResource Include="Resources\drawable\menusuamusica.jpg" />
+    <AndroidResource Include="Resources\drawable\imgEditar.png" />
+    <AndroidResource Include="Resources\drawable\detailsnoescuro.jpg" />
+    <AndroidResource Include="Resources\drawable\detailsessemundo.jpg" />
+    <AndroidResource Include="Resources\drawable\detailssuamusica.jpg" />
+    <AndroidResource Include="Resources\drawable\detailsdistantes.jpg" />
+    <AndroidResource Include="Resources\drawable\detailsinternos.jpg" />
+    <AndroidResource Include="Resources\drawable\detailsobscuro.jpg" />
+    <AndroidResource Include="Resources\drawable\detailsanjomorte.jpg" />
+    <AndroidResource Include="Resources\drawable\detailssober.jpg" />
+    <AndroidResource Include="Resources\drawable\iconInstagram.png" />
+    <AndroidResource Include="Resources\drawable\iconFaq.png" />
+    <AndroidResource Include="Resources\drawable\iconViews.png" />
+    <AndroidResource Include="Resources\drawable\capasober.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_reinaldo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_carol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\iconeFechar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\backInsonia.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\capaestranha.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\capaanjomorte.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\capadistantes.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\capaobscuros.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\capainternos.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\menuobscuro.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\menuresenhas.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\caparesenha.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\comentarios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\backresenhas.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\img_send.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\img_inicio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_launcher1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties XamarinHotReloadXFormsNugetUpgradeInfoBarInsoniaLiteraria04AndroidHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadDebuggerTimeoutExceptionInsoniaLiteraria04AndroidHideInfoBar="True" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

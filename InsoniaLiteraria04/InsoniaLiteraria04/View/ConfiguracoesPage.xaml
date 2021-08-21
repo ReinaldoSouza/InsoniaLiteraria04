@@ -12,15 +12,14 @@
             <StackLayout BackgroundColor="WhiteSmoke" Padding="10">
                 <StackLayout Orientation="Horizontal">
 
-                    <Button Text="Fechar" BackgroundColor="Transparent" Clicked="clkFechar" 
+                    <Button Text="Voltar" BackgroundColor="Transparent" Clicked="clkFechar" 
                             HorizontalOptions="StartAndExpand"></Button>
                     <Label Text="Ajustes"
                    FontSize="Title"
                    FontAttributes="Bold"
                    VerticalOptions="CenterAndExpand" 
-                   HorizontalOptions="CenterAndExpand" />
-                    <!--<Button Text="Salvar" BackgroundColor="Transparent"
-                            HorizontalOptions="EndAndExpand"></Button>-->
+                   HorizontalOptions="CenterAndExpand" 
+                           />
                 </StackLayout>
 
                 <StackLayout
@@ -29,6 +28,12 @@
                 WidthRequest="2"
                 BackgroundColor="Black"
                 >
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="Center">
+                    <Label x:Name="lblUsername" FontAttributes="Bold" FontSize="Medium" TextColor="Black" HorizontalOptions="CenterAndExpand"/>
+                    <Label x:Name="lblVersao" FontAttributes="Bold" FontSize="Small" TextColor="Gray" HorizontalOptions="CenterAndExpand"/>
+
                 </StackLayout>
 
                 <StackLayout HorizontalOptions="CenterAndExpand">
@@ -50,12 +55,14 @@
                     <Label Text="Nome" FontAttributes="Bold" FontSize="Small" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
 
                     <Label x:Name="lblNomeUsuario" FontAttributes="Bold" FontSize="Medium" TextColor="#FF4500" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+
+                    <Image HorizontalOptions="End" VerticalOptions="CenterAndExpand" Source="imgEditar.png" HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="clkAlterarNome"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
             <StackLayout Orientation="Horizontal">
-
-                    <Label Text="Username" FontAttributes="Bold" FontSize="Small" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
-
-                    <Label x:Name="lblUsername" FontAttributes="Bold" FontSize="Medium" TextColor="#FF4500" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
 
                 </StackLayout>
 
@@ -64,18 +71,71 @@
                     <Label Text="Email" FontAttributes="Bold" FontSize="Small" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
 
                     <Label x:Name="lblEmail" FontAttributes="Bold" FontSize="Medium" TextColor="#FF4500" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Image HorizontalOptions="End" VerticalOptions="CenterAndExpand" Source="imgEditar.png" HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="clkAlterarEmail"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                        
+                    </Image>
 
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Política de Privacidade e Termos de Uso" FontAttributes="Bold" FontSize="Small" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Image HorizontalOptions="End" VerticalOptions="CenterAndExpand" Source="imgEditar.png" HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="clkLinkTermosdeUso"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+
+                    </Image>
+
+                </StackLayout>
+
+                <StackLayout
+                Margin="10"
+                HeightRequest="2"
+                WidthRequest="2"
+                BackgroundColor="Black"
+                >
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image x:Name="imgInstagram" Source="iconInstagram.png" WidthRequest="40">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="imgInstagram_Tapped" ></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label x:Name="lblInstagram" VerticalOptions="Center" Text="Siga a gente também!" FontAttributes="Bold" FontSize="Small" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="imgInstagram_Tapped"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </StackLayout>
+
+                <StackLayout
+                Margin="10"
+                HeightRequest="2"
+                WidthRequest="2"
+                BackgroundColor="Black"
+                >
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Black" >
                     <Button Text="SAIR" BackgroundColor="Transparent" HorizontalOptions="Center"
                              TextColor="#FF4500" Clicked="clkSair"></Button>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="clkSair"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
                 </StackLayout>
 
-                <!--<StackLayout Orientation="Horizontal" VerticalOptions="End">
-                    <Button Text="Excluir Conta" BackgroundColor="Transparent"
-                            HorizontalOptions="StartAndExpand" TextColor="#FF4500"></Button>
-                </StackLayout>-->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Black" >
+                    <Button Text="EXCLUIR SUA CONTA" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="EndAndExpand"
+                             TextColor="#FF4500" Clicked="clkExcluir"></Button>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="clkExcluir"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
 
             </StackLayout>
         </ScrollView>

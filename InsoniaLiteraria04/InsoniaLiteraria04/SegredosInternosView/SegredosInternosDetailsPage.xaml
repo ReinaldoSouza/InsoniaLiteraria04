@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BackgroundImage="detailsinternos.jpg"
+             x:Class="InsoniaLiteraria04.SegredosInternosView.SegredosInternosDetailsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <StackLayout Orientation="Vertical" Padding="5">
+
+                    <ImageButton Source="iconeFechar" WidthRequest="30" HorizontalOptions="EndAndExpand" Clicked="clkFechar"/>
+
+                    <Frame BackgroundColor="Black" Padding="5" HorizontalOptions="CenterAndExpand">
+                        <Image Source="capainternos.jpg" WidthRequest="140"/>
+                    </Frame>
+                </StackLayout>
+
+            </StackLayout>
+
+            <ScrollView Padding="0">
+                <StackLayout VerticalOptions="Start" BackgroundColor="Transparent">
+
+                    <StackLayout Padding="5" BackgroundColor="Transparent">
+                        <Frame BorderColor="Transparent" CornerRadius="5" Padding="3">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout VerticalOptions="Start">
+                                    <Image Source="iconemain.png" WidthRequest="50"/>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Label x:Name="lbltitulo" TextColor="Black" FontSize="Medium" />
+                                    <Label x:Name="lbldescricao" TextColor="Black" FontSize="Small" />
+                                    <Label x:Name="lblPorcentagem" TextColor="Gray" FontAttributes="Bold" FontSize="Small" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="IrParaCapitulo"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout  Padding="10" BackgroundColor="Cornsilk">
+                        <Label TextColor="Black" Text="Segredos Internos" HorizontalTextAlignment="Center" TextDecorations="Underline" FontSize="18" FontAttributes="Bold" />
+                        <Label TextColor="Black" Text="Escrito por: Reinaldo Souza" HorizontalTextAlignment="Center" FontSize="Small" FontAttributes="Bold"/>
+                        <Label TextColor="Black" Text="Ano de Publicação: 2020" HorizontalTextAlignment="Center" FontSize="Small" FontAttributes="Bold"/>
+                        <Label TextColor="Black" Text="A vida de Jason e de seus amigos está bem diferente depois dos acontecimentos de Segredos Distantes." FontSize="15"/>
+                        <Label TextColor="Black" Text="Ao perceberem que funcionam melhor juntos, Jason e Emily embarcam em uma aventura que pode levá-los até o melhor momento de suas vidas. Eles finalmente se ajeitaram e aparentemente estão juntos para ficar. Mas logo vão perceber que a vida de um casal vai muito além do que esperavam e decisões precisarão ser tomadas para o bem do relacionamento." FontSize="15"/>
+                        <Label TextColor="Black" Text="Temperance fez uma escolha perigosa que pode mudar todo o seu futuro. Na tentativa de fugir de algo que ela nem sabe mais o que é, Temperance pode estar prestes a cometer o pior erro de sua vida ou finalmente acertar e ter a vida que sempre quis. Mas ela estará pronta para saber diferenciar as duas opções e escolher a correta?" FontSize="15"/>
+                        <Label TextColor="Black" Text="Allison e Amber precisam, mais do que nunca, se apoiar uma na outra após uma série de casualidades. Allison está com a vida feita e se sente no melhor momento, mas sabe por experiencia própria, que isso não vai durar por muito tempo. Amber, se sentindo uma estrela em ascensão, pode estar indo com muita sede ao pote." FontSize="15"/>
+                        <Label TextColor="Black" Text="Os amigos vão continuar juntos em todos os momentos importantes ou vão sofrer o impacto que os segredos ainda trazem para a vida de cada um deles?" FontSize="15"/>
+
+                        <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" BackgroundColor="Transparent">
+                            <Image x:Name="imgPlaylist" Source="spotify_icon.png" WidthRequest="40">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="imgPlaylist_Tapped" ></TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label x:Name="lblPlaylist" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="Clique aqui para escutar a playlist de Segredos..." FontAttributes="Bold" FontSize="Small" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="imgPlaylist_Tapped"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout BackgroundColor="Transparent" Padding="10">
+                            <Button Text="RESETAR HISTÓRIA" TextColor="White" HorizontalOptions="Center" BackgroundColor="Red" 
+                                    BorderColor="Transparent" CornerRadius="5" Clicked="clkResetar"></Button>
+                        </StackLayout>
+
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

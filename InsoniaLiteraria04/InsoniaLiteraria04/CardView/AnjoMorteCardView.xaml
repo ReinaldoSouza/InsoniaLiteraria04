@@ -2,8 +2,9 @@
 <Frame xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.CardView.AnjoMorteCardView"
-             Padding="0" Margin="2" VerticalOptions="Start"
-             BackgroundColor="#FFA500">
+             Padding="0" Margin="2" VerticalOptions="Start" BorderColor="Azure"
+             BackgroundColor="#FFA500"
+             CornerRadius="5">
     <Frame.GestureRecognizers>
         <TapGestureRecognizer Tapped="Card_Tapped"/>
     </Frame.GestureRecognizers>
@@ -13,21 +14,22 @@
                 <BoxView x:Name="boxCardColor" HorizontalOptions="Fill" BackgroundColor="#00ACC1" InputTransparent="True"/>
                 <Image x:Name="imgCard" HorizontalOptions="Fill" Aspect="AspectFill" Source="backanjomorte.jpg" InputTransparent="True"/>
             </Grid>
-            <StackLayout Margin="10" >
-                <Label Text="ANJO DA MORTE" FontSize="Large" Opacity="0.8"/>
-                <Label Text="Eu ouvi a personagem de uma série de TV, Peyton Sawyer, dizer que pessoas sempre partem e eu costumava me sentir mal por isso." FontSize="Small" Opacity="0.6"/>
-                <Label Text="Escrito por Carolina Anf, 2016" FontSize="Small" Opacity="0.8"/>
+            <StackLayout Margin="5" >
+                <Label TextColor="Black" Text="ANJO DA MORTE" FontAttributes="Bold" FontSize="Medium" Opacity="0.8"/>
+                <Label TextColor="Black" Text="Quanto tempo é necessário para se perceber que você esteve lamentando as coisas erradas?" FontSize="Small" Opacity="0.6"/>
+                <Label TextColor="Black" Text="Escrito por Carolina Anf, 2016" FontSize="Small" Opacity="0.8"/>
+
                 <StackLayout Orientation="Horizontal">
-                    <Image x:Name="imgLeituras" Source="leituras.png" WidthRequest="25"/>
-                    <Label x:Name="lblContagem" VerticalOptions="Center" FontSize="Small"/>
-                    <Label/>
                     <Image x:Name="imgComentarios" Source="comentarios.png" WidthRequest="25"/>
                     <Label x:Name="lblContagem2" VerticalOptions="Center" FontSize="Small"/>
+                    <Label/>
+                    <Image x:Name="imgVews" Source="iconViews.png" WidthRequest="25"/>
+                    <Label x:Name="lblContagem3" VerticalOptions="Center" FontSize="Small"/>
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Black" Text="EM ANDAMENTO" HorizontalOptions="EndAndExpand" />
                 </StackLayout>
                 
                 <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Red" Text="LEIA AGORA!"/>
-                    <Label FontAttributes="Bold" FontSize="Default" TextColor="White" BackgroundColor="Black" Text="EM ANDAMENTO" HorizontalOptions="EndAndExpand" />
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Red" Text="CLIQUE AQUI PARA LER!"/>
                 </StackLayout>
             </StackLayout>
 

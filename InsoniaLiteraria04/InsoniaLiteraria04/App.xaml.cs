@@ -1,12 +1,7 @@
 ﻿using Firebase.Xamarin.Auth;
 using InsoniaLiteraria04.Database;
-using InsoniaLiteraria04.Global;
 using InsoniaLiteraria04.Helper;
-using InsoniaLiteraria04.Model;
 using InsoniaLiteraria04.View;
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Push;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,25 +17,11 @@ namespace InsoniaLiteraria04
         {
             InitializeComponent();
 
-            DBFire service = new DBFire();
+            DBFireConta service = new DBFireConta();
 
             if (!string.IsNullOrEmpty(UserLocalData.userToken))
             {
-                MainPage = new PrincipalPage();
-
-                AppCenter.Start("android=5688ae49-6c8c-4c4b-88ea-11a199ed571b", typeof(Push));
-
-                AppCenter.GetInstallIdAsync().ContinueWith(installId =>
-                {
-                    Usuario_Notificacao notify = new Usuario_Notificacao();
-
-                    notify.Id = UserLocalData.userUID;
-                    notify.Id_Notificacao = installId.Result.ToString();
-                    notify.Username = UserLocalData.userEmail.Replace("@insonialiteraria.com", "");
-
-                    service.salvarIDNotificacao(notify, UserLocalData.userUID);
-
-                });
+                MainPage = new InicioPage();
             }
             else
             {
@@ -51,29 +32,8 @@ namespace InsoniaLiteraria04
 
         protected override void OnStart()
         {
-            #region Handle PushNotificationReceived Event
-            if (!AppCenter.Configured)
-            {
-                Push.PushNotificationReceived += OnPushNotificationRecieved;
-            }
-            #endregion
-
-            #region Startar o serviço de push
-            AppCenter.Start("android=5688ae49-6c8c-4c4b-88ea-11a199ed571b", typeof(Push));
-
-            #endregion
+            
         }
-
-        private void OnPushNotificationRecieved(object sender, PushNotificationReceivedEventArgs e)
-        {
-
-            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
-            {
-                //DependencyService.Get<IMessage>().ShortTime(e.Message);
-                //Current.MainPage.DisplayAlert(e.Title, e.Message, "OK");
-            });
-        }
-
         protected override void OnSleep()
         {
             // Handle when your app sleeps

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.MenusView.MenuSegredosInternosPage"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             BackgroundImage="backInsonia">
+    <ContentPage.Content>
+        <StackLayout Margin="5" Padding="2" BackgroundColor="Transparent" Opacity="0.9">
+            <ListView VerticalOptions="FillAndExpand" x:Name="_list" IsPullToRefreshEnabled="True" Refreshing="atualizarMenu" ItemSelected="IrParaCapitulo" ItemsSource="{Binding .}" SeparatorVisibility="None"
+                      HasUnevenRows="True" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Frame Padding="5" Margin="3">
+                                    <Grid Padding="0" BackgroundColor="Gainsboro">
+                                        <StackLayout Orientation="Horizontal" Padding="0">
+                                            <StackLayout>
+                                                <controls:CircleImage
+                                                  x:Name="image_profile"
+                                                  BorderColor="White"
+                                                  Source="{Binding Imagem}"
+                                                  BorderThickness="1"
+                                                  WidthRequest="60"
+                                                  HeightRequest="60"
+                                                  Aspect="AspectFill"
+                                                  HorizontalOptions="Start"
+                                                  />
+                                            </StackLayout>
+                                            <StackLayout HorizontalOptions="FillAndExpand" Padding="3">
+                                                <StackLayout Orientation="Vertical" Padding="4">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <StackLayout HorizontalOptions="StartAndExpand">
+                                                            <Label x:Name="eee" Text="{Binding Titulo}" FontSize="16" FontAttributes="Bold" HorizontalOptions="StartAndExpand"
+                                                            TextColor= "Black" VerticalOptions="Center"/>
+                                                        </StackLayout>
+                                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
+                                                            <Image Source="comentarios.png" IsVisible="{Binding Status}" WidthRequest="15"></Image>
+                                                            <Label VerticalOptions="Center" FontSize="Micro" Text="{Binding Capitulos}" x:Name="lblComentarios"></Label>
+                                                            <Label/>
+                                                            <Image Source="iconViews.png" IsVisible="{Binding Status}" WidthRequest="15"></Image>
+                                                            <Label VerticalOptions="Center" FontSize="Micro" Text="{Binding Views}" x:Name="lblViews"></Label>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                    <StackLayout HorizontalOptions="Start">
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="{Binding Descricao}" TextColor= "Black" FontSize="13" HorizontalOptions="StartAndExpand" />
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -8,12 +8,23 @@ namespace InsoniaLiteraria04
     {
         public MainPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
+
         }
 
         public void clkGoLogin(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new LoginPage());
+        }
+
+        public void clkGoCadastro(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new CadastroPage());
+        }
+
+        async void clkLinkTermosdeUso(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new TermosPage());
         }
     }
 }

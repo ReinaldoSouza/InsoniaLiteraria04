@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="InsoniaLiteraria04.CardView.SegredosInternosCardView"
+             Padding="0" Margin="2" VerticalOptions="Start" BorderColor="Azure"
+             BackgroundColor="#ADD8E6"
+             CornerRadius="5">
+    <Frame.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Card_Tapped"/>
+    </Frame.GestureRecognizers>
+    <Frame.Content>
+        <StackLayout>
+            <Grid>
+                <BoxView x:Name="boxCardColor" HorizontalOptions="Fill" BackgroundColor="#00ACC1" InputTransparent="True"/>
+                <Image x:Name="imgCard" HorizontalOptions="Fill" Aspect="AspectFill" Source="backinternos.jpg" InputTransparent="True"/>
+            </Grid>
+            <StackLayout Margin="5" >
+                <Label TextColor="Black" Text="SEGREDOS INTERNOS &#10; Volume 3" FontSize="Medium" FontAttributes="Bold" Opacity="0.8"/>
+                <Label TextColor="Black" Text="A vida é incrível, dolorida e curta. Merecemos aproveitar cada minuto dela..." FontSize="Small" Opacity="0.6"/>
+                <Label TextColor="Black" Text="Escrito por Reinaldo Souza, 2020" FontSize="Small" Opacity="0.8"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image x:Name="imgComentarios" Source="comentarios.png" WidthRequest="25"/>
+                    <Label x:Name="lblContagem2" VerticalOptions="Center" FontSize="Small"/>
+                    <Label/>
+                    <Image x:Name="imgVews" Source="iconViews.png" WidthRequest="25"/>
+                    <Label x:Name="lblContagem3" VerticalOptions="Center" FontSize="Small"/>
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Black" Text="EM ANDAMENTO" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Red" Text="CLIQUE AQUI PARA LER!"/>
+                </StackLayout>
+            </StackLayout>
+
+        </StackLayout>
+    </Frame.Content>
+    
+</Frame>

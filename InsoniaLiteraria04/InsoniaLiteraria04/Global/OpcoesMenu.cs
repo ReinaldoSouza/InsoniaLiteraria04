@@ -10,6 +10,10 @@ namespace InsoniaLiteraria04.Global
         public int Codigo { get; set; }
         public string Descricao { get; set; }
         public string Titulo { get; set; }
+        public string Autor { get; set; }
         public string Imagem { get; set; }
+        public string Views { get; set; }
+        public string Capitulos { get; set; }
+        public bool Status { get; set; }
     }
 }

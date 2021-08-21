@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.View.PrincipalPage"
              xmlns:pages="clr-namespace:InsoniaLiteraria04.View">
-    <!--Pages can be added as references or inline-->
-    <pages:InsoniaPage Icon="ic_launcher" Title="INSÔNIA" />
-    <pages:ContosPage Icon="ic_launcher1" Title="LITERÁRIA"/>
-    <pages:PerfilPage Icon="ic_perfil" Title="PERFIL" />
+
+    <pages:InsoniaPage Icon="icon_reinaldo" />
+    <pages:ContosPage Icon="icon_carol"/>
+    <pages:PerfilPage Icon="ic_perfil"/>
 </TabbedPage>
+

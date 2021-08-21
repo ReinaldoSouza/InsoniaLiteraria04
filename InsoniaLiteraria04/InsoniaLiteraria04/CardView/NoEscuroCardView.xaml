@@ -2,8 +2,9 @@
 <Frame xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.CardView.NoEscuroCardView"
-             Padding="0" Margin="2" VerticalOptions="Start"
-             BackgroundColor="#C0C0C0">
+             Padding="0" Margin="2" VerticalOptions="Start" BorderColor="Azure"
+             BackgroundColor="#C0C0C0"
+             CornerRadius="5">
     <Frame.GestureRecognizers>
         <TapGestureRecognizer Tapped="Card_Tapped"/>
     </Frame.GestureRecognizers>
@@ -14,21 +15,21 @@
                 <Image x:Name="imgCard" HorizontalOptions="Fill" Aspect="AspectFill" Source="backescuro.jpg" InputTransparent="True"/>
             </Grid>
             <StackLayout Margin="10" >
-                <Label Text="NO ESCURO" FontSize="Large" Opacity="0.8"/>
-                <Label Text="Uma volta a sua cidade natal pode depois de anos, além de trazer seus demônios de volta à vida, pode ser mortal..." FontSize="Small" Opacity="0.6"/>
-                <Label Text="Escrito por Reinaldo Souza, 2019" FontSize="Small" Opacity="0.8"/>
+                <Label TextColor="Black" Text="NO ESCURO" FontAttributes="Bold" FontSize="Medium" Opacity="0.8"/>
+                <Label TextColor="Black" Text="O mundo é mesmo louco. As pessoas são loucas..." FontSize="Small" Opacity="0.6"/>
+                <Label TextColor="Black" Text="Escrito por Reinaldo Souza, 2019" FontSize="Small" Opacity="0.8"/>
 
                 <StackLayout Orientation="Horizontal">
-                    <Image x:Name="imgLeituras" Source="leituras.png" WidthRequest="25"/>
-                    <Label x:Name="lblContagem" VerticalOptions="Center" FontSize="Small"/>
-                    <Label/>
                     <Image x:Name="imgComentarios" Source="comentarios.png" WidthRequest="25"/>
                     <Label x:Name="lblContagem2" VerticalOptions="Center" FontSize="Small"/>
+                    <Label/>
+                    <Image x:Name="imgVews" Source="iconViews.png" WidthRequest="25"/>
+                    <Label x:Name="lblContagem3" VerticalOptions="Center" FontSize="Small"/>
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Black" Text="EM ANDAMENTO" HorizontalOptions="EndAndExpand" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Red" Text="LEIA AGORA!"/>
-                    <Label FontAttributes="Bold" FontSize="Default" TextColor="White" BackgroundColor="Black" Text="EM ANDAMENTO" HorizontalOptions="EndAndExpand" />
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Red" Text="CLIQUE AQUI PARA LER!"/>
                 </StackLayout>
             </StackLayout>
 

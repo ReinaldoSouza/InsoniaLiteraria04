@@ -1,24 +1,21 @@
 ﻿using InsoniaLiteraria04.Database;
+using InsoniaLiteraria04.Helper;
+using InsoniaLiteraria04.Model;
 using Rg.Plugins.Popup.Extensions;
-using Rg.Plugins.Popup.Services;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Push;
-using InsoniaLiteraria04.Model;
-using InsoniaLiteraria04.Helper;
 
 namespace InsoniaLiteraria04.View
 {
     public partial class LoginPage : ContentPage
     {
-        DBFire service;
+        DBFireConta service;
 
-        public LoginPage ()
+        public LoginPage()
 		{
-			InitializeComponent ();
-            service = new DBFire();
+			InitializeComponent();
+            service = new DBFireConta();
         }
 
         async void clkGoPrincipal(object sender, EventArgs e)
@@ -26,67 +23,36 @@ namespace InsoniaLiteraria04.View
             await fazerLogin();
         }
 
-        public async void clkGoCadastro(object sender, EventArgs e)
+        public async void clkGoEsqueciSenha(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new CadastroPage());
-            
-            
+            await Navigation.PushModalAsync(new EsqueciSenhaPage());
         }
 
         async Task fazerLogin()
         {
+
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             try
             {
-                await service.authUser(txtUsernameLogin.Text + "@insonialiteraria.com", txtSenhaLogin.Text);
-                App.Current.MainPage = new PrincipalPage();
+                UserLocalData.removeDataAll();
+                await service.authUser(txtUsernameLogin.Text.Trim() + "@insonialiteraria.com", txtSenhaLogin.Text.Trim());
+                App.Current.MainPage = new PrincipalPage(0);
                 await Navigation.RemovePopupPageAsync(loadingPage);
-
-                #region Salvar o ID do App Center 
-                salvarIdNtificacao();
-                #endregion
 
             }
             catch (Exception ex)
             {
-                txtUsernameLogin.Text = "";
-                txtSenhaLogin.Text = "";
                 await Navigation.RemovePopupPageAsync(loadingPage);
-                await DisplayAlert("ERRO!", "SENHA OU USERNAME INVÁLIDO", "OK");
-                Console.WriteLine("Erro (Login)", ex.Message);
+                await DisplayAlert("Erro!", "Username ou Senha inválidos. Favor tente novamente.", "OK");
             }
-            
+
 
         }
 
-        public void salvarIdNtificacao()
-        {
-            AppCenter.GetInstallIdAsync().ContinueWith(installId =>
-            {
-                Usuario_Notificacao notify = new Usuario_Notificacao();
-
-                notify.Id = UserLocalData.userUID;
-                notify.Id_Notificacao = installId.Result.ToString();
-                notify.Username = UserLocalData.userEmail.Replace("@insonialiteraria.com", "");
-
-                service.salvarIDNotificacao(notify, UserLocalData.userUID);
-
-            });
-        }
-
-        //async void clkMudarSenha(object sender, EventArgs e)
-        //{
-        //    await MudarSenha();
-        //}
-
-
-
-        //async Task MudarSenha()
-        //{
-        //    await service.MudarSenha("reinaldo.s054@gmail.com");
-        //}
+        
+        
 
     }
 }

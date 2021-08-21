@@ -3,21 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.View.ContosPage"
              xmlns:controls="clr-namespace:InsoniaLiteraria04.CardView"
-             BackgroundImage="intro.png">
+             BackgroundImage="backInsonia">
     <ContentPage.Content>
         <StackLayout>
         <ScrollView>
             <StackLayout>
-                    <Frame Margin="15" BackgroundColor="WhiteSmoke">
-                        <StackLayout BackgroundColor="WhiteSmoke">
+
+                    <Frame Margin="7" BackgroundColor="Transparent" Padding="3">
+                        <StackLayout Padding="0">
+                            <controls:AnjoMorteCardView/>
+
+                            <controls:AscencaoSoberCardView/>
+
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Margin="7" BackgroundColor="Transparent" Padding="3">
+                        <StackLayout Padding="0">
                             <controls:EstranhaCardView/>
-                        </StackLayout>
-                    </Frame>
-                    <Frame Margin="15" BackgroundColor="WhiteSmoke">
-                        <StackLayout BackgroundColor="WhiteSmoke">
+
                             <controls:ApenasDanceCardView/>
+
                         </StackLayout>
                     </Frame>
+
                 </StackLayout>
         </ScrollView>
         </StackLayout>

@@ -3,198 +3,421 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.View.PerfilPage"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             BackgroundImage="intro2.png">
+             BackgroundImage="backInsonia">
     <ContentPage.Content>
         <ScrollView>
         <StackLayout>
-
-                <RelativeLayout>
-                    <Image x:Name="imgCard" HorizontalOptions="Fill" Aspect="AspectFill" Source="logo2.jpg" InputTransparent="True"/>
-
-                    <controls:CircleImage
+                <StackLayout Padding="2">
+                    <Frame CornerRadius="20" Padding="1" BackgroundColor="Gainsboro" BorderColor="Azure">
+                        <StackLayout>
+                            <StackLayout BackgroundColor="WhiteSmoke" Orientation="Horizontal">
+                                <controls:CircleImage
                               x:Name="image_profile"
                               BorderColor="White"
                               Source="capaprofile.jpg"
                               BorderThickness="5"
-                              WidthRequest="160"
-                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=imgCard, Property=Height, Factor=.5,Constant=40}"
-                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=imgCard, Property=Width, Factor=.5,Constant=-80}"
-                              HeightRequest="160"
+                              WidthRequest="115"
+                              HeightRequest="115"
                               Aspect="AspectFill"
-                              HorizontalOptions="Center"
-                              VerticalOptions="Start"/>
+                              HorizontalOptions="Start" />
 
-                </RelativeLayout>
+                                <StackLayout BackgroundColor="WhiteSmoke" VerticalOptions="Center" HorizontalOptions="Start">
+                                    <Label HorizontalTextAlignment="Center" TextColor="Black" x:Name="lblNome" FontAttributes="Bold" FontSize="Large"/>
+                                    <Label HorizontalTextAlignment="Center" x:Name="lblUsername" FontSize="Small"  />
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    
+                </StackLayout>
+                
 
-                <StackLayout>
+                <StackLayout Padding="2">
 
-                    <Label HorizontalOptions="Center" TextColor="Black" x:Name="lblNome" FontAttributes="Bold" FontSize="Large"  BackgroundColor="WhiteSmoke"/>
-                    <Label HorizontalOptions="Center" x:Name="lblUsername" FontSize="Small" BackgroundColor="WhiteSmoke" />
+                    <StackLayout Orientation="Horizontal"  Padding="0, 10, 0, 0">
+
+                        <Frame BackgroundColor="#2F4F4F" BorderColor="White" HorizontalOptions="FillAndExpand" Padding="1" Margin="5" >
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <Label Text="Configurações" TextColor="White" FontAttributes="Bold" VerticalOptions="CenterAndExpand" FontSize="Small"/>
+                                <Image Source="iconeAjustes.png" HeightRequest="30" />
+                            </StackLayout>
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="clkGoAjuste"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+
+                    </StackLayout>
 
                     <!--Histórias ainda sendo lidas-->
-                    
-                    <StackLayout BackgroundColor="ForestGreen" Padding="10">
-                        <Label HorizontalOptions="End" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Text="LENDO"/>
+                    <Frame CornerRadius="20" Padding="1" BackgroundColor="Gainsboro" BorderColor="Azure">
+                        <StackLayout BackgroundColor="Transparent" Padding="10">
+                            <Label HorizontalOptions="End" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Text="LENDO"/>
 
-                        <ScrollView HorizontalOptions="Fill" Orientation="Horizontal">
-                            <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke" Padding="2">
+                            <ScrollView HorizontalOptions="Fill" Orientation="Horizontal">
+                                <StackLayout Orientation="Horizontal" BackgroundColor="Transparent" Padding="2">
 
-                                <Image x:Name="imgSemLendo" Source="SemLeituras.PNG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgLendo_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
-                                
-                                <Image x:Name="imgEstranha" Source="capaestranha.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgEstranha_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                    <StackLayout x:Name="stlSemLendo" Orientation="Vertical">
+                                        <Image Source="SemLeituras.PNG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgLendo_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
 
-                                <Image x:Name="imgAnjoMorte" Source="capaanjomorte.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgAnjoMorte_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                    <StackLayout x:Name="stlEstranha" Orientation="Vertical">
+                                        <Image Source="capaestranha.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgEstranha_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
 
-                                <Image x:Name="imgApenasDance" Source="capadancecomigo.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgApenasDance_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                        <ProgressBar x:Name="BarraProgressoEstranha"
+                                                     WidthRequest="100"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Green">
+                                        </ProgressBar>
 
-                                <Image x:Name="imgMundo" Source="capaessemundo.JPG"  WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgMundo_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                    </StackLayout>
 
-                                <Image x:Name="imgEscuro" Source="capaescuro.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgEscuro_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                    <StackLayout x:Name="stlAscensaoSober" Orientation="Vertical">
+                                        <Image Source="capasober.jpg" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgAscensaoSober_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
 
-                                <Image x:Name="imgObscuros" Source="capaobscuros.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgObscuros_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                        <ProgressBar x:Name="BarraProgressoSober"
+                                                     WidthRequest="100"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Green">
+                                        </ProgressBar>
 
-                                <Image x:Name="imgDistantes" Source="capadistantes.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgDistantes_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                    </StackLayout>
 
-                            </StackLayout>
-                            
-                        </ScrollView>
+                                    <StackLayout x:Name="stlAnjoMorte" Orientation="Vertical">
+                                        <Image Source="capaanjomorte.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgAnjoMorte_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
 
-                    </StackLayout>
+                                        <ProgressBar x:Name="BarraProgressoAnjo"
+                                                     WidthRequest="100"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Green">
+                                        </ProgressBar>
 
-                    <!--Histórias aguardando capítulos novos-->
+                                    </StackLayout>
 
-                    <StackLayout BackgroundColor="Gold" Padding="10">
-                        <Label HorizontalOptions="End" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Text="AGUARDANDO MAIS"/>
+                                    <StackLayout x:Name="stlApenasDance" Orientation="Vertical">
+                                        <Image Source="capadancecomigo.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgApenasDance_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoDance"
+                                                     WidthRequest="100"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Green">
+                                        </ProgressBar>
+                                    </StackLayout>
 
-                        <ScrollView HorizontalOptions="Fill" Orientation="Horizontal">
-                            <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke" Padding="2">
+                                    <StackLayout x:Name="stlMundo" Orientation="Vertical">
+                                        <Image Source="capaessemundo.JPG"  WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgMundo_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoMundo"
+                                                     WidthRequest="100"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Green">
+                                        </ProgressBar>
+                                    </StackLayout>
 
-                                <Image x:Name="imgAguardando" Source="SemAguardando.jpg" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgLendo_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                    <StackLayout x:Name="stlSuaMusica" Orientation="Vertical">
+                                        <Image Source="capasuamusica.JPG"  WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgSuaMusica_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoMusica"
+                                                     WidthRequest="100"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Green">
+                                        </ProgressBar>
+                                    </StackLayout>
 
-                                <Image x:Name="imgEstranhaF" Source="capaestranha.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgEstranha_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                    <StackLayout x:Name="stlEscuro" Orientation="Vertical">
+                                        <Image Source="capaescuro.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgEscuro_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoEscuro"
+                                                     WidthRequest="100"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Green">
+                                        </ProgressBar>
+                                    </StackLayout>
 
-                                <Image x:Name="imgAnjoMorteF" Source="capaanjomorte.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgAnjoMorte_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                    <StackLayout x:Name="stlObscuros" Orientation="Vertical">
+                                        <Image Source="capaobscuros.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgObscuros_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoObscuros"
+                                                     WidthRequest="100"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Green">
+                                        </ProgressBar>
+                                    </StackLayout>
 
-                                <Image x:Name="imgApenasDanceF" Source="capadancecomigo.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgApenasDance_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                    <StackLayout x:Name="stlDistantes" Orientation="Vertical">
+                                        <Image Source="capadistantes.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgDistantes_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoDistantes"
+                                                     WidthRequest="100"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Green">
+                                        </ProgressBar>
+                                    </StackLayout>
 
-                                <Image x:Name="imgEscuroF" Source="capaescuro.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgEscuro_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                    <StackLayout x:Name="stlInternos" Orientation="Vertical">
+                                        <Image Source="capainternos.jpg" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgInternos_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoInternos"
+                                                     WidthRequest="100"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Green">
+                                        </ProgressBar>
+                                    </StackLayout>
+                                </StackLayout>
 
-                                <Image x:Name="imgDistantesF" Source="capadistantes.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgDistantes_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
-                                
-                            </StackLayout>
+                            </ScrollView>
 
-                        </ScrollView>
-
-                    </StackLayout>
-
-                    <!--Histórias finalizadas-->
-
-                    <StackLayout BackgroundColor="Maroon" Padding="10">
-                        <Label HorizontalOptions="End" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Text="FINALIZADAS"/>
-
-                        <ScrollView HorizontalOptions="Fill" Orientation="Horizontal">
-                            <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke" Padding="2">
-
-                                <Image x:Name="imgSemFinalizadas" Source="SemFinalizadas.jpg" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgLendo_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
-
-                                <Image x:Name="imgMundoF" Source="capaessemundo.JPG"  WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgMundo_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
-
-                                <Image x:Name="imgObscurosF" Source="capaobscuros.JPG" WidthRequest="140">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="imgObscuros_Tapped" ></TapGestureRecognizer>
-                                    </Image.GestureRecognizers>
-                                </Image>
-
-                            </StackLayout>
-
-                        </ScrollView>
-
-                    </StackLayout>
-
-                </StackLayout>
-
-                <StackLayout Orientation="Horizontal"  Padding="0, 10, 0, 0">
-
-                    <Frame BackgroundColor="#2F4F4F" BorderColor="White" HorizontalOptions="CenterAndExpand" Padding="15" CornerRadius="20" >
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="CONTA" TextColor="White" FontAttributes="Bold" VerticalOptions="CenterAndExpand" FontSize="Small"/>
-                            <Image Source="iconeAjustes.png" HeightRequest="30" />
                         </StackLayout>
-
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="clkGoAjuste"/>
-                        </Frame.GestureRecognizers>
                     </Frame>
 
-                    <!--<Button BackgroundColor="Black" WidthRequest="150" BorderColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="End" Text="ALTERAR FOTO" Clicked="ClkPegueFotoGaleria" TextColor="White"/>
-                    <Button BackgroundColor="Red" WidthRequest="150" BorderColor="Black" HorizontalOptions="EndAndExpand" VerticalOptions="End" TextColor="White" Text="SAIR" Clicked="clkSair"/>-->
+                    <!--Histórias aguardando capítulos novos-->
+                    <Frame CornerRadius="20" Padding="1" BackgroundColor="Gainsboro" BorderColor="Azure">
+                        <StackLayout BackgroundColor="Transparent" Padding="10">
+                            <Label HorizontalOptions="End" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Text="AGUARDANDO MAIS"/>
+
+                            <ScrollView HorizontalOptions="Fill" Orientation="Horizontal">
+                                <StackLayout Orientation="Horizontal" BackgroundColor="Transparent" Padding="2">
+                                    <StackLayout x:Name="stlAguardando" Orientation="Vertical">
+                                        <Image Source="SemAguardando.jpg" WidthRequest="100" />
+                                    </StackLayout>
+                                    <StackLayout x:Name="stlEstranhaF" Orientation="Vertical">
+                                        <Image Source="capaestranha.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgEstranha_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoEstranhaF"
+                                                     WidthRequest="100"
+                                                     Progress="1"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Orange">
+                                        </ProgressBar>
+                                    </StackLayout>
+                                    <StackLayout x:Name="stlAscensaoSoberF" Orientation="Vertical">
+                                        <Image Source="capasober.jpg" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgAscensaoSober_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoSoberF"
+                                                     WidthRequest="100"
+                                                     Progress="1"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Orange">
+                                        </ProgressBar>
+                                    </StackLayout>
+                                    <StackLayout x:Name="stlAnjoMorteF" Orientation="Vertical">
+                                        <Image Source="capaanjomorte.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgAnjoMorte_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoAnjoF"
+                                                     WidthRequest="100"
+                                                     Progress="1"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Orange">
+                                        </ProgressBar>
+                                    </StackLayout>
+                                    <StackLayout x:Name="stlApenasDanceF" Orientation="Vertical">
+                                        <Image Source="capadancecomigo.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgApenasDance_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoDanceF"
+                                                     WidthRequest="100"
+                                                     Progress="1"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Orange">
+                                        </ProgressBar>
+                                    </StackLayout>
+                                    <StackLayout x:Name="stlEscuroF" Orientation="Vertical">
+                                        <Image Source="capaescuro.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgEscuro_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoEscuroF"
+                                                     WidthRequest="100"
+                                                     Progress="1"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Orange">
+                                        </ProgressBar>
+                                    </StackLayout>
+                                    <StackLayout x:Name="stlInternosF" Orientation="Vertical">
+                                        <Image Source="capainternos.jpg" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgInternos_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoInternosF"
+                                                     WidthRequest="100"
+                                                     Progress="1"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Orange">
+                                        </ProgressBar>
+                                    </StackLayout>
+
+                                </StackLayout>
+
+                            </ScrollView>
+
+                        </StackLayout>
+                    </Frame>
+
+                    <!--Histórias finalizadas-->
+                    <Frame CornerRadius="20" Padding="1" BackgroundColor="Gainsboro" BorderColor="Azure">
+                        <StackLayout BackgroundColor="Transparent" Padding="10">
+                            <Label HorizontalOptions="End" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Text="FINALIZADAS"/>
+
+                            <ScrollView HorizontalOptions="Fill" Orientation="Horizontal">
+                                <StackLayout Orientation="Horizontal" BackgroundColor="Transparent" Padding="2">
+
+                                    <StackLayout x:Name="stlSemFinalizadas" Orientation="Vertical">
+                                        <Image Source="SemFinalizadas.jpg" WidthRequest="100" />
+                                    </StackLayout>
+                                    <StackLayout x:Name="stlMundoF" Orientation="Vertical">
+                                        <Image Source="capaessemundo.JPG"  WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgMundo_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoMundoF"
+                                                     WidthRequest="100"
+                                                     Progress="1"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Red">
+                                        </ProgressBar>
+                                    </StackLayout>
+                                    <StackLayout x:Name="stlSuaMusicaF" Orientation="Vertical">
+                                        <Image Source="capasuamusica.JPG"  WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgSuaMusica_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoMusicaF"
+                                                     WidthRequest="100"
+                                                     Progress="1"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Red">
+                                        </ProgressBar>
+                                    </StackLayout>
+                                    <StackLayout x:Name="stlObscurosF" Orientation="Vertical">
+                                        <Image Source="capaobscuros.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgObscuros_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoObscurosF"
+                                                     WidthRequest="100"
+                                                     Progress="1"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Red">
+                                        </ProgressBar>
+                                    </StackLayout>
+                                    <StackLayout x:Name="stlDistantesF" Orientation="Vertical">
+                                        <Image Source="capadistantes.JPG" WidthRequest="100">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="imgDistantes_Tapped" ></TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <ProgressBar x:Name="BarraProgressoDistantesF"
+                                                     WidthRequest="100"
+                                                     Progress="1"
+                                                     HeightRequest="5"
+                                                     VerticalOptions="Center" 
+                                                     HorizontalOptions="Center"
+                                                     ProgressColor="Red">
+                                        </ProgressBar>
+                                    </StackLayout>
+                                </StackLayout>
+
+                            </ScrollView>
+
+                        </StackLayout>
+                    </Frame>
                 </StackLayout>
 
-        </StackLayout>
+                <StackLayout>
+                    <Label x:Name="lblDataCadastro" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="Black" FontAttributes="Bold" />
+                </StackLayout>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

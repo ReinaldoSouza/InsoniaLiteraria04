@@ -2,8 +2,9 @@
 <Frame xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.CardView.SegredosDistantesCardView"
-             Padding="0" Margin="2" VerticalOptions="Start"
-             BackgroundColor="#ADD8E6">
+             Padding="0" Margin="2" VerticalOptions="Start" BorderColor="Azure"
+             BackgroundColor="#ADD8E6"
+             CornerRadius="5">
     <Frame.GestureRecognizers>
         <TapGestureRecognizer Tapped="Card_Tapped"/>
     </Frame.GestureRecognizers>
@@ -13,22 +14,22 @@
                 <BoxView x:Name="boxCardColor" HorizontalOptions="Fill" BackgroundColor="#00ACC1" InputTransparent="True"/>
                 <Image x:Name="imgCard" HorizontalOptions="Fill" Aspect="AspectFill" Source="backdistantes.jpg" InputTransparent="True"/>
             </Grid>
-            <StackLayout Margin="10" >
-                <Label Text="SEGREDOS DISTANTES (Pt2)" FontSize="Large" Opacity="0.8"/>
-                <Label Text="Anos depois dos acontecimentos de Segredos Obscuros, parece que cada um seguiu com a sua vida." FontSize="Small" Opacity="0.6"/>
-                <Label Text="Escrito por Reinaldo Souza, 2017" FontSize="Small" Opacity="0.8"/>
+            <StackLayout Margin="5" >
+                <Label TextColor="Black" Text="SEGREDOS DISTANTES &#10; Volume 2" FontAttributes="Bold" FontSize="Medium" Opacity="0.8"/>
+                <Label TextColor="Black" Text="Eu te amo. Você me ama. Boa notícia: casais assim geralmente ficam juntos..." FontSize="Small" Opacity="0.6"/>
+                <Label TextColor="Black" Text="Escrito por Reinaldo Souza, 2017" FontSize="Small" Opacity="0.8"/>
 
                 <StackLayout Orientation="Horizontal">
-                    <Image x:Name="imgLeituras" Source="leituras.png" WidthRequest="25"/>
-                    <Label x:Name="lblContagem" VerticalOptions="Center" FontSize="Small"/>
-                    <Label/>
                     <Image x:Name="imgComentarios" Source="comentarios.png" WidthRequest="25"/>
                     <Label x:Name="lblContagem2" VerticalOptions="Center" FontSize="Small"/>
+                    <Label/>
+                    <Image x:Name="imgVews" Source="iconViews.png" WidthRequest="25"/>
+                    <Label x:Name="lblContagem3" VerticalOptions="Center" FontSize="Small"/>
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Black" Text="COMPLETO" HorizontalOptions="EndAndExpand" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Red" Text="LEIA AGORA!"/>
-                    <Label FontAttributes="Bold" FontSize="Default" TextColor="White" BackgroundColor="Black" Text="EM ANDAMENTO" HorizontalOptions="EndAndExpand" />
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Red" Text="CLIQUE AQUI PARA LER!"/>
                 </StackLayout>
             </StackLayout>
 

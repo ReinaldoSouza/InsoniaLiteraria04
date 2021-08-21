@@ -1,4 +1,5 @@
 ﻿using InsoniaLiteraria04.Database;
+using InsoniaLiteraria04.Model;
 using InsoniaLiteraria04.View;
 using Rg.Plugins.Popup.Extensions;
 using System;
@@ -13,20 +14,15 @@ namespace InsoniaLiteraria04.CardView
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EstranhaCardView : Frame
 	{
-        DBFire db;
-        public EstranhaCardView ()
-		{
-			InitializeComponent ();
-            db = new DBFire();
-            quantidadeMensagens();
-            quantidadeLendo();
-        }
-
-        protected override void OnSizeAllocated(double width, double height)
+        DBFireViews dbViews;
+        DBFireComentarios dbComentario;
+        public EstranhaCardView()
         {
-            base.OnSizeAllocated(width, height);
-            boxCardColor.HeightRequest = boxCardColor.Width / 16 * 9;
-            imgCard.HeightRequest = imgCard.Width / 16 * 9;
+            InitializeComponent();
+            dbViews = new DBFireViews();
+            dbComentario = new DBFireComentarios();
+            quantidadeMensagens();
+            quantidadeView();
         }
 
         private async void Card_Tapped(object sender, EventArgs e)
@@ -34,7 +30,7 @@ namespace InsoniaLiteraria04.CardView
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
             await Navigation.PushModalAsync(new MenusView.MenuEstranhaPage());
-            await Task.Delay(5000);
+            await Task.Delay(500);
             await Navigation.RemovePopupPageAsync(loadingPage);
         }
 
@@ -46,7 +42,7 @@ namespace InsoniaLiteraria04.CardView
 
             try
             {
-                var listAsync = await db.mostrarQuantidadeMensagem("Estranha");
+                var listAsync = await dbComentario.mostrarQuantidadeComentariosTotal("Estranha");
 
 
                 if (listAsync != null)
@@ -63,29 +59,28 @@ namespace InsoniaLiteraria04.CardView
             }
         }
 
-        public async void quantidadeLendo()
+        public async void quantidadeView()
         {
-            int contagem = 0;
+            int contador = 0;
 
-            lblContagem.Text = contagem.ToString();
+            lblContagem3.Text = contador.ToString();
 
             try
             {
-                var listAsync = await db.mostrarQuantidadeLeituras("Estranha");
+               
+                var listAsyncV = await dbViews.mostrarQuantidadeViewTotal("Estranha");
 
-
-                if (listAsync != null)
+                if (listAsyncV != null)
                 {
-                    contagem = Convert.ToInt32(listAsync.Quantidade);
-
-
-                    lblContagem.Text = contagem.ToString();
+                    contador = Convert.ToInt32(listAsyncV.Quantidade);
                 }
 
+
+                lblContagem3.Text = contador.ToString();
             }
             catch (Exception ex)
             {
-                lblContagem.Text = contagem.ToString();
+                lblContagem3.Text = contador.ToString();
             }
         }
     }

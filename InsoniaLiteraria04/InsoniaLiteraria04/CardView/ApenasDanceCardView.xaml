@@ -2,8 +2,9 @@
 <Frame xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.CardView.ApenasDanceCardView"
-             Padding="0" Margin="2" VerticalOptions="Start"
-             BackgroundColor="#DDA0DD">
+             Padding="0" Margin="2" VerticalOptions="Start" BorderColor="Azure"
+             BackgroundColor="#DDA0DD"
+             CornerRadius="5">
     <Frame.GestureRecognizers>
         <TapGestureRecognizer Tapped="Card_Tapped"/>
     </Frame.GestureRecognizers>
@@ -13,22 +14,22 @@
                 <BoxView x:Name="boxCardColor" HorizontalOptions="Fill" BackgroundColor="#00ACC1" InputTransparent="True"/>
                 <Image x:Name="imgCard" HorizontalOptions="Fill" Aspect="AspectFill" Source="backapenasdance.jpg" InputTransparent="True"/>
             </Grid>
-            <StackLayout Margin="10" >
-                <Label Text="APENAS DANCE COMIGO" FontSize="Large" Opacity="0.8"/>
-                <Label Text="Essa história trás uma possibilidade de como seria a vida de duas personagens de mundos imaginários se elas vivessem no mundo real e se encontrassem." FontSize="Small" Opacity="0.6"/>
-                <Label Text="Escrito por Carolina Anf, 2019" FontSize="Small" Opacity="0.8"/>
+            <StackLayout Margin="5" >
+                <Label TextColor="Black" Text="APENAS DANCE COMIGO" FontAttributes="Bold" FontSize="Medium" Opacity="0.8"/>
+                <Label TextColor="Black" Text="Então quando, Valentina? Quando você vai voltar a viver e parar de se lamentar por uma coisa que você não tem culpa?" FontSize="Small" Opacity="0.6"/>
+                <Label TextColor="Black" Text="Escrito por Carolina Anf, 2017" FontSize="Small" Opacity="0.8"/>
 
                 <StackLayout Orientation="Horizontal">
-                    <Image x:Name="imgLeituras" Source="leituras.png" WidthRequest="25"/>
-                    <Label x:Name="lblContagem" VerticalOptions="Center" FontSize="Small"/>
-                    <Label/>
                     <Image x:Name="imgComentarios" Source="comentarios.png" WidthRequest="25"/>
                     <Label x:Name="lblContagem2" VerticalOptions="Center" FontSize="Small"/>
+                    <Label/>
+                    <Image x:Name="imgVews" Source="iconViews.png" WidthRequest="25"/>
+                    <Label x:Name="lblContagem3" VerticalOptions="Center" FontSize="Small"/>
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Black" Text="EM ANDAMENTO" HorizontalOptions="EndAndExpand" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Red" Text="LEIA AGORA!"/>
-                    <Label FontAttributes="Bold" FontSize="Default" TextColor="White" BackgroundColor="Black" Text="EM ANDAMENTO" HorizontalOptions="EndAndExpand" />
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Red" Text="CLIQUE AQUI PARA LER!"/>
                 </StackLayout>
             </StackLayout>
 

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InsoniaLiteraria04.View.TermosPage"
+             BackgroundColor="WhiteSmoke">
+    <ContentPage.Content>
+
+        <StackLayout Margin="7,10,7,7" BackgroundColor="White">
+
+
+            <WebView x:Name="browser" VerticalOptions="FillAndExpand">
+                <WebView.Source>
+                    <HtmlWebViewSource x:Name="htmlPage"></HtmlWebViewSource>
+                </WebView.Source>
+            </WebView>
+
+            <StackLayout>
+
+                <Button Text="Fechar" BackgroundColor="Transparent" Clicked="clkFechar" HorizontalOptions="End"></Button>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

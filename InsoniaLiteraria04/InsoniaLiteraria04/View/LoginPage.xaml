@@ -2,80 +2,65 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.View.LoginPage"
-             BackgroundImage="logointro.png"
-             >
-    <StackLayout Padding="10,80,10,20">
-        <Frame CornerRadius="20" BackgroundColor="Transparent" BorderColor="White" VerticalOptions="Center">
-            <StackLayout>
-        <StackLayout>
-            <Image Source="logologin.png" WidthRequest="500" HorizontalOptions="Center" />
-        </StackLayout>
+             BackgroundColor="WhiteSmoke">
+    <StackLayout>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Label HorizontalTextAlignment="Center" FontSize="Micro" TextColor="Black"
+               HorizontalOptions="CenterAndExpand">
+                    <Label.Text>
+                        "Você era o sol que fazia tudo girar ao seu redor..."
+- A ESTRANHA E OUTRAS HISTÓRIAS
+                    </Label.Text>
+                </Label>
+                <Image Source="ic_launcher1" x:Name="logoInsonia" WidthRequest="160" VerticalOptions="CenterAndExpand"/>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                    <Image Source="usuariologin.png" WidthRequest="40"/>
-                   
-                    <Entry x:Name="txtUsernameLogin" 
+                <StackLayout VerticalOptions="StartAndExpand">
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Image Source="usuariologin.png" WidthRequest="40"/>
+
+                        <Entry x:Name="txtUsernameLogin" 
                    TextColor="Black"
-                   BackgroundColor="White"
+                   BackgroundColor="WhiteSmoke"
                 Placeholder="Digite seu username..."
                            HorizontalOptions="FillAndExpand"
-               PlaceholderColor="Gray"
+                               ReturnType="Next"
+               PlaceholderColor="Silver"
                    />
-        </StackLayout>
+                    </StackLayout>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-            <Image Source="senhalogin.png" WidthRequest="40" />
-            <Entry x:Name="txtSenhaLogin" 
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Image Source="senhalogin.png" WidthRequest="40" />
+                        <Entry x:Name="txtSenhaLogin" 
                    IsPassword="True"
-                   BackgroundColor="White"
+                   BackgroundColor="WhiteSmoke"
                    Placeholder="Digite sua senha..."
                    HorizontalOptions="FillAndExpand"
-                   PlaceholderColor="Gray"
+                   PlaceholderColor="Silver"
+                               ReturnType="Done"
                     />
+                    </StackLayout>
 
+                    <StackLayout Padding="10" Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand" BackgroundColor="Black" >
+                        <Label FontSize="16" Text="ACESSAR MINHA CONTA" TextColor="White" HorizontalOptions="CenterAndExpand"></Label>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="clkGoPrincipal"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout Padding="10" Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" BackgroundColor="Transparent" >
+                        <Label FontSize="16" Text="ESQUECI A MINHA SENHA" TextColor="Black" HorizontalOptions="EndAndExpand"></Label>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="clkGoEsqueciSenha"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
 
                 </StackLayout>
+
             </StackLayout>
-        </Frame>
-
-        <Button Text="ACESSE SUA CONTA"
-                    Padding="10"
-                    Margin="10,20,10,0"
-                    BackgroundColor="#2F4F4F" 
-                    BorderRadius="20" 
-                    TextColor="White"
-                    HorizontalOptions="FillAndExpand"
-                    Clicked="clkGoPrincipal"
-                    />
-
-        <StackLayout
-                Margin="10"
-                HeightRequest="2"
-                WidthRequest="2"
-                BackgroundColor="Black"
-                >
-        </StackLayout>
-
-        <Button Text="AINDA NÃO TEM UMA CONTA?"
-                    Padding="10"
-                    Margin="10,0,10,0"
-                    BackgroundColor="#2F4F4F"
-                    BorderRadius="20" 
-                    TextColor="White"
-                    HorizontalOptions="Fill"
-                    Clicked="clkGoCadastro"/>
-
-
-        <!--<StackLayout>
-            <Button Text="ESQUECI MINHA SENHA"
-                    BackgroundColor="Transparent"
-                    TextColor="OrangeRed"
-                    HorizontalOptions="EndAndExpand"
-                    Clicked="clkMudarSenha"/>
-        </StackLayout>-->
-
+        </ScrollView>
     </StackLayout>
-    
-    
-
 </ContentPage>

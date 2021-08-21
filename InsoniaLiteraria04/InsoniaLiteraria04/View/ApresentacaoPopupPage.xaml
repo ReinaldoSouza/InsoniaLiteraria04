@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             CloseWhenBackgroundIsClicked="False"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             x:Class="InsoniaLiteraria04.View.ApresentacaoPopupPage">
+    <Frame BackgroundColor="WhiteSmoke" Margin="50">
+        <StackLayout BackgroundColor="WhiteSmoke">
+            <ImageButton Source="iconeFechar" WidthRequest="30" HorizontalOptions="EndAndExpand" Clicked="clkIniciar"/>
+            <StackLayout>
+                <Image Source="iconsuper.png" x:Name="logoInsonia" WidthRequest="120" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"/>
+                <StackLayout VerticalOptions="StartAndExpand">
+                    <Label VerticalTextAlignment="Center" 
+                           HorizontalTextAlignment="Center" 
+                           VerticalOptions="StartAndExpand" 
+                           TextColor="Black"
+                           FontAttributes="Bold" FontSize="Medium"
+                           Text="Nós, Reinaldo e Carol, a equipe do Insônia Literária &#10; te desejamos boas-vindas!"/>
+                    <Label VerticalTextAlignment="Center" 
+                           HorizontalTextAlignment="Center" 
+                           VerticalOptions="StartAndExpand" 
+                           TextColor="Black"
+                           FontSize="Small"
+                           Text="Esperamos poder te entreter com as histórias que temos para contar.
+Você pode comentar em todo capítulo. Nos conte o que você acha. Para gente, é muito importante.
+E principalmente, divirta-se!"
+                           />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image x:Name="imgInstagram" Source="iconInstagram.png" WidthRequest="40">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="imgInstagram_Tapped" ></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label x:Name="lblInstagram" VerticalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="Small" >
+                        <Label.Text>
+Siga a gente no Instagram!
+@insonialiterariia
+                        </Label.Text>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="imgInstagram_Tapped"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </StackLayout>
+
+            </StackLayout>
+        </StackLayout>
+        
+    </Frame>
+</pages:PopupPage>

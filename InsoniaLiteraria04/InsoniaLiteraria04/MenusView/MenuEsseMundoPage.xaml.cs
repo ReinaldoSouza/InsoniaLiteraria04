@@ -1,73 +1,648 @@
-﻿using InsoniaLiteraria04.MenusViewModel;
-using InsoniaLiteraria04.View;
+﻿using InsoniaLiteraria04.View;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Rg.Plugins.Popup.Extensions;
+using InsoniaLiteraria04.Constantes;
+using InsoniaLiteraria04.Control;
+using InsoniaLiteraria04.Global;
+using System.Collections.ObjectModel;
+using InsoniaLiteraria04.Database;
+using InsoniaLiteraria04.Model;
+using System.Linq;
 
 namespace InsoniaLiteraria04.MenusView
 {
     public partial class MenuEsseMundoPage : ContentPage
 	{
+        DBFireViews serviceViews;
+        DBFireComentarios serviceComentarios;
+        ObservableCollection<OpcoesMenu> ListaMenu = new ObservableCollection<OpcoesMenu>();
+        ObservableCollection<QuantidadeViews> ListaViews = new ObservableCollection<QuantidadeViews>();
+        ObservableCollection<QuantidadeComentario> ListaComentarios = new ObservableCollection<QuantidadeComentario>();
 
-        public MenuEsseMundoViewModel ViewModel;
-
-        public MenuEsseMundoPage ()
+        public MenuEsseMundoPage()
 		{
-			InitializeComponent ();
-            this.ViewModel = new MenuEsseMundoViewModel();
-            this.BindingContext = this.ViewModel;
+			InitializeComponent();
+            AdmobControl admobControl = new AdmobControl()
+            {
+                AdUnitId = AppConstants.BannerId
+            };
+
+            serviceViews = new DBFireViews();
+            serviceComentarios = new DBFireComentarios();
+            _list.BindingContext = ListaMenu;
+            carregarViews();
         }
 
-        public async void IrParaCapitulo(object sender, EventArgs e)
+        public async void carregarViews()
+        {
+            try
+            {
+                ListaViews.Clear();
+                ListaComentarios.Clear();
+
+                var listAsyncViews = await serviceViews.mostrarQuantidadeCapitulo("EsseMundoVaiMudar");
+
+                var lista1 = listAsyncViews.ToList();
+
+                foreach (var item in lista1)
+                {
+                    ListaViews.Add(item);
+                }
+
+                var listAsyncComents = await serviceComentarios.mostrarComentarioCapitulo("EsseMundoVaiMudar");
+
+                var lista2 = listAsyncComents.ToList();
+
+                foreach (var item2 in lista2)
+                {
+                    ListaComentarios.Add(item2);
+                }
+
+                ListaMenu.Clear();
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.PrincipalPage,
+                    Descricao = "Aproveite e escolha outra história para ler!",
+                    Titulo = "Voltar Para a Tela Principal",
+                    Imagem = "menu_voltar.png",
+                    Status = false
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Prologo,
+                    Descricao = "Bem Vindo à Minha Vida",
+                    Titulo = "PRÓLOGO",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Prologo].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Prologo].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo1,
+                    Descricao = "Emily",
+                    Titulo = "CAPÍTULO 1",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo1].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo1].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo2,
+                    Descricao = "Perto de Você, O Céu é Mais Azul",
+                    Titulo = "CAPÍTULO 2",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo2].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo2].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo3,
+                    Descricao = "Um Dia Vamos Saber... Por Que Eu Não Fui Feito Para Você... Que Eu Era O Único Para Você",
+                    Titulo = "CAPÍTULO 3",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo2].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo13].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo4,
+                    Descricao = "Eu Te Desafio A Se Mexer",
+                    Titulo = "CAPÍTULO 4",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo4].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo4].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo5,
+                    Descricao = "Dizem Por Aí",
+                    Titulo = "CAPÍTULO 5",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo5].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo5].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo6,
+                    Descricao = "Mas Eu Sou Só Um Humano Comum Com Jeitos Comuns",
+                    Titulo = "CAPÍTULO 6",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo6].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo6].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo7,
+                    Descricao = "Você Não Pode Se Esconder de Seus Fantasmas",
+                    Titulo = "CAPÍTULO 7",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo7].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo7].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo8,
+                    Descricao = "Príncipe Nada Encantado",
+                    Titulo = "CAPÍTULO 8",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo8].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo8].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo9,
+                    Descricao = "Eu Atiro Em Tudo O Que Eu Já Amei",
+                    Titulo = "CAPÍTULO 9",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo9].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo9].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo10,
+                    Descricao = "De Mãos Vazias",
+                    Titulo = "CAPÍTULO 10",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo10].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo10].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo11,
+                    Descricao = "Eu Acredito Que Podemos Fazer Isso",
+                    Titulo = "CAPÍTULO 11",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo11].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo11].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo12,
+                    Descricao = "Me Diga Quando For A Hora De Eu Dizer Que Te Amo",
+                    Titulo = "CAPÍTULO 12",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo12].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo12].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo13,
+                    Descricao = "Contando Estrelas",
+                    Titulo = "CAPÍTULO 13",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo13].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo13].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo14,
+                    Descricao = "Às Vezes Eu Queria Poder Te Salvar",
+                    Titulo = "CAPÍTULO 14",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo14].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo14].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo15,
+                    Descricao = "Você Está Feliz?",
+                    Titulo = "CAPÍTULO 15",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo15].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo15].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo16,
+                    Descricao = "Estranhos, Farsas Perfeitas",
+                    Titulo = "CAPÍTULO 16",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo16].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo16].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo17,
+                    Descricao = "O Homem Que Não Podem Mover",
+                    Titulo = "CAPÍTULO 17",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo17].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo17].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo18,
+                    Descricao = "Com Você Por Perto",
+                    Titulo = "CAPÍTULO 18",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo18].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo18].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo19,
+                    Descricao = "Cale a Boca e Dance Comigo",
+                    Titulo = "CAPÍTULO 19",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo19].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo19].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo20,
+                    Descricao = "(Não) Se Esqueça de Mim",
+                    Titulo = "CAPÍTULO 20",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo20].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo20].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo21,
+                    Descricao = "Por Toda A Noite",
+                    Titulo = "CAPÍTULO 21",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo21].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo21].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo22,
+                    Descricao = "Então é Natal",
+                    Titulo = "CAPÍTULO 22",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo22].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo22].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo23,
+                    Descricao = "Mais Um Ano, Você Fez Uma Promessa",
+                    Titulo = "CAPÍTULO 23",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo23].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo23].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo24,
+                    Descricao = "Seja Lá O Que Precisa Dizer, Diga Agora",
+                    Titulo = "CAPÍTULO 24",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo24].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo24].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo25,
+                    Descricao = "Eu Quero Que Você Seja Mais Feliz",
+                    Titulo = "CAPÍTULO 25",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo25].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo25].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo26,
+                    Descricao = "Você Não Fez Nada Para Eu Te Amar Menos",
+                    Titulo = "CAPÍTULO 26",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo26].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo26].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo27,
+                    Descricao = "Como Se Fôssemos Os Únicos No Mundo",
+                    Titulo = "CAPÍTULO 27",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo27].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo27].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo28,
+                    Descricao = "Mas É Difícil Quando Se é Jovem",
+                    Titulo = "CAPÍTULO 28",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo28].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo28].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo29,
+                    Descricao = "Minha Vida Seria Uma Droga Sem Você",
+                    Titulo = "CAPÍTULO 29",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo29].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo29].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo30,
+                    Descricao = "Eu Vou Te Encontrar Lá",
+                    Titulo = "CAPÍTULO 30",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo30].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo30].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo31,
+                    Descricao = "Mais Duas Pessoas Sozinhas No Mundo Hoje à Noite",
+                    Titulo = "CAPÍTULO 31",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo31].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo31].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo32,
+                    Descricao = "Ninguém Vai Fazer O Que Eu Faço Por Você",
+                    Titulo = "CAPÍTULO 32",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo32].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo32].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo33,
+                    Descricao = "Podemos Começar De Novo Antes Que Acabe?",
+                    Titulo = "CAPÍTULO 33",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo33].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo33].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo34,
+                    Descricao = "A Vida Em Cores é Assim, Hoje Não Parece Com Nenhum Outro Dia",
+                    Titulo = "CAPÍTULO 34",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo34].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo34].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo35,
+                    Descricao = "Só Diga Que Não Vai Embora",
+                    Titulo = "CAPÍTULO 35",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo35].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo35].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo36,
+                    Descricao = "Tudo Está Nas Cicatrizes",
+                    Titulo = "CAPÍTULO 36",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo36].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo36].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo37,
+                    Descricao = "Até Mesmo Os Melhores Caem Às Vezes",
+                    Titulo = "CAPÍTULO 37",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo37].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo38].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo38,
+                    Descricao = "Estou Desaparecendo",
+                    Titulo = "CAPÍTULO 38",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo38].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo38].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo39,
+                    Descricao = "Como Se Fosse O Aniversário Dela",
+                    Titulo = "CAPÍTULO 39",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo39].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo39].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo40,
+                    Descricao = "E Você Estará Quebrado De Um Jeito Melhor",
+                    Titulo = "CAPÍTULO 40",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo40].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo40].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo41,
+                    Descricao = "Meu Lugar é Com Você",
+                    Titulo = "CAPÍTULO 41",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo41].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo41].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo42,
+                    Descricao = "Se Você Topar, Eu Topo",
+                    Titulo = "CAPÍTULO 42",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo42].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo42].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo43,
+                    Descricao = "Fuja Como Um Criminoso",
+                    Titulo = "CAPÍTULO 43",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo43].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo43].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo44,
+                    Descricao = "O Eco é A Única Voz Que Está Voltando",
+                    Titulo = "CAPÍTULO 44",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo44].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo44].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo45,
+                    Descricao = "Eu Não Quero Mais Ficar Triste",
+                    Titulo = "CAPÍTULO 45",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo45].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo45].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo46,
+                    Descricao = "E Eu Vou Tentar Te Consertar",
+                    Titulo = "CAPÍTULO 46",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo46].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo46].Quantidade.ToString(),
+                    Status = true
+                });
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.Capitulo47,
+                    Descricao = "Você e Só Você",
+                    Titulo = "Epílogo",
+                    Imagem = "menuessemundo.JPG",
+                    Views = ListaViews[MenuConstantes.Capitulo47].Quantidade.ToString(),
+                    Capitulos = ListaComentarios[MenuConstantes.Capitulo47].Quantidade.ToString(),
+                    Status = true
+                });
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("AVISO!", "O MENU NÃO FOI CARREGADO! VERIFIQUE SUA CONEXÃO COM A INTERNET", "OK");
+
+                ListaMenu.Clear();
+
+                ListaMenu.Add(new OpcoesMenu
+                {
+                    Codigo = MenuConstantes.PrincipalPage,
+                    Descricao = "Aproveite e escolha outra história para ler!",
+                    Titulo = "Voltar Para a Tela Principal",
+                    Imagem = "menu_voltar.png",
+                    Status = false
+                });
+            }
+        }
+
+        public void atualizarMenu(object sender, EventArgs e)
+        {
+            carregarViews();
+            _list.IsRefreshing = false;
+        }
+        public async void IrParaCapitulo(object sender, SelectedItemChangedEventArgs e)
         {
             try {
                 var loadingPage = new LoadingPopupPage();
                 await Navigation.PushPopupAsync(loadingPage);
 
-                var codigo = ViewModel.MenuSelecionado.Codigo;
+                for (var i = 0; i < 1; i++)
+                {
+                    await DependencyService.Get<IAdmobInterstitialAds>().Display(AppConstants.InterstitialAdId);
+                }
+
+                var item = (OpcoesMenu)e.SelectedItem;
+                var codigo = item.Codigo;
 
                 if (codigo == -1)
                 {
-                    await Navigation.PushModalAsync(new PrincipalPage());
-                } else if(codigo == 0)
-                {
-                    await Navigation.PushModalAsync(new EsseMundoView.IntroducaoPage());
-                } //capitulo 1 - 6
-                else if (codigo >= 1 && codigo <= 6)
-                {
+                    await Navigation.PushModalAsync(new PrincipalPage(0));
+                } else { 
                     await Navigation.PushModalAsync(new EsseMundoView.Capitulo1Page(codigo));
-                } //capítulo 7 - 12
-                else if (codigo >= 7 && codigo <= 12)
-                {
-                    await Navigation.PushModalAsync(new EsseMundoView.Capitulo2Page(codigo));
-                } //capitulo 13 - 18
-                else if (codigo >= 13 && codigo <= 18)
-                {
-                    await Navigation.PushModalAsync(new EsseMundoView.Capitulo3Page(codigo));
-                } // capitulo 19 - 24
-                else if (codigo >= 19 && codigo <= 24)
-                {
-                    await Navigation.PushModalAsync(new EsseMundoView.Capitulo4Page(codigo));
-                } // capitulo 25 - 30
-                else if (codigo >= 25 && codigo <= 30)
-                {
-                    await Navigation.PushModalAsync(new EsseMundoView.Capitulo5Page(codigo));
-                } // capitulo 31 - 36
-                else if (codigo >= 31 && codigo <= 36)
-                {
-                    await Navigation.PushModalAsync(new EsseMundoView.Capitulo6Page(codigo));
-                }   // capitulo 37 - 42
-                else if (codigo >= 37 && codigo <= 42)
-                {
-                    await Navigation.PushModalAsync(new EsseMundoView.Capitulo7Page(codigo));
-                }// capitulo 43 - 47
-                else if (codigo >= 43 && codigo <= 47)
-                {
-                    await Navigation.PushModalAsync(new EsseMundoView.Capitulo8Page(codigo));
-                }
+                } 
 
-                await Task.Delay(1000);
+                await Task.Delay(500);
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
             catch (Exception ex)

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="InsoniaLiteraria04.View.EsqueciSenhaPage"
+             BackgroundColor="WhiteSmoke">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+
+            <Label HorizontalTextAlignment="Center" FontSize="Micro" TextColor="Black"
+               HorizontalOptions="CenterAndExpand">
+                <Label.Text>
+"Ao menos dessa vez, talvez, você possa se perder comigo nessa noite..."
+- A ESTRANHA E OUTRAS HISTÓRIAS
+                </Label.Text>
+            </Label>
+            <Image Source="ic_launcher1" x:Name="logoInsonia" WidthRequest="160" VerticalOptions="CenterAndExpand"/>
+
+            <StackLayout VerticalOptions="StartAndExpand">
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Image Source="nomecadastro.png" WidthRequest="40"/>
+                    <Entry x:Name="txtNomeCadastro" Placeholder="Seu nome (Obrigatório)"
+                   BackgroundColor="WhiteSmoke"
+                           PlaceholderColor="Silver"
+                                   HorizontalOptions="FillAndExpand"
+                           ReturnType="Next"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Image Source="emailcadastro.png" WidthRequest="40"/>
+                    <Entry x:Name="txtEmailCadastro" Placeholder="Seu email (Obrigatório)"
+                   BackgroundColor="WhiteSmoke"
+                           PlaceholderColor="Silver"
+                                   HorizontalOptions="FillAndExpand"
+                           ReturnType="Next"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Image Source="usuariologin.png" WidthRequest="40"/>
+                    <Entry x:Name="txtUsernameCadastro" Placeholder="Seu username (Opcional)"
+                        BackgroundColor="WhiteSmoke"
+                                   HorizontalOptions="FillAndExpand"
+                           PlaceholderColor="Silver" 
+                           ReturnType="Done"
+                           TextColor="Black" />
+                </StackLayout>
+
+                <StackLayout Padding="10" Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand" BackgroundColor="Black" >
+                    <Label FontSize="16" Text="RECUPERAR MINHA SENHA" TextColor="White" HorizontalOptions="CenterAndExpand"></Label>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="clkEsqueciSenha"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+            </StackLayout>
+
+
+        </StackLayout>
+       
+    </ContentPage.Content>
+</ContentPage>

@@ -10,19 +10,25 @@ using System.Threading.Tasks;
 using InsoniaLiteraria04.View;
 using Rg.Plugins.Popup.Extensions;
 using System.Linq;
+using InsoniaLiteraria04.Control;
+using InsoniaLiteraria04.Constantes;
+using InsoniaLiteraria04.Global;
 
 namespace InsoniaLiteraria04.EsseMundoView
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EsseMundoDetailsPage : ContentPage
     {
-        DBFire service;
-        ObservableCollection<ProximoCapitulo> list = new ObservableCollection<ProximoCapitulo>();
+        DBFireCapitulos serviceCapitulos;
         public EsseMundoDetailsPage()
         {
             InitializeComponent();
-            service = new DBFire();
-            _list.BindingContext = list;
+            AdmobControl admobControl = new AdmobControl()
+            {
+                AdUnitId = AppConstants.BannerId
+            };
+            serviceCapitulos = new DBFireCapitulos();
+            lblPorcentagem.Text = "0% LIDO";
             MostrarProximoCapitulo(UserLocalData.userUID);
         }
 
@@ -39,19 +45,15 @@ namespace InsoniaLiteraria04.EsseMundoView
 
             try
             {
-                var listAsync = await service.proximoCapitulo(usuario, "EsseMundoVaiMudar");
+                var listAsync = await serviceCapitulos.proximoCapitulo(usuario, "EsseMundoVaiMudar");
 
                 if (listAsync != null)
                 {
 
                     if (listAsync.Count == 0)
                     {
-                        list.Add(new ProximoCapitulo
-                        {
-                            nomeCapitulo = "VOCÊ AINDA NÃO COMEÇOU A HISTÓRIA",
-                            capituloLido = "VENHA LER AGORA!"
-                        });
-
+                        lbltitulo.Text = "COMECE AGORA A LER";
+                        lbldescricao.Text = "CLIQUE AQUI PARA COMEÇAR!";
                     }
                     else
                     {
@@ -68,30 +70,31 @@ namespace InsoniaLiteraria04.EsseMundoView
 
                             if (capitulos == 0)
                             {
-                                capituloDescricao = "VOCÊ AINDA NÃO COMEÇOU A HISTÓRIA";
+                                capituloDescricao = "COMECE AGORA A LER";
                             }
                             if (capitulos > 0)
                             {
                                 capituloDescricao = "PRÓXIMO: CAPÍTULO " + capitulos.ToString();
+
+                                decimal capitulo = capitulos;
+                                decimal total = Constantes.CapsConstantes.EsseMundo + 1;
+                                decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                                lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
+
                             }
-                            if (capitulos == 48)
+                            if (capitulos > CapsConstantes.EsseMundo)
                             {
-                                capituloDescricao = "ESPERO QUE VOCÊ TENHA GOSTADO...";
+                                capituloDescricao = "ESPERO QUE TENHA GOSTADO...";
+                                lblPorcentagem.Text = "100% LIDO";
                             }
 
-                            list.Add(new ProximoCapitulo
-                            {
-                                nomeCapitulo = capituloDescricao, //"CAPÍTULO " + capitulos.ToString(),
-                                capituloLido = "CONTINUE LENDO!"
-                            });
+                            lbltitulo.Text = capituloDescricao.ToString();
+                            lbldescricao.Text = "CLIQUE AQUI E CONTINUE LENDO!";
 
                             if (listPrincipal.Lido.ToString() == "true")
                             {
                                 break;
-                            }
-                            else
-                            {
-                                list.Clear();
                             }
                         }
                         return capitulos;
@@ -102,11 +105,9 @@ namespace InsoniaLiteraria04.EsseMundoView
             }
             catch (Exception ex)
             {
-                list.Add(new ProximoCapitulo
-                {
-                    nomeCapitulo = "VOCÊ AINDA NÃO COMEÇOU A HISTÓRIA",
-                    capituloLido = "VENHA LER AGORA!"
-                });
+                lbltitulo.Text = "COMECE AGORA A LER";
+                lbldescricao.Text = "CLIQUE AQUI PARA COMEÇAR!";
+                lblPorcentagem.Text = "0% LIDO";
 
                 await DisplayAlert("FALHA DE CONEXÃO", "VERIFIQUE SUA CONEXÃO COM A INTERNET", "OK");
 
@@ -116,57 +117,55 @@ namespace InsoniaLiteraria04.EsseMundoView
 
         async void IrParaCapitulo(object sender, EventArgs e)
         {
+            
             var task = MostrarProximoCapitulo(UserLocalData.userUID);
             int result = await task;
 
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
 
-            if (result >= 48)
+            for (var i = 0; i < 1; i++)
             {
-                result = 47;
+                    await DependencyService.Get<IAdmobInterstitialAds>().Display(AppConstants.InterstitialAdId);
             }
 
-                if (result == 0)
-                {
-                    await Navigation.PushModalAsync(new IntroducaoPage());
-                }
-                else if (result >= 1 && result <= 6)
-                {
-                    await Navigation.PushModalAsync(new Capitulo1Page(result));
-                }
-                else if (result >= 7 && result <= 12)
-                {
-                    await Navigation.PushModalAsync(new Capitulo2Page(result));
-                }
-                else if (result >= 13 && result <= 18)
-                {
-                    await Navigation.PushModalAsync(new Capitulo3Page(result));
-                }
-                else if (result >= 19 && result <= 24)
-                {
-                    await Navigation.PushModalAsync(new Capitulo4Page(result));
-                }
-                else if (result >= 25 && result <= 30)
-                {
-                    await Navigation.PushModalAsync(new Capitulo5Page(result));
-                }
-                else if (result >= 31 && result <= 36)
-                {
-                    await Navigation.PushModalAsync(new Capitulo6Page(result));
-                }
-                else if (result >= 37 && result <= 42)
-                {
-                    await Navigation.PushModalAsync(new Capitulo7Page(result));
-                }
-                else if (result >= 43 && result <= 47)
-                {
-                    await Navigation.PushModalAsync(new Capitulo8Page(result));
-                }
+            if (result > CapsConstantes.EsseMundo)
+            {
+                await Navigation.PushModalAsync(new MenusView.MenuEsseMundoPage());
+            } else
+            {
+                await Navigation.PushModalAsync(new Capitulo1Page(result));
+            }
 
-            await Task.Delay(1000);
-                await Navigation.RemovePopupPageAsync(loadingPage);
-            
+            await Task.Delay(500);
+            await Navigation.RemovePopupPageAsync(loadingPage);
+
+        }
+
+        async void clkFechar(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
+
+        private async void clkResetar(object sender, EventArgs e)
+        {
+            try
+            {
+                var action = await DisplayAlert("Aviso", "Deseja mesmo resetar essa história?", "Sim", "Não");
+                if (action)
+                {
+                    var loadingPage = new LoadingPopupPage();
+                    await Navigation.PushPopupAsync(loadingPage);
+                    await serviceCapitulos.resetarSerie(UserLocalData.userUID, "EsseMundoVaiMudar");
+                    await Task.Delay(500);
+                    await Navigation.PushModalAsync(new PrincipalPage(0));
+                    await Navigation.RemovePopupPageAsync(loadingPage);
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("ERRO", "Não foi possível resetar essa história. Favor tentar novamente.", "OK");
+            }
         }
     }
 }

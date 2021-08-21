@@ -1,9 +1,8 @@
-﻿using InsoniaLiteraria04.Database;
+﻿using InsoniaLiteraria04.Constantes;
+using InsoniaLiteraria04.Database;
 using InsoniaLiteraria04.Helper;
-using InsoniaLiteraria04.Model;
 using Rg.Plugins.Popup.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,340 +14,401 @@ namespace InsoniaLiteraria04.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PerfilPage : ContentPage
     {
-        DBFire db;
-
+        DBFireCapitulos serviceCapitulos;
+        DBFireUsuario serviceUsuario;
         public PerfilPage()
         {
             InitializeComponent();
             inicializarImagens();
-            image_profile.Source = "capaprofile.jpg";
-            db = new DBFire();
+            serviceCapitulos = new DBFireCapitulos();
+            serviceUsuario = new DBFireUsuario();
             carregarUsuario();
             mostrarEstadoHistorias();
-
         }
 
+        //inicializar as imagens como visibilidade falsa.
         public void inicializarImagens()
         {
-            imgAnjoMorte.IsVisible = false;
-            imgApenasDance.IsVisible = false;
-            imgEscuro.IsVisible = false;
-            imgEstranha.IsVisible = false;
-            imgMundo.IsVisible = false;
-            imgObscuros.IsVisible = false;
-            imgDistantes.IsVisible = false;
-            imgAnjoMorteF.IsVisible = false;
-            imgApenasDanceF.IsVisible = false;
-            imgEscuroF.IsVisible = false;
-            imgEstranhaF.IsVisible = false;
-            imgMundoF.IsVisible = false;
-            imgObscurosF.IsVisible = false;
-            imgDistantesF.IsVisible = false;
-            imgSemLendo.IsVisible = true;
-            imgSemFinalizadas.IsVisible = true;
-            imgAguardando.IsVisible = true;
+            stlAscensaoSober.IsVisible = false;
+            stlAnjoMorte.IsVisible = false;
+            stlApenasDance.IsVisible = false;
+            stlEscuro.IsVisible = false;
+            stlEstranha.IsVisible = false;
+            stlMundo.IsVisible = false;
+            stlSuaMusica.IsVisible = false;
+            stlObscuros.IsVisible = false;
+            stlDistantes.IsVisible = false;
+            stlInternos.IsVisible = false;
+            stlAnjoMorteF.IsVisible = false;
+            stlApenasDanceF.IsVisible = false;
+            stlAscensaoSoberF.IsVisible = false;
+            stlEscuroF.IsVisible = false;
+            stlEstranhaF.IsVisible = false;
+            stlMundoF.IsVisible = false;
+            stlSuaMusicaF.IsVisible = false;
+            stlObscurosF.IsVisible = false;
+            stlDistantesF.IsVisible = false;
+            stlInternosF.IsVisible = false;
+            stlSemLendo.IsVisible = true;
+            stlSemFinalizadas.IsVisible = true;
+            stlAguardando.IsVisible = true;
         }
 
         async void carregarUsuario()
         {
+            image_profile.Source = "capaprofile.jpg";
+            lblNome.Text = "NOME";
+            lblUsername.Text = "username";
+            lblDataCadastro.Text = "";
+
             try
             {
-                var listAsync = await db.mostrarUsuarioNome();
-                lblNome.Text = "  " + listAsync.ToUpper() + "  ";
+                var listAsyncFoto = await serviceUsuario.mostrarFotoPerfil(UserLocalData.userUID);
 
-                var listAsync2 = await db.mostrarUsuarioUsername();
-                lblUsername.Text = "  " + listAsync2.ToUpper() + "  ";
-
-                var listAsync3 = await db.mostrarFotoPerfil();
-
-                if (listAsync3 != null)
+                if (listAsyncFoto != null)
                 {
-                    image_profile.Source = listAsync3.ImageUrl.ToString();
-                }
-                else
-                {
-                    image_profile.Source = "capaprofile.jpg";
-                    await DisplayAlert("PERFIL", "Escolha agora uma foto para seu perfil em AJUSTES!", "OK");
-
+                    image_profile.Source = listAsyncFoto.ImageUrl.ToString();
                 }
 
+                var listAsyncDados = await serviceUsuario.coletarDadosUsuario(UserLocalData.userUID);
+
+                if (listAsyncDados != null)
+                {
+                    lblNome.Text = listAsyncDados.Nome.ToUpper();
+                    lblUsername.Text = listAsyncDados.Username.ToLower();
+                    lblDataCadastro.Text = "Cadastrado em " + Convert.ToDateTime(listAsyncDados.Data_cadastro).ToString("d");
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                await DisplayAlert("ERRO", "SEUS DADOS NÃO FORAM CARREGADOS. VERIFIQUE A CONEXÃO COM A INTERNET!", "OK");
-                image_profile.Source = "capaprofile.jpg";
-                lblNome.Text = "NOME";
-                lblUsername.Text = "USERNAME";
+                await DisplayAlert("ERRO", "SEUS DADOS NÃO FORAM CARREGADOS CORRETAMENTE. VERIFIQUE A CONEXÃO COM A INTERNET!", "OK");
             }
         }
 
-        private async Task<bool> verificarLeituras(string usuario, string nomeHistoria)
+        private async Task<int> verificarCapitulo(string usuario, string nomeHistoria)
         {
+            int capitulo = 0;
+
             try
             {
-                var listAsync = await db.proximoCapitulo(usuario, nomeHistoria);
+                var listAsync = await serviceCapitulos.proximoCapitulo(usuario, nomeHistoria);
+
                 if (listAsync != null)
                 {
-                    if (listAsync.Count != 0)
-                    {
-                        var estado = listAsync[0].Lido.ToString();
-
-                        if (estado == "true")
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-
-                    } else
-                    {
-                        return false;
-                    }
-
-                } else
-                {
-                    return false;
-                }
-
-
-            } catch (Exception ex)
-            {
-                return false;
-            }
-        }
-
-        private async Task<bool> verificarFinalizada(string usuario, string nomeHistoria, int capitulo)
-        {
-            try
-            {
-
-                var listAsync = await db.proximoCapitulo(usuario, nomeHistoria);
-                if (listAsync != null)
-                {
-                    if (listAsync.Count != 0)
+                    if (listAsync.Count > 0)
                     {
                         var listaOrdenada = listAsync.OrderBy(i => i.Capitulo).ToList();
 
-                        var numero = listaOrdenada[listaOrdenada.Count - 1].Capitulo.ToString();
-
-                        if (Convert.ToInt32(numero) == capitulo)
+                        for (int i = 1; i <= listaOrdenada.Count; i++)
                         {
-                            var estado = listaOrdenada[listaOrdenada.Count - 1].Lido.ToString();
+                            var listPrincipal = listaOrdenada[listaOrdenada.Count - i];
 
-                            if (estado == "true")
+                            var capituloNaoFormato = listPrincipal.Capitulo.ToString();
+                            capitulo = Convert.ToInt32(capituloNaoFormato) + 1;
+
+                            if (listPrincipal.Lido.ToString() == "true")
                             {
-                                return true;
-                            }
-                            else
-                            {
-                                return false;
+                                break;
                             }
                         }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
                     }
                 }
-                else
-                {
-                    return false;
-                }
-
-            } catch (Exception ex)
+                return capitulo;
+            } catch (Exception)
             {
-                return false;
+                return capitulo;
             }
         }
 
         public void mostrarEstadoHistorias()
         {
             mostrarFinalizadasAnjoMorte();
+            mostrarFinalizadasAscencaoSober();
             mostrarFinalizadasApenasDance();
             mostrarFinalizadasEscuro();
             mostrarFinalizadasEsseMundo();
+            mostrarFinalizadasSuaMusica();
             mostrarFinalizadasEstranha();
             mostrarFinalizadasObscuros();
+            mostrarFinalizadasInternos();
             mostrarFinalizadasDistantes();
+        }
+
+        public async void mostrarFinalizadasAscencaoSober()
+        {
+            var task = verificarCapitulo(UserLocalData.userUID, "AscensaoSober");
+            int result = await task;
+
+            if (result != 0)
+            {
+                if (result > CapsConstantes.AscencaoSober)
+                {
+                    stlAscensaoSoberF.IsVisible = true;
+                    stlAguardando.IsVisible = false;
+                } else
+                {
+                    decimal capitulo = result;
+                    decimal total = Constantes.CapsConstantes.AscencaoSober + 1;
+                    decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                    porcentagem = porcentagem / 100;
+
+                    BarraProgressoSober.Progress = Convert.ToDouble(porcentagem);
+
+                    stlAscensaoSober.IsVisible = true;
+                    stlSemLendo.IsVisible = false;
+                }
+            }
         }
 
         public async void mostrarFinalizadasAnjoMorte()
         {
-            var task1 = verificarFinalizada(UserLocalData.userUID, "AnjoMorte", 11);
-            bool result1 = await task1;
+            var task = verificarCapitulo(UserLocalData.userUID, "AnjoMorte");
+            int result = await task;
 
-            var task2 = verificarLeituras(UserLocalData.userUID, "AnjoMorte");
-            bool result2 = await task2;
-
-            if (result1 == true)
+            if (result != 0)
             {
-                imgAnjoMorteF.IsVisible = true;
-                imgAguardando.IsVisible = false;
-            }
-            else
-            {
-                if (result2 == true)
+                if (result > CapsConstantes.AnjoMorte)
                 {
-                    imgAnjoMorte.IsVisible = true;
-                    imgSemLendo.IsVisible = false;
+                    stlAnjoMorteF.IsVisible = true;
+                    stlAguardando.IsVisible = false;
+                } else
+                {
+                    decimal capitulo = result;
+                    decimal total = CapsConstantes.AnjoMorte + 1;
+                    decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                    porcentagem = porcentagem / 100;
+
+                    BarraProgressoAnjo.Progress = Convert.ToDouble(porcentagem);
+
+                    stlAnjoMorte.IsVisible = true;
+                    stlSemLendo.IsVisible = false;
                 }
             }
         }
 
         public async void mostrarFinalizadasEsseMundo()
         {
-            var task1 = verificarFinalizada(UserLocalData.userUID, "EsseMundoVaiMudar", 47);
-            bool result1 = await task1;
+            var task = verificarCapitulo(UserLocalData.userUID, "EsseMundoVaiMudar");
+            int result = await task;
 
-            var task2 = verificarLeituras(UserLocalData.userUID, "EsseMundoVaiMudar");
-            bool result2 = await task2;
-
-            if (result1 == true)
+            if (result != 0)
             {
-                imgMundoF.IsVisible = true;
-                imgSemFinalizadas.IsVisible = false;
-            }
-            else
-            {
-                if (result2 == true)
+                if (result > CapsConstantes.EsseMundo)
                 {
-                    imgMundo.IsVisible = true;
-                    imgSemLendo.IsVisible = false;
+                    stlMundoF.IsVisible = true;
+                    stlSemFinalizadas.IsVisible = false;
+                } else
+                {
+                    decimal capitulo = result;
+                    decimal total = Constantes.CapsConstantes.EsseMundo + 1;
+                    decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                    porcentagem = porcentagem / 100;
+
+                    BarraProgressoMundo.Progress = Convert.ToDouble(porcentagem);
+
+                    stlMundo.IsVisible = true;
+                    stlSemLendo.IsVisible = false;
+                }
+            }
+        }
+
+        public async void mostrarFinalizadasSuaMusica()
+        {
+            var task = verificarCapitulo(UserLocalData.userUID, "SuaMusicaSalvou");
+            int result = await task;
+
+            if (result != 0)
+            {
+                if (result > CapsConstantes.SuaMusica)
+                {
+                    stlSuaMusicaF.IsVisible = true;
+                    stlSemFinalizadas.IsVisible = false;
+                } else
+                {
+                    decimal capitulo = result;
+                    decimal total = Constantes.CapsConstantes.SuaMusica + 1;
+                    decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                    porcentagem = porcentagem / 100;
+
+                    BarraProgressoMusica.Progress = Convert.ToDouble(porcentagem);
+
+                    stlSuaMusica.IsVisible = true;
+                    stlSemLendo.IsVisible = false;
                 }
             }
         }
 
         public async void mostrarFinalizadasEscuro()
         {
-            var task1 = verificarFinalizada(UserLocalData.userUID, "NoEscuro", 5);
-            bool result1 = await task1;
+            var task = verificarCapitulo(UserLocalData.userUID, "NoEscuro");
+            int result = await task;
 
-            var task2 = verificarLeituras(UserLocalData.userUID, "NoEscuro");
-            bool result2 = await task2;
-
-            if (result1 == true)
+            if (result != 0)
             {
-                imgEscuroF.IsVisible = true;
-                imgAguardando.IsVisible = false;
-            }
-            else
-            {
-                if (result2 == true)
+                if (result > CapsConstantes.NoEscuro)
                 {
-                    imgEscuro.IsVisible = true;
-                    imgSemLendo.IsVisible = false;
+                    stlEscuroF.IsVisible = true;
+                    stlAguardando.IsVisible = false;
+                } else
+                {
+                    decimal capitulo = result;
+                    decimal total = Constantes.CapsConstantes.NoEscuro + 1;
+                    decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                    porcentagem = porcentagem / 100;
+
+                    BarraProgressoEscuro.Progress = Convert.ToDouble(porcentagem);
+
+                    stlEscuro.IsVisible = true;
+                    stlSemLendo.IsVisible = false;
                 }
             }
         }
 
         public async void mostrarFinalizadasObscuros()
         {
-            var task1 = verificarFinalizada(UserLocalData.userUID, "SegObscuros", 30);
-            bool result1 = await task1;
+            var task = verificarCapitulo(UserLocalData.userUID, "SegObscuros");
+            int result = await task;
 
-            var task2 = verificarLeituras(UserLocalData.userUID, "SegObscuros");
-            bool result2 = await task2;
-
-            if (result1 == true)
+            if (result != 0)
             {
-                imgObscurosF.IsVisible = true;
-                imgSemFinalizadas.IsVisible = false;
-            } else
-            {
-
-                if (result2 == true)
+                if (result > CapsConstantes.SegObscuros)
                 {
-                    imgObscuros.IsVisible = true;
-                    imgSemLendo.IsVisible = false;
+                    stlObscurosF.IsVisible = true;
+                    stlSemFinalizadas.IsVisible = false;
+                } else
+                {
+                    decimal capitulo = result - 1;
+                    decimal total = Constantes.CapsConstantes.SegObscuros;
+                    decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                    porcentagem = porcentagem / 100;
+
+                    BarraProgressoObscuros.Progress = Convert.ToDouble(porcentagem);
+
+                    stlObscuros.IsVisible = true;
+                    stlSemLendo.IsVisible = false;
                 }
             }
         }
 
         public async void mostrarFinalizadasDistantes()
         {
-            var task1 = verificarFinalizada(UserLocalData.userUID, "SegDistantes", 8);
-            bool result1 = await task1;
+            var task = verificarCapitulo(UserLocalData.userUID, "SegDistantes");
+            int result = await task;
 
-            var task2 = verificarLeituras(UserLocalData.userUID, "SegDistantes");
-            bool result2 = await task2;
-
-            if (result1 == true)
+            if (result != 0)
             {
-                imgDistantesF.IsVisible = true;
-                imgAguardando.IsVisible = false;
-            }
-            else
-            {
-
-                if (result2 == true)
+                if (result > CapsConstantes.SegDistantes)
                 {
-                    imgDistantes.IsVisible = true;
-                    imgSemLendo.IsVisible = false;
+                    stlDistantesF.IsVisible = true;
+                    stlSemFinalizadas.IsVisible = false;
+                } else
+                {
+                    decimal capitulo = result;
+                    decimal total = Constantes.CapsConstantes.SegDistantes + 1;
+                    decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                    porcentagem = porcentagem / 100;
+
+                    BarraProgressoDistantes.Progress = Convert.ToDouble(porcentagem);
+
+                    stlDistantes.IsVisible = true;
+                    stlSemLendo.IsVisible = false;
                 }
             }
         }
 
+        public async void mostrarFinalizadasInternos()
+        {
+            var task = verificarCapitulo(UserLocalData.userUID, "SegInternos");
+            int result = await task;
+
+            if (result != 0)
+            {
+                if (result > CapsConstantes.SegInternos)
+                {
+                    stlInternosF.IsVisible = true;
+                    stlAguardando.IsVisible = false;
+                } else
+                {
+                    decimal capitulo = result;
+                    decimal total = Constantes.CapsConstantes.SegInternos + 1;
+                    decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                    porcentagem = porcentagem / 100;
+
+                    BarraProgressoInternos.Progress = Convert.ToDouble(porcentagem);
+
+                    stlInternos.IsVisible = true;
+                    stlSemLendo.IsVisible = false;
+                }
+            }
+        }
         public async void mostrarFinalizadasEstranha()
         {
-            var task1 = verificarFinalizada(UserLocalData.userUID, "Estranha", 6);
-            bool result1 = await task1;
+            var task = verificarCapitulo(UserLocalData.userUID, "Estranha");
+            int result = await task;
 
-            var task2 = verificarLeituras(UserLocalData.userUID, "Estranha");
-            bool result2 = await task2;
-
-            if (result1 == true)
+            if (result != 0)
             {
-                imgEstranhaF.IsVisible = true;
-                imgAguardando.IsVisible = false;
-            }
-            else
-            {
-
-                if (result2 == true)
+                if (result > CapsConstantes.Estranha)
                 {
-                    imgEstranha.IsVisible = true;
-                    imgSemLendo.IsVisible = false;
+                    stlEstranhaF.IsVisible = true;
+                    stlAguardando.IsVisible = false;
+                } else
+                {
+                    decimal capitulo = result - 1;
+                    decimal total = Constantes.CapsConstantes.Estranha;
+                    decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                    porcentagem = porcentagem / 100;
+
+                    BarraProgressoEstranha.Progress = Convert.ToDouble(porcentagem);
+
+                    stlEstranha.IsVisible = true;
+                    stlSemLendo.IsVisible = false;
                 }
             }
         }
 
         public async void mostrarFinalizadasApenasDance()
         {
-            var task1 = verificarFinalizada(UserLocalData.userUID, "ApenasDance", 2);
-            bool result1 = await task1;
+            var task = verificarCapitulo(UserLocalData.userUID, "ApenasDance");
+            int result = await task;
 
-            var task2 = verificarLeituras(UserLocalData.userUID, "ApenasDance");
-            bool result2 = await task2;
-
-            if (result1 == true)
+            if (result != 0)
             {
-                imgApenasDanceF.IsVisible = true;
-                imgAguardando.IsVisible = false;
-            }
-            else
-            {
-
-                if (result2 == true)
+                if (result > CapsConstantes.ApenasDance)
                 {
-                    imgApenasDance.IsVisible = true;
-                    imgSemLendo.IsVisible = false;
+                    stlApenasDanceF.IsVisible = true;
+                    stlAguardando.IsVisible = false;
+                } else
+                {
+                    decimal capitulo = result -1;
+                    decimal total = Constantes.CapsConstantes.ApenasDance;
+                    decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                    porcentagem = porcentagem / 100;
+
+                    BarraProgressoDance.Progress = Convert.ToDouble(porcentagem);
+
+                    stlApenasDance.IsVisible = true;
+                    stlSemLendo.IsVisible = false;
                 }
             }
         }
-
 
         private async void imgLendo_Tapped(object sender, EventArgs e)
         {
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
-            await Task.Delay(5000);
-            await Navigation.PushModalAsync(new PrincipalPage());
+            await Task.Delay(500);
+            await Navigation.PushModalAsync(new PrincipalPage(0));
             await Navigation.RemovePopupPageAsync(loadingPage);
         }
 
@@ -356,8 +416,17 @@ namespace InsoniaLiteraria04.View
         {
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
-            await Task.Delay(5000);
+            await Task.Delay(500);
             await Navigation.PushModalAsync(new EsseMundoView.EsseMundoDetailsPage());
+            await Navigation.RemovePopupPageAsync(loadingPage);
+        }
+
+        private async void imgSuaMusica_Tapped(object sender, EventArgs e)
+        {
+            var loadingPage = new LoadingPopupPage();
+            await Navigation.PushPopupAsync(loadingPage);
+            await Task.Delay(500);
+            await Navigation.PushModalAsync(new SuaMusicaView.SuaMusicaDetailsPage());
             await Navigation.RemovePopupPageAsync(loadingPage);
         }
 
@@ -365,8 +434,17 @@ namespace InsoniaLiteraria04.View
         {
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
-            await Task.Delay(5000);
+            await Task.Delay(500);
             await Navigation.PushModalAsync(new NoEscuro.NoEscuroDetailsPage());
+            await Navigation.RemovePopupPageAsync(loadingPage);
+        }
+
+        private async void imgAscensaoSober_Tapped(object sender, EventArgs e)
+        {
+            var loadingPage = new LoadingPopupPage();
+            await Navigation.PushPopupAsync(loadingPage);
+            await Task.Delay(500);
+            await Navigation.PushModalAsync(new AscencaoSoberView.AnscensaoSoberDetailsPage());
             await Navigation.RemovePopupPageAsync(loadingPage);
         }
 
@@ -374,7 +452,7 @@ namespace InsoniaLiteraria04.View
         {
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
-            await Task.Delay(5000);
+            await Task.Delay(500);
             await Navigation.PushModalAsync(new AnjoMorteView.AnjoMorteDetaisPage());
             await Navigation.RemovePopupPageAsync(loadingPage);
         }
@@ -383,7 +461,7 @@ namespace InsoniaLiteraria04.View
         {
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
-            await Task.Delay(5000);
+            await Task.Delay(500);
             await Navigation.PushModalAsync(new MenusView.MenuApenasDancePage());
             await Navigation.RemovePopupPageAsync(loadingPage);
         }
@@ -392,7 +470,7 @@ namespace InsoniaLiteraria04.View
         {
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
-            await Task.Delay(5000);
+            await Task.Delay(500);
             await Navigation.PushModalAsync(new SegredosObscurosView.SegredosObscurosDetailsPage());
             await Navigation.RemovePopupPageAsync(loadingPage);
         }
@@ -401,8 +479,17 @@ namespace InsoniaLiteraria04.View
         {
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
-            await Task.Delay(5000);
+            await Task.Delay(500);
             await Navigation.PushModalAsync(new SegredosDistantesView.SegredosDistantesDetailsPage());
+            await Navigation.RemovePopupPageAsync(loadingPage);
+        }
+
+        private async void imgInternos_Tapped(object sender, EventArgs e)
+        {
+            var loadingPage = new LoadingPopupPage();
+            await Navigation.PushPopupAsync(loadingPage);
+            await Task.Delay(500);
+            await Navigation.PushModalAsync(new SegredosInternosView.SegredosInternosDetailsPage());
             await Navigation.RemovePopupPageAsync(loadingPage);
         }
 
@@ -410,7 +497,7 @@ namespace InsoniaLiteraria04.View
         {
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
-            await Task.Delay(5000);
+            await Task.Delay(500);
             await Navigation.PushModalAsync(new MenusView.MenuEstranhaPage());
             await Navigation.RemovePopupPageAsync(loadingPage);
         }
@@ -419,7 +506,7 @@ namespace InsoniaLiteraria04.View
         {
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
-            await Task.Delay(2000);
+            await Task.Delay(500);
             await Navigation.PushModalAsync(new ConfiguracoesPage());
             await Navigation.RemovePopupPageAsync(loadingPage);
         }

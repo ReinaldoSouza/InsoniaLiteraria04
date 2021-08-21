@@ -2,21 +2,51 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.MainPage"
-             BackgroundImage="intro.png">
-    <StackLayout Padding="20"
-       VerticalOptions="End"
-       HorizontalOptions="CenterAndExpand"
-        >
-        <Frame BackgroundColor="#2F4F4F" BorderColor="White" Padding="10" CornerRadius="20" >
-            <StackLayout Orientation="Horizontal">
-                <Label Text="CLIQUE AQUI PARA COMEÇAR" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="Medium"/>
-                <Image Source="iconemain.png" HeightRequest="50" />
+             >
+    <StackLayout Padding="10">
+        <Label HorizontalTextAlignment="Center" FontSize="Micro" TextColor="Black"
+               HorizontalOptions="CenterAndExpand">
+            <Label.Text>
+"Eu tenho você e você tem mim..."
+- SEGREDOS DISTANTES
+                </Label.Text>
+               </Label>
+        <Image Source="ic_launcher1" x:Name="logoInsonia" WidthRequest="160" VerticalOptions="CenterAndExpand"/>
+
+        <StackLayout x:Name="slPrincipal" VerticalOptions="StartAndExpand">
+            <Label FontSize="Large" TextColor="Black" FontAttributes="Bold" 
+               HorizontalTextAlignment="Center"
+               Text="FAÇA PARTE &#10; DO INSÔNIA LITERÁRIA"
+               HorizontalOptions="CenterAndExpand">
+            </Label>
+
+            <Label Text="Romances originais &#10; Viva a leitura de cada um deles" FontSize="Small" 
+               HorizontalTextAlignment="Center"
+               HorizontalOptions="CenterAndExpand" TextColor="Black" />
+
+            <StackLayout Padding="10" Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand" BackgroundColor="Black" >
+                <Label FontSize="16" Text="CRIAR A MINHA CONTA" TextColor="White" HorizontalOptions="CenterAndExpand"></Label>
+                <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="clkGoCadastro"></TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
             </StackLayout>
 
-            <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="clkGoLogin"/>
-            </Frame.GestureRecognizers>
-        </Frame>
+            <StackLayout Padding="10"
+                     Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Black" >
+                <Label FontSize="16" Text="JÁ TENHO UMA CONTA" TextColor="White" HorizontalOptions="CenterAndExpand"></Label>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="clkGoLogin"></TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
+            </StackLayout>
+        </StackLayout>
+
+        <StackLayout VerticalOptions="EndAndExpand">
+            <Button VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" 
+                    BackgroundColor="Transparent" Text="Política de Privacidade e Termos de Uso" 
+                    TextColor="Gray" FontAttributes="Bold" FontFamily="Underline"
+                    Clicked="clkLinkTermosdeUso"/>
+        </StackLayout>
 
     </StackLayout>
 

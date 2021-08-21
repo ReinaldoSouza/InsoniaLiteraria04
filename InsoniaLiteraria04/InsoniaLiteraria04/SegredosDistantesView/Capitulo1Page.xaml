@@ -4,20 +4,26 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="InsoniaLiteraria04.SegredosDistantesView.Capitulo1Page">
+             x:Class="InsoniaLiteraria04.SegredosDistantesView.Capitulo1Page"
+             BackgroundImage="backInsonia">
     <ContentPage.Content>
-        <StackLayout Margin="7,30,7,7">
+        <StackLayout Margin="7" BackgroundColor="White">
 
-            <Label x:Name="lblTitulo" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Medium" FontAttributes="Bold"/>
-            <Label Text="MARQUE COMO LIDO" TextColor="Gray" FontSize="Micro" HorizontalOptions="Center"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="1">
+                <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                    <Label x:Name="lblPorcentagem" TextColor="Gray" FontAttributes="Bold" FontSize="Micro" HorizontalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                    <Image Source="iconViews.png"></Image>
+                    <Label VerticalOptions="Center" FontSize="Micro" x:Name="lblViews"></Label>
+                </StackLayout>
+            </StackLayout>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-
-                <Label Text="***" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center"/>
-                <CheckBox HorizontalOptions="Center" Scale="2" x:Name="chkCapitulo" Color="MidnightBlue"
+            <Label x:Name="lblTitulo" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="Small" FontAttributes="Bold" TextColor="Gray"/>
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Padding="5">
+                <Label Text="MARQUE COMO LIDO" TextColor="Gray" FontSize="Micro" HorizontalOptions="Center"/>
+                <CheckBox HorizontalOptions="Center" Scale="2"  x:Name="chkCapitulo" Color="MidnightBlue"
                            CheckedChanged="clkSalvar"></CheckBox>
-                <Label Text="***" FontAttributes="Bold" HorizontalOptions="Start" VerticalOptions="Center"/>
-
             </StackLayout>
 
             <WebView x:Name="browser" VerticalOptions="FillAndExpand">
@@ -26,11 +32,11 @@
                 </WebView.Source>
             </WebView>
 
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" Padding="2">
 
                 <Button Text="COMENTE" BackgroundColor="DarkBlue" TextColor="White" Clicked="clkAbrirComentar" HorizontalOptions="StartAndExpand"/>
                 <Button Text="*MENU*"  BackgroundColor="Red" TextColor="White" Clicked="clkIrMenu" HorizontalOptions="CenterAndExpand"/>
-                <Button Text="PRÓXIMO" BackgroundColor="#5ED055" TextColor="White" Clicked="clkAbrirProximo" HorizontalOptions="EndAndExpand"/>
+                <Button x:Name="btnCap" Text="PRÓXIMO" BackgroundColor="#5ED055" TextColor="White" Clicked="clkAbrirProximo" HorizontalOptions="EndAndExpand"/>
 
             </StackLayout>
 

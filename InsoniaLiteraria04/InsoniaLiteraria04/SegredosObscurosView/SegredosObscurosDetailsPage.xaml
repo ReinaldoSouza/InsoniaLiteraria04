@@ -2,52 +2,76 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.SegredosObscurosView.SegredosObscurosDetailsPage"
-             BackgroundImage="capaobscuros.JPG">
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             BackgroundImage="detailsobscuro.JPG">
     <ContentPage.Content>
-        <StackLayout Padding="0">
-            <StackLayout Padding="40, 10, 40, 0">
-                <Frame BackgroundColor="DarkSlateBlue" CornerRadius="50" Rotation="5">
-                    <StackLayout>
-                        <Image Source="capaobscuros.JPG" WidthRequest="120"/>
-                        <Label Text="Segredos Obscuros" TextColor="White" FontAttributes="Bold" HorizontalOptions="EndAndExpand" FontSize="Medium" />
-                    </StackLayout>
-                </Frame>
+        <StackLayout>
+            <StackLayout>
+                <StackLayout Orientation="Vertical" Padding="5">
+                    
+                    <ImageButton Source="iconeFechar" WidthRequest="30" HorizontalOptions="EndAndExpand" Clicked="clkFechar"/>
 
+                    <Frame BackgroundColor="Black" Padding="5" HorizontalOptions="CenterAndExpand">
+                        <Image Source="capaobscuros.JPG" WidthRequest="140"/>
+                    </Frame>
+                </StackLayout>
             </StackLayout>
-            <ScrollView>
-                <StackLayout Margin="0" VerticalOptions="Start" Padding="10" BackgroundColor="#ADD8E6">
 
-                    <StackLayout>
-                        <Frame BorderColor="Black" CornerRadius="5" Padding="1">
-                            <StackLayout>
-                                <ListView VerticalOptions="Start" x:Name="_list"  SeparatorVisibility="Default"
-                                               HasUnevenRows="True"  SeparatorColor="Black" ItemTapped="IrParaCapitulo" ItemsSource="{Binding .}" HeightRequest="81">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <ImageCell ImageSource="menuobscuro.JPG" x:Name="txcCapitulo" Text="{Binding nomeCapitulo}" Detail="{Binding capituloLido}" TextColor="MidnightBlue" Height="80" ></ImageCell>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
+            <ScrollView Padding="0">
+                <StackLayout VerticalOptions="Start" BackgroundColor="Transparent">
+
+                    <StackLayout Padding="5" BackgroundColor="Transparent">
+                        
+                        <Frame BorderColor="Transparent" CornerRadius="5" Padding="3">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout VerticalOptions="Start">
+                                    <Image Source="iconemain.png" WidthRequest="50"/>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Label x:Name="lbltitulo" TextColor="Black" FontSize="Medium" />
+                                    <Label x:Name="lbldescricao" TextColor="Black" FontSize="Small" />
+                                    <Label x:Name="lblPorcentagem" TextColor="Gray" FontAttributes="Bold" FontSize="Small" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="IrParaCapitulo"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
                             </StackLayout>
                         </Frame>
                     </StackLayout>
 
-                    <Label Text="Você tem um segredo? Aquele do tipo que ninguém, nem a pessoa mais próxima pode saber?
-A verdade é que todo mundo tem. Todo mundo esconde algo, ninguém é totalmente sincero com as pessoas.
-O que você faria se esse tão guardado segredo vazasse?
-E se todo mundo soubesse da coisa mais horrível que você acha que já fez? Te tratariam diferente?
-Você conseguiria encarar todos sabendo que eles poderiam te julgar a qualquer momento?
-O fato é que todo mundo esconde algo e, mais cedo ou mais tarde, alguém vai descobrir,
-e essa pessoa vai te ter nas mãos e vai poder escolher entre te ajudar a manter o segredo ou espalhar,
-isso já vai sair do seu controle, mas as consequências ainda vão ser culpa sua, já que a verdade é sempre o melhor caminho,
-mesmo sendo doloroso." VerticalOptions="Fill" HorizontalOptions="Fill" FontSize="Small"/>
-                    <Label Text="--*--" FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
-                    <Label Text="Gênero: Romance, Ficção Adolescente, Amizade, Comédia..." FontSize="Small" FontAttributes="Bold"/>
-                    <Label Text="Escrito por: Reinaldo Souza" FontSize="Small" FontAttributes="Bold"/>
-                    <Label Text="Ano de Publicação: 2015" FontSize="Small" FontAttributes="Bold"/>
+                    <StackLayout Padding="10" BackgroundColor="Cornsilk">
+                        <Label TextColor="Black" Text="Segredos Obscuros" HorizontalTextAlignment="Center" TextDecorations="Underline" FontSize="18" FontAttributes="Bold" />
+                        <Label TextColor="Black" Text="Escrito por: Reinaldo Souza" HorizontalTextAlignment="Center" FontSize="Small" FontAttributes="Bold"/>
+                        <Label TextColor="Black" Text="Ano de Publicação: 2015" HorizontalTextAlignment="Center" FontSize="Small" FontAttributes="Bold"/>
+                        <Label TextColor="Black" Text="Você se importa com a opinião alheia sobre alguém? E se ela for sobre você? " FontSize="15"/>
+                        <Label TextColor="Black" Text="Vida nova. Escola nova. Recomeço. Jason e Lisa deixaram o passado para trás e se mudaram para o mais longe que conseguiram na esperança de cursar o último ano do Ensino Médio em paz." FontSize="15"/>
+                        <Label TextColor="Black" Text="Amigos novos. Pessoas novas. Os mesmos problemas. Talvez piores. A Escola Carmel tem uma coisa que poucas escolas têm. Um fofoqueiro de plantão." FontSize="15"/>
+                        <Label TextColor="Black" Text="Empenhado em fazer comentários maldosos de alunos considerados ruins, o blog Tesouro de Segredos Obscuros ataca Jason anonimamente em seu primeiro dia e logo, todos percebem que ele não vai parar até acabar com o pouco de reputação que o garoto está tentando conseguir na escola nova." FontSize="15"/>
+                        <Label TextColor="Black" Text="Decidido em comprar essa briga, Jason trava uma disputa contra esse blog. No meio da caça de gato e rato, outras coisas entram em perspectiva. Amizades novas e um teste de duração das antigas, amores novos e diferentes. Conselhos que às vezes não são tão bem vindos." FontSize="15"/>
+
+                        <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" BackgroundColor="Transparent">
+                            <Image x:Name="imgPlaylist" Source="spotify_icon.png" WidthRequest="40">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="imgPlaylist_Tapped" ></TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label x:Name="lblPlaylist" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="Clique aqui para escutar a playlist de Segredos..." FontAttributes="Bold" FontSize="Small" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="imgPlaylist_Tapped"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout BackgroundColor="Transparent" Padding="10">
+                            <Button Text="RESETAR HISTÓRIA" TextColor="White" HorizontalOptions="Center" BackgroundColor="Red" 
+                                    BorderColor="Transparent" CornerRadius="5" Clicked="clkResetar"></Button>
+                        </StackLayout>
+
+                    </StackLayout>
 
                 </StackLayout>
             </ScrollView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

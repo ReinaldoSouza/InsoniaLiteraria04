@@ -5,5 +5,6 @@
         public int Capitulo { get; set; }
         public string Lido { get; set; }
         public string Historia { get; set; }
+        public string DataGravacao { get; set; }
     }
 }

@@ -1,13 +1,12 @@
-﻿using InsoniaLiteraria04.Database;
+﻿using InsoniaLiteraria04.Constantes;
+using InsoniaLiteraria04.Control;
+using InsoniaLiteraria04.Database;
+using InsoniaLiteraria04.Global;
 using InsoniaLiteraria04.Helper;
-using InsoniaLiteraria04.Model;
 using InsoniaLiteraria04.View;
 using Rg.Plugins.Popup.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -15,16 +14,19 @@ using Xamarin.Forms.Xaml;
 
 namespace InsoniaLiteraria04.AnjoMorteView
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AnjoMorteDetaisPage : ContentPage
     {
-        DBFire service;
-        ObservableCollection<ProximoCapitulo> list = new ObservableCollection<ProximoCapitulo>();
+        DBFireCapitulos serviceCapitulo;
         public AnjoMorteDetaisPage ()
 		{
 			InitializeComponent ();
-            service = new DBFire();
-            _list.BindingContext = list;
+            AdmobControl admobControl = new AdmobControl()
+            {
+                AdUnitId = AppConstants.BannerId
+            };
+            serviceCapitulo = new DBFireCapitulos();
+            lblPorcentagem.Text = "0% LIDO";
             MostrarProximoCapitulo(UserLocalData.userUID);
         }
 
@@ -35,23 +37,18 @@ namespace InsoniaLiteraria04.AnjoMorteView
 
             try
             {
-                var listAsync = await service.proximoCapitulo(usuario, "AnjoMorte");
+                var listAsync = await serviceCapitulo.proximoCapitulo(usuario, "AnjoMorte");
 
                 if (listAsync != null)
                 {
 
                     if (listAsync.Count == 0)
                     {
-                        list.Add(new ProximoCapitulo
-                        {
-                            nomeCapitulo = "VOCÊ AINDA NÃO COMEÇOU A HISTÓRIA",
-                            capituloLido = "VENHA LER AGORA!"
-                        });
-
+                        lbltitulo.Text = "COMECE AGORA A LER";
+                        lbldescricao.Text = "CLIQUE AQUI PARA COMEÇAR!";
                     }
                     else
                     {
-
                         var listaOrdenada = listAsync.OrderBy(i => i.Capitulo).ToList();
 
                         for (int i = 1; i <= listaOrdenada.Count; i++)
@@ -65,30 +62,31 @@ namespace InsoniaLiteraria04.AnjoMorteView
 
                             if (capitulos == 0)
                             {
-                                capituloDescricao = "VOCÊ AINDA NÃO COMEÇOU a HISTÓRIA";
+                                capituloDescricao = "COMECE AGORA A LER";
                             }
                             if (capitulos > 0)
                             {
                                 capituloDescricao = "PRÓXIMO: CAPÍTULO " + capitulos.ToString();
+
+                                decimal capitulo = capitulos;
+                                decimal total = Constantes.CapsConstantes.AnjoMorte + 1;
+                                decimal porcentagem = Math.Ceiling(100 * capitulo / total);
+
+                                lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
+
                             }
-                            if (capitulos == 12)
+                            if (capitulos > CapsConstantes.AnjoMorte)
                             {
                                 capituloDescricao = "CAPÍTULOS NOVOS EM BREVE...";
+                                lblPorcentagem.Text = "100% LIDO";
                             }
 
-                            list.Add(new ProximoCapitulo
-                            {
-                                nomeCapitulo = capituloDescricao, //"CAPÍTULO " + capitulos.ToString(),
-                                capituloLido = "CONTINUE LENDO!"
-                            });
+                            lbltitulo.Text = capituloDescricao.ToString();
+                            lbldescricao.Text = "CLIQUE AQUI E CONTINUE LENDO!";
 
                             if (listPrincipal.Lido.ToString() == "true")
                             {
                                 break;
-                            }
-                            else
-                            {
-                                list.Clear();
                             }
                         }
                         return capitulos;
@@ -99,11 +97,9 @@ namespace InsoniaLiteraria04.AnjoMorteView
             }
             catch (Exception ex)
             {
-                list.Add(new ProximoCapitulo
-                {
-                    nomeCapitulo = "VOCÊ AINDA NÃO COMEÇOU A HISTÓRIA",
-                    capituloLido = "VENHA LER AGORA!"
-                });
+                lbltitulo.Text = "COMECE AGORA A LER";
+                lbldescricao.Text = "CLIQUE AQUI PARA COMEÇAR!";
+                lblPorcentagem.Text = "0% LIDO";
 
                 await DisplayAlert("FALHA DE CONEXÃO", "VERIFIQUE SUA CONEXÃO COM A INTERNET", "OK");
 
@@ -125,22 +121,46 @@ namespace InsoniaLiteraria04.AnjoMorteView
             var loadingPage = new LoadingPopupPage();
             await Navigation.PushPopupAsync(loadingPage);
 
-            if (result >= 11)
+            for (var i = 0; i < 1; i++)
             {
-                result = 11;
+                await DependencyService.Get<IAdmobInterstitialAds>().Display(AppConstants.InterstitialAdId);
             }
 
-            if (result >= 0 && result <= 6)
+            if (result > CapsConstantes.AnjoMorte)
+            {
+                await Navigation.PushModalAsync(new MenusView.MenuAnjoMortePage());
+            } else
             {
                 await Navigation.PushModalAsync(new Capitulo1Page(result));
-            } else if (result >=7 && result <= 11)
-            {
-                await Navigation.PushModalAsync(new Capitulo2Page(result));
             }
 
-            await Task.Delay(1000);
+            await Task.Delay(500);
             await Navigation.RemovePopupPageAsync(loadingPage);
+        }
 
+        async void clkFechar(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
+
+        private async void clkResetar(object sender, EventArgs e)
+        {
+            try
+            {
+                var action = await DisplayAlert("Aviso", "Deseja mesmo resetar essa história?", "Sim", "Não");
+                if (action)
+                {
+                    var loadingPage = new LoadingPopupPage();
+                    await Navigation.PushPopupAsync(loadingPage);
+                    await serviceCapitulo.resetarSerie(UserLocalData.userUID, "AnjoMorte");
+                    await Task.Delay(500);
+                    await Navigation.PushModalAsync(new PrincipalPage(0));
+                    await Navigation.RemovePopupPageAsync(loadingPage);
+                }
+            } catch(Exception ex)
+            {
+                await DisplayAlert("ERRO", "Não foi possível resetar essa história. Favor tentar novamente.", "OK");
+            }
         }
     }
 }

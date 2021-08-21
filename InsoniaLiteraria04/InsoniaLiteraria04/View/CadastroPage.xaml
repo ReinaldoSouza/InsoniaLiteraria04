@@ -2,83 +2,75 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.View.CadastroPage"
-             BackgroundImage="logointro.png">
+             BackgroundColor="WhiteSmoke">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="10,20,10,20">
-                <Frame CornerRadius="20" BackgroundColor="Transparent" BorderColor="White" VerticalOptions="Center">
-                    <StackLayout>
-                        <StackLayout>
-                            <Image Source="logocadastro.png" WidthRequest="150" HorizontalOptions="Center" />
-                        </StackLayout>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Padding="10">
+                    <Label HorizontalTextAlignment="Center" FontSize="Micro" TextColor="Black"
+               HorizontalOptions="CenterAndExpand">
+                        <Label.Text>
+                            "Eu acredito que podemos fazer qualquer coisa..."
+ - ESSE MUNDO VAI MUDAR A SUA VIDA UM DIA DESSES
+                        </Label.Text>
+                    </Label>
+                    <Image Source="ic_launcher1" x:Name="logoInsonia" WidthRequest="160" VerticalOptions="CenterAndExpand"/>
+
+                    <StackLayout VerticalOptions="StartAndExpand">
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                             <Image Source="nomecadastro.png" WidthRequest="40"/>
                             <Entry x:Name="txtNomeCadastro" Placeholder="Digite seu nome..."
-                   BackgroundColor="White"
-                           PlaceholderColor="Gray"
-                                   HorizontalOptions="FillAndExpand"
-                           TextColor="Black"/>
+                                    BackgroundColor="WhiteSmoke"
+                                    PlaceholderColor="Silver"
+                                    HorizontalOptions="FillAndExpand"
+                                    TextColor="Black"
+                                   ReturnType="Next"/>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                             <Image Source="usuariologin.png" WidthRequest="40"/>
                             <Entry x:Name="txtUsernameCadastro" Placeholder="Digite seu username..."
-                   BackgroundColor="White"
-                                   HorizontalOptions="FillAndExpand"
-                           PlaceholderColor="Gray" 
-                           TextColor="Black"/>
+                                    BackgroundColor="WhiteSmoke"
+                                    HorizontalOptions="FillAndExpand"
+                                    PlaceholderColor="Silver" 
+                                    ReturnType="Next"
+                                    TextColor="Black"/>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                             <Image Source="emailcadastro.png" WidthRequest="40"/>
                             <Entry x:Name="txtEmailCadastro" Placeholder="Digite seu email..."
-                   BackgroundColor="White"
-                           PlaceholderColor="Gray"
-                                   HorizontalOptions="FillAndExpand"
-                           Keyboard="Email"
-                           TextColor="Black"/>
+                                    BackgroundColor="WhiteSmoke"
+                                    PlaceholderColor="Silver"
+                                    HorizontalOptions="FillAndExpand"
+                                    ReturnType="Next"
+                                    TextColor="Black"/>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                             <Image Source="senhalogin.png" WidthRequest="40"/>
                             <Entry x:Name="txtSenhaCadastro" Placeholder="Digite sua senha..."       
-                   BackgroundColor="White"
-                           PlaceholderColor="Gray"
-                                   HorizontalOptions="FillAndExpand"
-                           IsPassword="True"
-                           TextColor="Black"/>
+                                    BackgroundColor="WhiteSmoke"
+                                    PlaceholderColor="Silver"
+                                    HorizontalOptions="FillAndExpand"
+                                    IsPassword="True"
+                                    ReturnType="Done"
+                                    TextColor="Black"/>
+                        </StackLayout>
+
+                        <StackLayout Padding="10" Orientation="Horizontal"
+                                    HorizontalOptions="FillAndExpand" BackgroundColor="Black" >
+                            <Label FontSize="16" Text="CRIAR MINHA CONTA" TextColor="White" HorizontalOptions="CenterAndExpand"></Label>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="clkCriarConta"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                     </StackLayout>
-                </Frame>
 
-                <Button Text="CRIE SUA CONTA" 
-                                BackgroundColor="#2F4F4F" 
-                                BorderRadius="20" 
-                                TextColor="White"
-                                HorizontalOptions="Fill"
-                                Margin="10,0,10,0"
-                                Padding="10"
-                                Clicked="clkCriarConta"/>
-
-                <StackLayout
-                Margin="10"
-                HeightRequest="2"
-                WidthRequest="2"
-                BackgroundColor="Black"
-                >
                 </StackLayout>
-
-                <Button Text="JÁ TEM UMA CONTA" 
-                                BackgroundColor="#2F4F4F" 
-                                BorderRadius="20" 
-                                Margin="10,0,10,0"
-                                TextColor="White"
-                                HorizontalOptions="Fill"
-                                Padding="10"
-                                Clicked="clkGoLogin"/>
-            </StackLayout>
-        </ScrollView>
+            </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

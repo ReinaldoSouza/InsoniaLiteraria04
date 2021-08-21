@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="InsoniaLiteraria04.CardView.SuaMusicaCardView"
+             Padding="0" Margin="2" VerticalOptions="Start" BorderColor="Azure"
+             BackgroundColor="#B0C4DE"
+             CornerRadius="5">
+    <Frame.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Card_Tapped"/>
+    </Frame.GestureRecognizers>
+    <Frame.Content>
+        <StackLayout>
+            <Grid>
+                <BoxView x:Name="boxCardColor" HorizontalOptions="Fill" BackgroundColor="#00ACC1" InputTransparent="True"/>
+                <Image x:Name="imgCard" HorizontalOptions="Fill" Aspect="AspectFill" Source="backsuamusica.jpg" InputTransparent="True"/>
+            </Grid>
+            <StackLayout Margin="10" >
+                <Label TextColor="Black" Text="SUA MÚSICA SALVOU MINHA VIDA &#10; Volume 2" FontAttributes="Bold" FontSize="Medium" Opacity="0.8"/>
+                <Label TextColor="Black" Text="É isso que eu sinto por você. Um milhão de balões voando. Não faz o menor sentido..." FontSize="Small" Opacity="0.6"/>
+                <Label TextColor="Black" Text="Escrito por Reinaldo Souza, 2016" FontSize="Small" Opacity="0.8"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image x:Name="imgComentarios" Source="comentarios.png" WidthRequest="25"/>
+                    <Label x:Name="lblContagem2" VerticalOptions="Center" FontSize="Small"/>
+                    <Label/>
+                    <Image x:Name="imgVews" Source="iconViews.png" WidthRequest="25"/>
+                    <Label x:Name="lblContagem3" VerticalOptions="Center" FontSize="Small"/>
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Black" Text="COMPLETO" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Label FontAttributes="Bold" FontSize="Default" TextColor="Red" Text="CLIQUE AQUI PARA LER!"/>
+                </StackLayout>
+            </StackLayout>
+
+        </StackLayout>
+    </Frame.Content>
+</Frame>

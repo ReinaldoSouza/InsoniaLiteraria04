@@ -2,61 +2,68 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InsoniaLiteraria04.EsseMundoView.EsseMundoDetailsPage"
-             BackgroundImage="capaessemundo.JPG">
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             BackgroundImage="detailsessemundo.JPG">
     <ContentPage.Content>
-        <StackLayout Padding="0">
-            <StackLayout Padding="40, 10, 40, 0">
-                <Frame BackgroundColor="MidnightBlue" CornerRadius="50" Rotation="5" >
-                    <StackLayout>
-                        <Image Source="capaessemundo.JPG" WidthRequest="120"/>
-                        <Label Text="Esse Mundo Vai Mudar A Sua Vida Um Dia Desses" TextColor="White" FontAttributes="Bold" HorizontalOptions="EndAndExpand" FontSize="Medium" />
-                    </StackLayout>
-                </Frame>
-                
-            </StackLayout>
-            <ScrollView>
-                <StackLayout Margin="0" VerticalOptions="Start" Padding="10" BackgroundColor="#B0C4DE">
+        <StackLayout>
+            <StackLayout>
+                <StackLayout Orientation="Vertical" Padding="5">
 
-                    <StackLayout>
-                        <Frame BorderColor="Black" CornerRadius="5" Padding="1">
-                            <StackLayout>
-                                <ListView VerticalOptions="Start" x:Name="_list"  SeparatorVisibility="Default"
-                                               HasUnevenRows="True"  SeparatorColor="Black" ItemTapped="IrParaCapitulo" ItemsSource="{Binding .}" HeightRequest="81">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <ImageCell ImageSource="menuessemundo.JPG" x:Name="txcCapitulo" Text="{Binding nomeCapitulo}" Detail="{Binding capituloLido}" TextColor="MidnightBlue" Height="80" ></ImageCell>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
+                    <ImageButton Source="iconeFechar" WidthRequest="30" HorizontalOptions="EndAndExpand" Clicked="clkFechar"/>
+
+                    <Frame BackgroundColor="Black" Padding="5" HorizontalOptions="CenterAndExpand">
+                        <Image Source="capaessemundo.JPG" WidthRequest="140"/>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+            <ScrollView Padding="0">
+                <StackLayout VerticalOptions="Start" BackgroundColor="Transparent">
+
+                    <StackLayout Padding="5" BackgroundColor="Transparent">
+                        <Frame BorderColor="Transparent" CornerRadius="5" Padding="3">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout VerticalOptions="Start">
+                                    <Image Source="iconemain.png" WidthRequest="50"/>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Label x:Name="lbltitulo" TextColor="Black" FontSize="Medium" />
+                                    <Label x:Name="lbldescricao" TextColor="Black" FontSize="Small" />
+                                    <Label x:Name="lblPorcentagem" TextColor="Gray" FontAttributes="Bold" FontSize="Small" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="IrParaCapitulo"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
                             </StackLayout>
                         </Frame>
                     </StackLayout>
 
-                    <Label TextColor="Black" Text="Somos incompletos. Vivemos uma vida longa, mas nunca conseguimos o bastante. Nem sempre se tem o que se quer, não é? Mas saber isso não muda nada,
-só nos deixa mais fortes na busca por alguma coisa que não temos.
-Passamos a vida toda querendo alguma coisa, buscando alguma coisa, procurando alguma coisa,
-ansiando por alguma coisa e isso é uma coisa boa.
-Não nascemos perfeitos, mas muita gente busca a vida toda por perfeição, mas a perfeição é tão difícil.
-Não nascemos apaixonados, mas todos nós buscamos a vida toda por amor, e se a perfeição é difícil,
-amar é mais ainda.
-Mas quando estamos com a pessoa certa, amar não parece ser tão complicado,
-parece a coisa mais fácil do mundo." VerticalOptions="Fill" FontSize="Small"/>
-                    <Label Text="--*--" FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
-                    <Label Text="Gênero: Romance, Ficção Adolescente, Amizade..." FontSize="Small" FontAttributes="Bold" />
-                    <Label Text="Escrito por: Reinaldo Souza" FontSize="Small" FontAttributes="Bold"/>
-                    <Label Text="Ano de Publicação: 2015" FontSize="Small" FontAttributes="Bold"/>
+                    <StackLayout Padding="10" BackgroundColor="Cornsilk">
+                        <Label TextColor="Black" Text="Esse Mundo Vai Mudar A Sua Vida Um Dia Desses" HorizontalTextAlignment="Center" TextDecorations="Underline" FontSize="18" FontAttributes="Bold" />
+                        <Label TextColor="Black" Text="Escrito por: Reinaldo Souza" HorizontalTextAlignment="Center" FontSize="Small" FontAttributes="Bold"/>
+                        <Label TextColor="Black" Text="Ano de Publicação: 2015" HorizontalTextAlignment="Center" FontSize="Small" FontAttributes="Bold"/>
+                        <Label TextColor="Black" Text="Will sempre se considerou um garoto muito comum em Los Angeles. Tem que ir para a escola todos os dias, tem problemas familiares como todo mundo e tem um melhor amigo que sempre tratou como seu grilo falante." FontSize="15"/>
+                        <Label TextColor="Black" Text="Will também tem um sonho. E esse sonho não é compartilhado com ninguém que ele conhece." FontSize="15"/>
+                        <Label TextColor="Black" Text="Sua vida começa a sair do comum quando conhece a forasteira, Emily. No primeiro momento, um não tem nada a ver com o outro. Com o tempo, os dois se tornam um só." FontSize="15"/>
+                        <Label TextColor="Black" Text="O amor pela música e pela Emily muda a vida de Will por completo. Algo que ele nunca imaginou que fosse acontecer. Mas nem tudo é um mar de rosas e eles, juntos, vão descobrir que amar alguém não é tão simples quanto parece." FontSize="15"/>
 
-                    <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" BackgroundColor="Transparent">
-                        <Image x:Name="imgPlaylist" Source="spotify_icon.png" WidthRequest="40">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="imgPlaylist_Tapped" ></TapGestureRecognizer>
-                            </Image.GestureRecognizers>
-                        </Image>
-                        <Label x:Name="lblPlaylist" VerticalOptions="Center" Text="Escutar Playlist Esse Mundo..." FontAttributes="Bold" FontSize="Small" >
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="imgPlaylist_Tapped"></TapGestureRecognizer>
-                            </Label.GestureRecognizers>
-                        </Label>
+                        <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" BackgroundColor="Transparent">
+                            <Image x:Name="imgPlaylist" Source="spotify_icon.png" WidthRequest="40">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="imgPlaylist_Tapped" ></TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label x:Name="lblPlaylist" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="Clique aqui para escutar a playlist de Esse Mundo..." FontAttributes="Bold" FontSize="Small" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="imgPlaylist_Tapped"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout BackgroundColor="Transparent" Padding="10">
+                            <Button Text="RESETAR HISTÓRIA" TextColor="White" HorizontalOptions="Center" BackgroundColor="Red" 
+                                    BorderColor="Transparent" CornerRadius="5" Clicked="clkResetar"></Button>
+                        </StackLayout>
+
                     </StackLayout>
 
                 </StackLayout>
