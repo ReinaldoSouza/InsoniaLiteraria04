@@ -19,6 +19,7 @@ namespace InsoniaLiteraria04.MenusView
 	{
         DBFireViews serviceViews;
         DBFireComentarios serviceComentarios;
+        DBFireMenus serviceMenus;
         ObservableCollection<OpcoesMenu> ListaMenu = new ObservableCollection<OpcoesMenu>();
         ObservableCollection<QuantidadeViews> ListaViews = new ObservableCollection<QuantidadeViews>();
         ObservableCollection<QuantidadeComentario> ListaComentarios = new ObservableCollection<QuantidadeComentario>();
@@ -32,6 +33,7 @@ namespace InsoniaLiteraria04.MenusView
             };
             serviceViews = new DBFireViews();
             serviceComentarios = new DBFireComentarios();
+            serviceMenus = new DBFireMenus();
             _list.BindingContext = ListaMenu;
             carregarViews();
         }
@@ -44,8 +46,10 @@ namespace InsoniaLiteraria04.MenusView
                 ListaViews.Clear();
                 ListaComentarios.Clear();
 
-                var listAsyncViews = await serviceViews.mostrarQuantidadeCapitulo("ApenasDance");
+                var listAsyncMenu = await serviceMenus.mostrarMenu("AnjoMorte");
+                var listMenu = listAsyncMenu.ToList();
 
+                var listAsyncViews = await serviceViews.mostrarQuantidadeCapitulo("ApenasDance");
                 var lista1 = listAsyncViews.ToList();
 
                 foreach (var item in lista1)
@@ -54,7 +58,6 @@ namespace InsoniaLiteraria04.MenusView
                 }
 
                 var listAsyncComents = await serviceComentarios.mostrarComentarioCapitulo("ApenasDance");
-
                 var lista2 = listAsyncComents.ToList();
 
                 foreach (var item2 in lista2)
@@ -73,27 +76,19 @@ namespace InsoniaLiteraria04.MenusView
                     Status = false
                 });
 
-                ListaMenu.Add(new OpcoesMenu
+                foreach (var menu in listMenu)
                 {
-                    Codigo = MenuConstantes.Capitulo1,
-                    Descricao = "O Baile",
-                    Titulo = "CAPÍTULO 1",
-                    Imagem = "menuapenasdance.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo1].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo1].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo2,
-                    Descricao = "A Carta",
-                    Titulo = "CAPÍTULO 2",
-                    Imagem = "menuapenasdance.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo2].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo2].Quantidade.ToString(),
-                    Status = true
-                });
+                    ListaMenu.Add(new OpcoesMenu
+                    {
+                        Codigo = Convert.ToInt32(menu.codigo),
+                        Descricao = menu.descricao,
+                        Titulo = menu.titulo,
+                        Imagem = "menuapenasdance.JPG",
+                        Views = ListaViews[Convert.ToInt32(menu.codigo)].Quantidade.ToString(),
+                        Capitulos = ListaComentarios[Convert.ToInt32(menu.codigo)].Quantidade.ToString(),
+                        Status = true
+                    });
+                }
             }
             catch (Exception ex)
             {

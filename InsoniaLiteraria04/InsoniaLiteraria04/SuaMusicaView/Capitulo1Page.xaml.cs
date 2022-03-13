@@ -19,6 +19,7 @@ namespace InsoniaLiteraria04.SuaMusicaView
     {
         DBFireCapitulos serviceCapitulos;
         DBFireViews serviceViews;
+        CapsConstantes capConstantes;
         public int condicao;
         public Capitulo1Page(int numero)
         {
@@ -29,12 +30,14 @@ namespace InsoniaLiteraria04.SuaMusicaView
             };
             serviceCapitulos = new DBFireCapitulos();
             serviceViews = new DBFireViews();
+            capConstantes = new CapsConstantes();
+            carregarConstantes();
             condicao = numero;
 
             if (condicao != 0)
             {
                 decimal capitulo = condicao;
-                decimal total = Constantes.CapsConstantes.SuaMusica + 1;
+                decimal total = Convert.ToInt32(capConstantes.SuaMusica) + 1;
                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -44,7 +47,7 @@ namespace InsoniaLiteraria04.SuaMusicaView
                 lblPorcentagem.Text = "0% LIDO";
             }
 
-            if (numero == CapsConstantes.SuaMusica)
+            if (numero == Convert.ToInt32(capConstantes.SuaMusica))
             {
                 btnCap.Text = "FIM";
             }
@@ -52,6 +55,18 @@ namespace InsoniaLiteraria04.SuaMusicaView
             mostrarCapituloSalvo("SuaMusicaSalvou", "Capitulo" + numero.ToString());
 
             carregarHistoria(numero);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.SuaMusica = "0";
+            }
         }
 
         public async void carregarHistoria(int capitulo)
@@ -78,7 +93,7 @@ namespace InsoniaLiteraria04.SuaMusicaView
             await Navigation.PushPopupAsync(loadingPage);
             await Task.Delay(500);
 
-            if (condicao + 1 > CapsConstantes.SuaMusica)
+            if (condicao + 1 > Convert.ToInt32(capConstantes.SuaMusica))
             {
                 await DisplayAlert("CAPÍTULOS!", "VOCÊ CHEGOU NO ÚLTIMO CAPÍTULO. AGUARDE PARA MAIS CAPÍTULOS", "OK");
                 await Navigation.PushModalAsync(new MenusView.MenuSuaMusicaPage());
@@ -107,7 +122,7 @@ namespace InsoniaLiteraria04.SuaMusicaView
                     LerCapitulo(condicao.ToString(), "true");
 
                     decimal capitulo = condicao + 1;
-                    decimal total = Constantes.CapsConstantes.SuaMusica + 1;
+                    decimal total = Convert.ToInt32(capConstantes.SuaMusica) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -123,7 +138,7 @@ namespace InsoniaLiteraria04.SuaMusicaView
                     else
                     {
                         decimal capitulo = condicao;
-                        decimal total = Constantes.CapsConstantes.SuaMusica + 1;
+                        decimal total = Convert.ToInt32(capConstantes.SuaMusica) + 1;
                         decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                         lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";

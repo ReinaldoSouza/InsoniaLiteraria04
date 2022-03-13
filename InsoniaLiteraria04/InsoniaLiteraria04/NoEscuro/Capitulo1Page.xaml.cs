@@ -19,6 +19,7 @@ namespace InsoniaLiteraria04.NoEscuro
 	{
         DBFireCapitulos serviceCapitulos;
         DBFireViews serviceViews;
+        CapsConstantes capConstantes;
         public int condicao;
 
         public Capitulo1Page(int numero)
@@ -30,12 +31,14 @@ namespace InsoniaLiteraria04.NoEscuro
             };
             serviceCapitulos = new DBFireCapitulos();
             serviceViews = new DBFireViews();
+            capConstantes = new CapsConstantes();
+            carregarConstantes();
             condicao = numero;
 
             if (condicao != 0)
             {
                 decimal capitulo = condicao;
-                decimal total = Constantes.CapsConstantes.NoEscuro + 1;
+                decimal total = Convert.ToInt32(capConstantes.NoEscuro) + 1;
                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -45,13 +48,25 @@ namespace InsoniaLiteraria04.NoEscuro
                 lblPorcentagem.Text = "0% LIDO";
             }
 
-            if (numero == CapsConstantes.NoEscuro)
+            if (numero == Convert.ToInt32(capConstantes.NoEscuro))
             {
                 btnCap.Text = "FIM";
             }
             salvarViews(numero);
             mostrarCapituloSalvo("NoEscuro", "Capitulo" + numero.ToString());
             carregarHistoria(numero);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.NoEscuro = "0";
+            }
         }
 
         public async void carregarHistoria(int capitulo)
@@ -84,7 +99,7 @@ namespace InsoniaLiteraria04.NoEscuro
             await Navigation.PushPopupAsync(loadingPage);
             await Task.Delay(500);
 
-            if (condicao + 1 > CapsConstantes.NoEscuro)
+            if (condicao + 1 > Convert.ToInt32(capConstantes.NoEscuro))
             {
                 await DisplayAlert("CAPÍTULOS!", "VOCÊ CHEGOU NO ÚLTIMO CAPÍTULO. AGUARDE PARA MAIS CAPÍTULOS NO FUTURO", "OK");
                 await Navigation.PushModalAsync(new MenusView.MenuNoEscuroPage());
@@ -108,7 +123,7 @@ namespace InsoniaLiteraria04.NoEscuro
                     LerCapitulo(condicao.ToString(), "true");
 
                     decimal capitulo = condicao + 1;
-                    decimal total = Constantes.CapsConstantes.NoEscuro + 1;
+                    decimal total = Convert.ToInt32(capConstantes.NoEscuro) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -125,7 +140,7 @@ namespace InsoniaLiteraria04.NoEscuro
                     else
                     {
                         decimal capitulo = condicao;
-                        decimal total = Constantes.CapsConstantes.NoEscuro + 1;
+                        decimal total = Convert.ToInt32(capConstantes.NoEscuro) + 1;
                         decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                         lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";

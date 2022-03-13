@@ -19,6 +19,7 @@ namespace InsoniaLiteraria04.MenusView
 	{
         DBFireViews serviceViews;
         DBFireComentarios serviceComentarios;
+        DBFireMenus serviceMenus;
         ObservableCollection<OpcoesMenu> ListaMenu = new ObservableCollection<OpcoesMenu>();
         ObservableCollection<QuantidadeViews> ListaViews = new ObservableCollection<QuantidadeViews>();
         ObservableCollection<QuantidadeComentario> ListaComentarios = new ObservableCollection<QuantidadeComentario>();
@@ -32,6 +33,7 @@ namespace InsoniaLiteraria04.MenusView
             };
             serviceViews = new DBFireViews();
             serviceComentarios = new DBFireComentarios();
+            serviceMenus = new DBFireMenus();
             _list.BindingContext = ListaMenu;
             carregarViews();
         }
@@ -43,8 +45,10 @@ namespace InsoniaLiteraria04.MenusView
                 ListaViews.Clear();
                 ListaComentarios.Clear();
 
-                var listAsyncViews = await serviceViews.mostrarQuantidadeCapitulo("NoEscuro");
+                var listAsyncMenu = await serviceMenus.mostrarMenu("NoEscuro");
+                var listMenu = listAsyncMenu.ToList();
 
+                var listAsyncViews = await serviceViews.mostrarQuantidadeCapitulo("NoEscuro");
                 var lista1 = listAsyncViews.ToList();
 
                 foreach (var item in lista1)
@@ -53,7 +57,6 @@ namespace InsoniaLiteraria04.MenusView
                 }
 
                 var listAsyncComents = await serviceComentarios.mostrarComentarioCapitulo("NoEscuro");
-
                 var lista2 = listAsyncComents.ToList();
 
                 foreach (var item2 in lista2)
@@ -72,181 +75,19 @@ namespace InsoniaLiteraria04.MenusView
                     Status = false
                 });
 
-                ListaMenu.Add(new OpcoesMenu
+                foreach (var menu in listMenu)
                 {
-                    Codigo = MenuConstantes.Prologo,
-                    Descricao = null,
-                    Titulo = "PRÓLOGO",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Prologo].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Prologo].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo1,
-                    Descricao = "Retorno",
-                    Titulo = "CAPÍTULO 1",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo1].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo1].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo2,
-                    Descricao = "A Mulher No Lago",
-                    Titulo = "CAPÍTULO 2",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo2].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo2].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo3,
-                    Descricao = "Máscaras",
-                    Titulo = "CAPÍTULO 3",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo3].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo3].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo4,
-                    Descricao = "A Feira",
-                    Titulo = "CAPÍTULO 4",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo4].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo4].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo5,
-                    Descricao = "Nostalgia",
-                    Titulo = "CAPÍTULO 5",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo5].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo5].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo6,
-                    Descricao = "Desconfiança",
-                    Titulo = "CAPÍTULO 6",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo6].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo6].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo7,
-                    Descricao = "Parceria",
-                    Titulo = "CAPÍTULO 7",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo7].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo7].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo8,
-                    Descricao = "Estratégia",
-                    Titulo = "CAPÍTULO 8",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo8].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo8].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo9,
-                    Descricao = "Isca",
-                    Titulo = "CAPÍTULO 9",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo9].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo9].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo10,
-                    Descricao = "Traição",
-                    Titulo = "CAPÍTULO 10",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo10].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo10].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo11,
-                    Descricao = "Armadilha",
-                    Titulo = "CAPÍTULO 11",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo11].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo11].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo12,
-                    Descricao = "Culpa",
-                    Titulo = "CAPÍTULO 12",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo12].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo12].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo13,
-                    Descricao = "Alerta",
-                    Titulo = "CAPÍTULO 13",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo13].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo13].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo14,
-                    Descricao = "Medo",
-                    Titulo = "CAPÍTULO 14",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo14].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo14].Quantidade.ToString(),
-                    Status = true
-                });
-
-                ListaMenu.Add(new OpcoesMenu
-                {
-                    Codigo = MenuConstantes.Capitulo15,
-                    Descricao = "Subterrâneo",
-                    Titulo = "CAPÍTULO 15",
-                    Imagem = "menuescuro.JPG",
-                    Views = ListaViews[MenuConstantes.Capitulo15].Quantidade.ToString(),
-                    Capitulos = ListaComentarios[MenuConstantes.Capitulo15].Quantidade.ToString(),
-                    Status = true
-                });
+                    ListaMenu.Add(new OpcoesMenu
+                    {
+                        Codigo = Convert.ToInt32(menu.codigo),
+                        Descricao = menu.descricao,
+                        Titulo = menu.titulo,
+                        Imagem = "menuescuro.JPG",
+                        Views = ListaViews[Convert.ToInt32(menu.codigo)].Quantidade.ToString(),
+                        Capitulos = ListaComentarios[Convert.ToInt32(menu.codigo)].Quantidade.ToString(),
+                        Status = true
+                    });
+                }
             }
             catch (Exception ex)
             {

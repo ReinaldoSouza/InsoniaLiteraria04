@@ -19,6 +19,7 @@ namespace InsoniaLiteraria04.AnjoMorteView
 	{
         DBFireCapitulos serviceCapitulos;
         DBFireViews serviceViews;
+        CapsConstantes capConstantes;
         public int condicao;
 
         public Capitulo1Page (int numero)
@@ -30,12 +31,14 @@ namespace InsoniaLiteraria04.AnjoMorteView
             };
             serviceCapitulos = new DBFireCapitulos();
             serviceViews = new DBFireViews();
+            capConstantes = new CapsConstantes();
+            carregarConstantes();
             condicao = numero;
 
             if (condicao != 0)
             {
                 decimal capitulo = condicao;
-                decimal total = Constantes.CapsConstantes.AnjoMorte + 1;
+                decimal total = Convert.ToInt32(capConstantes.AnjoMorte) + 1;
                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -45,7 +48,7 @@ namespace InsoniaLiteraria04.AnjoMorteView
                 lblPorcentagem.Text = "0% LIDO";
             }
 
-            if (numero == CapsConstantes.AnjoMorte)
+            if (numero == Convert.ToInt32(capConstantes.AnjoMorte))
             {
                 btnCap.Text = "FIM";
             }
@@ -53,6 +56,18 @@ namespace InsoniaLiteraria04.AnjoMorteView
             mostrarCapituloSalvo("AnjoMorte", "Capitulo" + numero.ToString());
 
             carregarHistoria(numero);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.AnjoMorte = "0";
+            }
         }
 
         public async void carregarHistoria(int capitulo)
@@ -79,7 +94,7 @@ namespace InsoniaLiteraria04.AnjoMorteView
             await Navigation.PushPopupAsync(loadingPage);
             await Task.Delay(500);
 
-            if (condicao + 1 > CapsConstantes.AnjoMorte)
+            if (condicao + 1 > Convert.ToInt32(capConstantes.AnjoMorte))
             {
                 await DisplayAlert("CAPÍTULOS!", "VOCÊ CHEGOU NO ÚLTIMO CAPÍTULO. CONFIRA OUTRA HISTÓRIA", "OK");
                 await Navigation.PushModalAsync(new MenusView.MenuAnjoMortePage());
@@ -112,7 +127,7 @@ namespace InsoniaLiteraria04.AnjoMorteView
                     LerCapitulo(condicao.ToString(), "true");
 
                     decimal capitulo = condicao + 1;
-                    decimal total = Constantes.CapsConstantes.AnjoMorte + 1;
+                    decimal total = Convert.ToInt32(capConstantes.AnjoMorte) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -128,7 +143,7 @@ namespace InsoniaLiteraria04.AnjoMorteView
                     else
                     {
                         decimal capitulo = condicao;
-                        decimal total = Constantes.CapsConstantes.AnjoMorte + 1;
+                        decimal total = Convert.ToInt32(capConstantes.AnjoMorte) + 1;
                         decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                         lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";

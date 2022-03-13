@@ -16,14 +16,38 @@ namespace InsoniaLiteraria04.View
     {
         DBFireCapitulos serviceCapitulos;
         DBFireUsuario serviceUsuario;
+        CapsConstantes capConstantes;
         public PerfilPage()
         {
             InitializeComponent();
             inicializarImagens();
             serviceCapitulos = new DBFireCapitulos();
             serviceUsuario = new DBFireUsuario();
+            capConstantes = new CapsConstantes();
+            carregarConstantes();
             carregarUsuario();
             mostrarEstadoHistorias();
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            } catch (Exception ex)
+            {
+                capConstantes.AnjoMorte = "0";
+                capConstantes.ApenasDance = "0";
+                capConstantes.AscencaoSober = "0";
+                capConstantes.EsseMundo = "0";
+                capConstantes.Estranha = "0";
+                capConstantes.NoEscuro = "0";
+                capConstantes.Resenhas = "0";
+                capConstantes.SegDistantes = "0";
+                capConstantes.SegInternos = "0";
+                capConstantes.SegObscuros = "0";
+                capConstantes.SuaMusica = "0";
+            }
         }
 
         //inicializar as imagens como visibilidade falsa.
@@ -141,14 +165,14 @@ namespace InsoniaLiteraria04.View
 
             if (result != 0)
             {
-                if (result > CapsConstantes.AscencaoSober)
+                if (result > Convert.ToInt32(capConstantes.AscencaoSober))
                 {
                     stlAscensaoSoberF.IsVisible = true;
                     stlAguardando.IsVisible = false;
                 } else
                 {
                     decimal capitulo = result;
-                    decimal total = Constantes.CapsConstantes.AscencaoSober + 1;
+                    decimal total = Convert.ToInt32(capConstantes.AscencaoSober) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     porcentagem = porcentagem / 100;
@@ -168,14 +192,14 @@ namespace InsoniaLiteraria04.View
 
             if (result != 0)
             {
-                if (result > CapsConstantes.AnjoMorte)
+                if (result > Convert.ToInt32(capConstantes.AnjoMorte))
                 {
                     stlAnjoMorteF.IsVisible = true;
                     stlAguardando.IsVisible = false;
                 } else
                 {
                     decimal capitulo = result;
-                    decimal total = CapsConstantes.AnjoMorte + 1;
+                    decimal total = Convert.ToInt32(capConstantes.AnjoMorte) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     porcentagem = porcentagem / 100;
@@ -195,14 +219,14 @@ namespace InsoniaLiteraria04.View
 
             if (result != 0)
             {
-                if (result > CapsConstantes.EsseMundo)
+                if (result > Convert.ToInt32(capConstantes.EsseMundo))
                 {
                     stlMundoF.IsVisible = true;
                     stlSemFinalizadas.IsVisible = false;
                 } else
                 {
                     decimal capitulo = result;
-                    decimal total = Constantes.CapsConstantes.EsseMundo + 1;
+                    decimal total = Convert.ToInt32(capConstantes.EsseMundo) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     porcentagem = porcentagem / 100;
@@ -222,14 +246,14 @@ namespace InsoniaLiteraria04.View
 
             if (result != 0)
             {
-                if (result > CapsConstantes.SuaMusica)
+                if (result > Convert.ToInt32(capConstantes.SuaMusica))
                 {
                     stlSuaMusicaF.IsVisible = true;
                     stlSemFinalizadas.IsVisible = false;
                 } else
                 {
                     decimal capitulo = result;
-                    decimal total = Constantes.CapsConstantes.SuaMusica + 1;
+                    decimal total = Convert.ToInt32(capConstantes.SuaMusica) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     porcentagem = porcentagem / 100;
@@ -249,14 +273,14 @@ namespace InsoniaLiteraria04.View
 
             if (result != 0)
             {
-                if (result > CapsConstantes.NoEscuro)
+                if (result > Convert.ToInt32(capConstantes.NoEscuro))
                 {
                     stlEscuroF.IsVisible = true;
                     stlAguardando.IsVisible = false;
                 } else
                 {
                     decimal capitulo = result;
-                    decimal total = Constantes.CapsConstantes.NoEscuro + 1;
+                    decimal total = Convert.ToInt32(capConstantes.NoEscuro) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     porcentagem = porcentagem / 100;
@@ -276,14 +300,14 @@ namespace InsoniaLiteraria04.View
 
             if (result != 0)
             {
-                if (result > CapsConstantes.SegObscuros)
+                if (result > Convert.ToInt32(capConstantes.SegObscuros))
                 {
                     stlObscurosF.IsVisible = true;
                     stlSemFinalizadas.IsVisible = false;
                 } else
                 {
                     decimal capitulo = result - 1;
-                    decimal total = Constantes.CapsConstantes.SegObscuros;
+                    decimal total = Convert.ToInt32(capConstantes.SegObscuros);
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     porcentagem = porcentagem / 100;
@@ -303,14 +327,14 @@ namespace InsoniaLiteraria04.View
 
             if (result != 0)
             {
-                if (result > CapsConstantes.SegDistantes)
+                if (result > Convert.ToInt32(capConstantes.SegDistantes))
                 {
                     stlDistantesF.IsVisible = true;
                     stlSemFinalizadas.IsVisible = false;
                 } else
                 {
                     decimal capitulo = result;
-                    decimal total = Constantes.CapsConstantes.SegDistantes + 1;
+                    decimal total = Convert.ToInt32(capConstantes.SegDistantes) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     porcentagem = porcentagem / 100;
@@ -330,14 +354,14 @@ namespace InsoniaLiteraria04.View
 
             if (result != 0)
             {
-                if (result > CapsConstantes.SegInternos)
+                if (result > Convert.ToInt32(capConstantes.SegInternos))
                 {
                     stlInternosF.IsVisible = true;
                     stlAguardando.IsVisible = false;
                 } else
                 {
                     decimal capitulo = result;
-                    decimal total = Constantes.CapsConstantes.SegInternos + 1;
+                    decimal total = Convert.ToInt32(capConstantes.SegInternos) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     porcentagem = porcentagem / 100;
@@ -356,14 +380,14 @@ namespace InsoniaLiteraria04.View
 
             if (result != 0)
             {
-                if (result > CapsConstantes.Estranha)
+                if (result > Convert.ToInt32(capConstantes.Estranha))
                 {
                     stlEstranhaF.IsVisible = true;
                     stlAguardando.IsVisible = false;
                 } else
                 {
                     decimal capitulo = result - 1;
-                    decimal total = Constantes.CapsConstantes.Estranha;
+                    decimal total = Convert.ToInt32(capConstantes.Estranha);
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     porcentagem = porcentagem / 100;
@@ -383,14 +407,14 @@ namespace InsoniaLiteraria04.View
 
             if (result != 0)
             {
-                if (result > CapsConstantes.ApenasDance)
+                if (result > Convert.ToInt32(capConstantes.ApenasDance))
                 {
                     stlApenasDanceF.IsVisible = true;
                     stlAguardando.IsVisible = false;
                 } else
                 {
                     decimal capitulo = result -1;
-                    decimal total = Constantes.CapsConstantes.ApenasDance;
+                    decimal total = Convert.ToInt32(capConstantes.ApenasDance);
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     porcentagem = porcentagem / 100;

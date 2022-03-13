@@ -18,6 +18,7 @@ namespace InsoniaLiteraria04.SegredosObscurosView
 	public partial class SegredosObscurosDetailsPage : ContentPage
 	{
         DBFireCapitulos serviceCapitulos;
+        CapsConstantes capConstantes;
         public SegredosObscurosDetailsPage ()
 		{
 			InitializeComponent ();
@@ -27,7 +28,21 @@ namespace InsoniaLiteraria04.SegredosObscurosView
             };
             serviceCapitulos = new DBFireCapitulos();
             lblPorcentagem.Text = "0% LIDO";
+            capConstantes = new CapsConstantes();
+            carregarConstantes();
             MostrarProximoCapitulo(UserLocalData.userUID);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.SegObscuros = "0";
+            }
         }
 
         private async void imgPlaylist_Tapped(object sender, EventArgs e)
@@ -75,13 +90,13 @@ namespace InsoniaLiteraria04.SegredosObscurosView
                             {
                                 capituloDescricao = "PRÓXIMO: CAPÍTULO " + capitulos.ToString();
                                 decimal capitulo = capitulos - 1;
-                                decimal total = Constantes.CapsConstantes.SegObscuros;
+                                decimal total = Convert.ToInt32(capConstantes.SegObscuros);
                                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
                             }
 
-                            if (capitulos > CapsConstantes.SegObscuros)
+                            if (capitulos > Convert.ToInt32(capConstantes.SegObscuros))
                             {
                                 capituloDescricao = "ESPERO QUE TENHA GOSTADO...";
                                 lblPorcentagem.Text = "100% LIDO";
@@ -132,7 +147,7 @@ namespace InsoniaLiteraria04.SegredosObscurosView
                 result = 1;
             }
 
-            if (result > CapsConstantes.SegObscuros)
+            if (result > Convert.ToInt32(capConstantes.SegObscuros))
             {
                 await Navigation.PushModalAsync(new MenusView.MenuSegredosObscurosPage());
             } else

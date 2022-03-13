@@ -20,6 +20,7 @@ namespace InsoniaLiteraria04.SegredosDistantesView
     public partial class SegredosDistantesDetailsPage : ContentPage
     {
         DBFireCapitulos serviceCapitulos;
+        CapsConstantes capConstantes;
         public SegredosDistantesDetailsPage()
         {
             InitializeComponent();
@@ -29,7 +30,21 @@ namespace InsoniaLiteraria04.SegredosDistantesView
             };
             serviceCapitulos = new DBFireCapitulos();
             lblPorcentagem.Text = "0% LIDO";
+            capConstantes = new CapsConstantes();
+            carregarConstantes();
             MostrarProximoCapitulo(UserLocalData.userUID);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.SegDistantes = "0";
+            }
         }
 
         private async void imgPlaylist_Tapped(object sender, EventArgs e)
@@ -78,13 +93,13 @@ namespace InsoniaLiteraria04.SegredosDistantesView
                             {
                                 capituloDescricao = "PRÓXIMO: CAPÍTULO " + capitulos.ToString();
                                 decimal capitulo = capitulos;
-                                decimal total = Constantes.CapsConstantes.SegDistantes + 1;
+                                decimal total = Convert.ToInt32(capConstantes.SegDistantes) + 1;
                                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
                             }
 
-                            if (capitulos > CapsConstantes.SegDistantes)
+                            if (capitulos > Convert.ToInt32(capConstantes.SegDistantes))
                             {
                                 capituloDescricao = "ESPERO QUE TENHA GOSTADO...";
                                 lblPorcentagem.Text = "100% LIDO";
@@ -129,7 +144,7 @@ namespace InsoniaLiteraria04.SegredosDistantesView
                 await DependencyService.Get<IAdmobInterstitialAds>().Display(AppConstants.InterstitialAdId);
             }
 
-            if (result > CapsConstantes.SegDistantes)
+            if (result > Convert.ToInt32(capConstantes.SegDistantes))
             {
                 await Navigation.PushModalAsync(new MenusView.MenuSegredosDistantesPage());
             } else

@@ -8,6 +8,7 @@ using Firebase.Xamarin.Auth;
 using Firebase.Xamarin.Database;
 using FireSharp.Interfaces;
 using FireSharp.Response;
+using InsoniaLiteraria04.Constantes;
 using InsoniaLiteraria04.Model;
 using Newtonsoft.Json;
 
@@ -111,5 +112,22 @@ namespace InsoniaLiteraria04.Database
                 throw ex;
             }
         }
+
+        public async Task<CapsConstantes> carregarCapituloConstante()
+        {
+            try
+            {
+                var leitura = await fbCliente.Child("/Constantes_Capitulos/")
+                            .OnceSingleAsync<CapsConstantes>();
+
+                return leitura;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
     }
 }

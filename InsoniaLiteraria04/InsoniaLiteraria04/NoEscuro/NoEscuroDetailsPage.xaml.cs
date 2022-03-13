@@ -17,6 +17,7 @@ namespace InsoniaLiteraria04.NoEscuro
 	public partial class NoEscuroDetailsPage : ContentPage
     {
         DBFireCapitulos serviceCapitulos;
+        CapsConstantes capConstantes;
         public NoEscuroDetailsPage ()
 		{
 			InitializeComponent ();
@@ -25,8 +26,21 @@ namespace InsoniaLiteraria04.NoEscuro
                 AdUnitId = AppConstants.BannerId
             };
             serviceCapitulos = new DBFireCapitulos();
+            capConstantes = new CapsConstantes();
             lblPorcentagem.Text = "0% LIDO";
+            carregarConstantes();
             MostrarProximoCapitulo(UserLocalData.userUID);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            } catch (Exception ex)
+            {
+                capConstantes.NoEscuro = "0";
+            }
         }
 
         private async Task<int> MostrarProximoCapitulo(string usuario)
@@ -68,12 +82,12 @@ namespace InsoniaLiteraria04.NoEscuro
                                 capituloDescricao = "PRÓXIMO: CAPÍTULO " + capitulos.ToString();
 
                                 decimal capitulo = capitulos;
-                                decimal total = Constantes.CapsConstantes.NoEscuro + 1;
+                                decimal total = Convert.ToInt32(capConstantes.NoEscuro) + 1;
                                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
                             }
-                            if (capitulos > CapsConstantes.NoEscuro)
+                            if (capitulos > Convert.ToInt32(capConstantes.NoEscuro))
                             {
                                 capituloDescricao = "CAPÍTULOS NOVOS EM BREVE...";
                                 lblPorcentagem.Text = "100% LIDO";
@@ -118,7 +132,7 @@ namespace InsoniaLiteraria04.NoEscuro
                 await DependencyService.Get<IAdmobInterstitialAds>().Display(AppConstants.InterstitialAdId);
             }
 
-            if (result > CapsConstantes.NoEscuro)
+            if (result > Convert.ToInt32(capConstantes.NoEscuro))
             {
                 await Navigation.PushModalAsync(new MenusView.MenuNoEscuroPage());
             } else

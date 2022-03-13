@@ -18,6 +18,7 @@ namespace InsoniaLiteraria04.AnjoMorteView
 	public partial class AnjoMorteDetaisPage : ContentPage
     {
         DBFireCapitulos serviceCapitulo;
+        CapsConstantes capConstantes;
         public AnjoMorteDetaisPage ()
 		{
 			InitializeComponent ();
@@ -26,8 +27,22 @@ namespace InsoniaLiteraria04.AnjoMorteView
                 AdUnitId = AppConstants.BannerId
             };
             serviceCapitulo = new DBFireCapitulos();
+            capConstantes = new CapsConstantes();
             lblPorcentagem.Text = "0% LIDO";
+            carregarConstantes();
             MostrarProximoCapitulo(UserLocalData.userUID);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulo.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.AnjoMorte = "0";
+            }
         }
 
         private async Task<int> MostrarProximoCapitulo(string usuario)
@@ -69,13 +84,13 @@ namespace InsoniaLiteraria04.AnjoMorteView
                                 capituloDescricao = "PRÓXIMO: CAPÍTULO " + capitulos.ToString();
 
                                 decimal capitulo = capitulos;
-                                decimal total = Constantes.CapsConstantes.AnjoMorte + 1;
+                                decimal total = Convert.ToInt32(capConstantes.AnjoMorte) + 1;
                                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
 
                             }
-                            if (capitulos > CapsConstantes.AnjoMorte)
+                            if (capitulos > Convert.ToInt32(capConstantes.AnjoMorte))
                             {
                                 capituloDescricao = "CAPÍTULOS NOVOS EM BREVE...";
                                 lblPorcentagem.Text = "100% LIDO";
@@ -126,7 +141,7 @@ namespace InsoniaLiteraria04.AnjoMorteView
                 await DependencyService.Get<IAdmobInterstitialAds>().Display(AppConstants.InterstitialAdId);
             }
 
-            if (result > CapsConstantes.AnjoMorte)
+            if (result > Convert.ToInt32(capConstantes.AnjoMorte))
             {
                 await Navigation.PushModalAsync(new MenusView.MenuAnjoMortePage());
             } else

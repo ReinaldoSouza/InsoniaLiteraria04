@@ -20,6 +20,7 @@ namespace InsoniaLiteraria04.EsseMundoView
     public partial class EsseMundoDetailsPage : ContentPage
     {
         DBFireCapitulos serviceCapitulos;
+        CapsConstantes capConstantes;
         public EsseMundoDetailsPage()
         {
             InitializeComponent();
@@ -28,8 +29,22 @@ namespace InsoniaLiteraria04.EsseMundoView
                 AdUnitId = AppConstants.BannerId
             };
             serviceCapitulos = new DBFireCapitulos();
+            capConstantes = new CapsConstantes();
             lblPorcentagem.Text = "0% LIDO";
+            carregarConstantes();
             MostrarProximoCapitulo(UserLocalData.userUID);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.EsseMundo = "0";
+            }
         }
 
         private async void imgPlaylist_Tapped(object sender, EventArgs e)
@@ -77,13 +92,13 @@ namespace InsoniaLiteraria04.EsseMundoView
                                 capituloDescricao = "PRÓXIMO: CAPÍTULO " + capitulos.ToString();
 
                                 decimal capitulo = capitulos;
-                                decimal total = Constantes.CapsConstantes.EsseMundo + 1;
+                                decimal total = Convert.ToInt32(capConstantes.EsseMundo) + 1;
                                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
 
                             }
-                            if (capitulos > CapsConstantes.EsseMundo)
+                            if (capitulos > Convert.ToInt32(capConstantes.EsseMundo))
                             {
                                 capituloDescricao = "ESPERO QUE TENHA GOSTADO...";
                                 lblPorcentagem.Text = "100% LIDO";
@@ -129,7 +144,7 @@ namespace InsoniaLiteraria04.EsseMundoView
                     await DependencyService.Get<IAdmobInterstitialAds>().Display(AppConstants.InterstitialAdId);
             }
 
-            if (result > CapsConstantes.EsseMundo)
+            if (result > Convert.ToInt32(capConstantes.EsseMundo))
             {
                 await Navigation.PushModalAsync(new MenusView.MenuEsseMundoPage());
             } else

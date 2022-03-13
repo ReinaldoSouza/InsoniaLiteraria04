@@ -19,6 +19,7 @@ namespace InsoniaLiteraria04.SegredosObscurosView
 	{
         DBFireCapitulos serviceCapitulos;
         DBFireViews serviceViews;
+        CapsConstantes capConstantes;
         public int condicao;
 
         public Capitulo1Page(int numero)
@@ -30,12 +31,14 @@ namespace InsoniaLiteraria04.SegredosObscurosView
             };
             serviceCapitulos = new DBFireCapitulos();
             serviceViews = new DBFireViews();
+            capConstantes = new CapsConstantes();
+            carregarConstantes();
             condicao = numero;
 
             if (condicao != 0)
             {
                 decimal capitulo = condicao - 1;
-                decimal total = Constantes.CapsConstantes.SegObscuros;
+                decimal total = Convert.ToInt32(capConstantes.SegObscuros);
                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -45,13 +48,25 @@ namespace InsoniaLiteraria04.SegredosObscurosView
                 lblPorcentagem.Text = "0% LIDO";
             }
 
-            if (numero == CapsConstantes.SegObscuros)
+            if (numero == Convert.ToInt32(capConstantes.SegObscuros))
             {
                 btnCap.Text = "FIM";
             }
             salvarViews(numero);
             mostrarCapituloSalvo("SegObscuros", "Capitulo" + numero.ToString());
             carregarHistoria(numero);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.SegObscuros = "0";
+            }
         }
 
         public async void carregarHistoria(int capitulo)
@@ -84,7 +99,7 @@ namespace InsoniaLiteraria04.SegredosObscurosView
             await Navigation.PushPopupAsync(loadingPage);
             await Task.Delay(500);
 
-            if (condicao + 1 > CapsConstantes.SegObscuros)
+            if (condicao + 1 > Convert.ToInt32(capConstantes.SegObscuros))
             {
                 await DisplayAlert("CAPÍTULOS!", "VOCÊ CHEGOU NO ÚLTIMO CAPÍTULO. CONFIRA OUTRA HISTÓRIA", "OK");
                 await Navigation.PushModalAsync(new MenusView.MenuSegredosObscurosPage());
@@ -108,7 +123,7 @@ namespace InsoniaLiteraria04.SegredosObscurosView
                     LerCapitulo(condicao.ToString(), "true");
 
                     decimal capitulo = condicao;
-                    decimal total = Constantes.CapsConstantes.SegObscuros;
+                    decimal total = Convert.ToInt32(capConstantes.SegObscuros);
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -124,7 +139,7 @@ namespace InsoniaLiteraria04.SegredosObscurosView
                     else
                     {
                         decimal capitulo = condicao - 1;
-                        decimal total = Constantes.CapsConstantes.SegObscuros;
+                        decimal total = Convert.ToInt32(capConstantes.SegObscuros);
                         decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                         lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";

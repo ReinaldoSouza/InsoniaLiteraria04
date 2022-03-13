@@ -19,6 +19,7 @@ namespace InsoniaLiteraria04.SegredosDistantesView
     {
         DBFireCapitulos serviceCapitulos;
         DBFireViews serviceViews;
+        CapsConstantes capConstantes;
         public int condicao;
 
         public Capitulo1Page(int numero)
@@ -30,12 +31,14 @@ namespace InsoniaLiteraria04.SegredosDistantesView
             };
             serviceCapitulos = new DBFireCapitulos();
             serviceViews = new DBFireViews();
+            capConstantes = new CapsConstantes();
+            carregarConstantes();
             condicao = numero;
 
             if (condicao != 0)
             {
                 decimal capitulo = condicao;
-                decimal total = Constantes.CapsConstantes.SegDistantes + 1;
+                decimal total = Convert.ToInt32(capConstantes.SegDistantes) + 1;
                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -45,13 +48,25 @@ namespace InsoniaLiteraria04.SegredosDistantesView
                 lblPorcentagem.Text = "0% LIDO";
             }
 
-            if (numero == CapsConstantes.SegDistantes)
+            if (numero == Convert.ToInt32(capConstantes.SegDistantes))
             {
                 btnCap.Text = "FIM";
             }
             salvarViews(numero);
             mostrarCapituloSalvo("SegDistantes", "Capitulo" + numero.ToString());
             carregarHistoria(numero);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.SegDistantes = "0";
+            }
         }
 
         public async void carregarHistoria(int capitulo)
@@ -79,7 +94,7 @@ namespace InsoniaLiteraria04.SegredosDistantesView
             await Navigation.PushPopupAsync(loadingPage);
             await Task.Delay(500);
 
-            if (condicao + 1 > CapsConstantes.SegDistantes)
+            if (condicao + 1 > Convert.ToInt32(capConstantes.SegDistantes))
             {
                 await DisplayAlert("CAPÍTULOS!", "VOCÊ CHEGOU AO ÚLTIMO CAPÍTULO. CONFIRA AGORA SEGREDOS INTERNOS", "OK");
                 await Navigation.PushModalAsync(new MenusView.MenuSegredosDistantesPage());
@@ -108,7 +123,7 @@ namespace InsoniaLiteraria04.SegredosDistantesView
                     LerCapitulo(condicao.ToString(), "true");
 
                     decimal capitulo = condicao + 1;
-                    decimal total = Constantes.CapsConstantes.SegDistantes + 1;
+                    decimal total = Convert.ToInt32(capConstantes.SegDistantes) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -124,7 +139,7 @@ namespace InsoniaLiteraria04.SegredosDistantesView
                     else
                     {
                         decimal capitulo = condicao;
-                        decimal total = Constantes.CapsConstantes.SegDistantes + 1;
+                        decimal total = Convert.ToInt32(capConstantes.SegDistantes) + 1;
                         decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                         lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";

@@ -19,6 +19,7 @@ namespace InsoniaLiteraria04.AscencaoSoberView
     {
         DBFireCapitulos serviceCapitulos;
         DBFireViews serviceViews;
+        CapsConstantes capConstantes;
         public int condicao;
         public Capitulo1Page(int numero)
         {
@@ -29,12 +30,14 @@ namespace InsoniaLiteraria04.AscencaoSoberView
             };
             serviceCapitulos = new DBFireCapitulos();
             serviceViews = new DBFireViews();
+            capConstantes = new CapsConstantes();
+            carregarConstantes();
             condicao = numero;
 
             if (condicao != 0)
             {
                 decimal capitulo = condicao;
-                decimal total = Constantes.CapsConstantes.AscencaoSober + 1;
+                decimal total = Convert.ToInt32(capConstantes.AscencaoSober) + 1;
                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -43,7 +46,7 @@ namespace InsoniaLiteraria04.AscencaoSoberView
                 lblPorcentagem.Text = "0% LIDO";
             }
 
-            if (numero == CapsConstantes.AscencaoSober)
+            if (numero == Convert.ToInt32(capConstantes.AscencaoSober))
             {
                 btnCap.Text = "FIM";
             }
@@ -51,6 +54,18 @@ namespace InsoniaLiteraria04.AscencaoSoberView
             mostrarCapituloSalvo("AscensaoSober", "Capitulo" + numero.ToString());
 
             carregarHistoria(numero);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.AscencaoSober = "0";
+            }
         }
 
         public async void carregarHistoria(int capitulo)
@@ -77,7 +92,7 @@ namespace InsoniaLiteraria04.AscencaoSoberView
             await Navigation.PushPopupAsync(loadingPage);
             await Task.Delay(500);
 
-            if (condicao + 1 > CapsConstantes.AscencaoSober)
+            if (condicao + 1 > Convert.ToInt32(capConstantes.AscencaoSober))
             {
                 await DisplayAlert("CAPÍTULOS!", "VOCÊ CHEGOU NO ÚLTIMO CAPÍTULO. CONFIRA OUTRA HISTÓRIA", "OK");
                 await Navigation.PushModalAsync(new MenusView.MenuAscensaoSoberPage());
@@ -105,7 +120,7 @@ namespace InsoniaLiteraria04.AscencaoSoberView
                     LerCapitulo(condicao.ToString(), "true");
 
                     decimal capitulo = condicao + 1;
-                    decimal total = Constantes.CapsConstantes.AscencaoSober + 1;
+                    decimal total = Convert.ToInt32(capConstantes.AscencaoSober) + 1;
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -122,7 +137,7 @@ namespace InsoniaLiteraria04.AscencaoSoberView
                     else
                     {
                         decimal capitulo = condicao;
-                        decimal total = Constantes.CapsConstantes.AscencaoSober + 1;
+                        decimal total = Convert.ToInt32(capConstantes.AscencaoSober) + 1;
                         decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                         lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";

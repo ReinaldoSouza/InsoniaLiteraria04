@@ -21,13 +21,7 @@
                             <controls:NoEscuroCardView/>
                         </StackLayout>
                     </Frame>
-
-                    <!--<Frame Margin="7" BackgroundColor="Transparent" Padding="3">
-                        <StackLayout Padding="0">
-                            <controls:ResenhasCardView/>
-                        </StackLayout>
-                    </Frame>-->
-
+                    
                 </StackLayout>
             </ScrollView>
 

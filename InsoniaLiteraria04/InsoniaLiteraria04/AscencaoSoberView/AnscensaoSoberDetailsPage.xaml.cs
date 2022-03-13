@@ -19,6 +19,7 @@ namespace InsoniaLiteraria04.AscencaoSoberView
     public partial class AnscensaoSoberDetailsPage : ContentPage
     {
         DBFireCapitulos serviceCapitulos;
+        CapsConstantes capConstantes;
         ObservableCollection<Comentarios> listComentarios = new ObservableCollection<Comentarios>();
         public AnscensaoSoberDetailsPage()
         {
@@ -27,9 +28,23 @@ namespace InsoniaLiteraria04.AscencaoSoberView
             {
                 AdUnitId = AppConstants.BannerId
             };
-            serviceCapitulos = new DBFireCapitulos(); 
+            serviceCapitulos = new DBFireCapitulos();
+            capConstantes = new CapsConstantes();
+            carregarConstantes();
             lblPorcentagem.Text = "0% LIDO";
             MostrarProximoCapitulo(UserLocalData.userUID);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.AscencaoSober = "0";
+            }
         }
 
         private async Task<int> MostrarProximoCapitulo(string usuario)
@@ -71,12 +86,12 @@ namespace InsoniaLiteraria04.AscencaoSoberView
                                 capituloDescricao = "PRÓXIMO: CAPÍTULO " + capitulos.ToString();
 
                                 decimal capitulo = capitulos;
-                                decimal total = Constantes.CapsConstantes.AscencaoSober + 1;
+                                decimal total = Convert.ToInt32(capConstantes.AscencaoSober) + 1;
                                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
                             }
-                            if (capitulos > CapsConstantes.AscencaoSober)
+                            if (capitulos > Convert.ToInt32(capConstantes.AscencaoSober))
                             {
                                 capituloDescricao = "CAPÍTULOS NOVOS EM BREVE...";
                                 lblPorcentagem.Text = "100% LIDO";
@@ -121,7 +136,7 @@ namespace InsoniaLiteraria04.AscencaoSoberView
                     await DependencyService.Get<IAdmobInterstitialAds>().Display(AppConstants.InterstitialAdId);
                 }
            
-            if (result > CapsConstantes.AscencaoSober)
+            if (result > Convert.ToInt32(capConstantes.AscencaoSober))
             {
                 await Navigation.PushModalAsync(new MenusView.MenuAscensaoSoberPage());
             } else

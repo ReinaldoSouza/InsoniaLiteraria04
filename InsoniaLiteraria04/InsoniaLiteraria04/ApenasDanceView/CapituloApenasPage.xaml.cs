@@ -19,6 +19,7 @@ namespace InsoniaLiteraria04.ApenasDanceView
 	{
         DBFireCapitulos serviceCapitulos;
         DBFireViews serviceViews;
+        CapsConstantes capConstantes;
         public int condicao;
 
         public CapituloApenasPage (int numero)
@@ -30,12 +31,14 @@ namespace InsoniaLiteraria04.ApenasDanceView
             };
             serviceCapitulos = new DBFireCapitulos();
             serviceViews = new DBFireViews();
+            capConstantes = new CapsConstantes();
+            carregarConstantes();
             condicao = numero;
 
             if (condicao != 0)
             {
                 decimal capitulo = condicao -1;
-                decimal total = Constantes.CapsConstantes.ApenasDance;
+                decimal total = Convert.ToInt32(capConstantes.ApenasDance);
                 decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                 lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -45,7 +48,7 @@ namespace InsoniaLiteraria04.ApenasDanceView
                 lblPorcentagem.Text = "0% LIDO";
             }
 
-            if (numero == CapsConstantes.ApenasDance)
+            if (numero == Convert.ToInt32(capConstantes.ApenasDance))
             {
                 btnCap.Text = "FIM";
             }
@@ -53,6 +56,18 @@ namespace InsoniaLiteraria04.ApenasDanceView
             mostrarCapituloSalvo("ApenasDance", "Capitulo" + numero.ToString());
 
             carregarHistoria(numero);
+        }
+
+        public async void carregarConstantes()
+        {
+            try
+            {
+                capConstantes = await serviceCapitulos.carregarCapituloConstante();
+            }
+            catch (Exception ex)
+            {
+                capConstantes.ApenasDance = "0";
+            }
         }
 
         public async void carregarHistoria(int capitulo)
@@ -84,7 +99,7 @@ namespace InsoniaLiteraria04.ApenasDanceView
             await Navigation.PushPopupAsync(loadingPage);
             await Task.Delay(500);
 
-            if (condicao + 1 > CapsConstantes.ApenasDance)
+            if (condicao + 1 > Convert.ToInt32(capConstantes.ApenasDance))
             {
                 await DisplayAlert("CAPÍTULOS!", "VOCÊ CHEGOU NO ÚLTIMO CAPÍTULO. CONFIRA OUTRA HISTÓRIA", "OK");
                 await Navigation.PushModalAsync(new MenusView.MenuApenasDancePage());
@@ -113,7 +128,7 @@ namespace InsoniaLiteraria04.ApenasDanceView
                     LerCapitulo(condicao.ToString(), "true");
 
                     decimal capitulo = condicao;
-                    decimal total = Constantes.CapsConstantes.ApenasDance;
+                    decimal total = Convert.ToInt32(capConstantes.ApenasDance);
                     decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                     lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
@@ -129,7 +144,7 @@ namespace InsoniaLiteraria04.ApenasDanceView
                     else
                     {
                         decimal capitulo = condicao - 1;
-                        decimal total = Constantes.CapsConstantes.ApenasDance;
+                        decimal total = Convert.ToInt32(capConstantes.ApenasDance);
                         decimal porcentagem = Math.Ceiling(100 * capitulo / total);
 
                         lblPorcentagem.Text = porcentagem.ToString() + "% LIDO";
